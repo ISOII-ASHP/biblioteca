@@ -1,8 +1,9 @@
-package domain.entities;
+package es.uclm.library.business.entity;
 
+import java.util.Date;
 import java.util.Vector;
-import domain.entities.Prestamo;
-import domain.entities.Reserva;
+import es.uclm.library.business.entity.Prestamo;
+import es.uclm.library.business.entity.Reserva;
 
 public class Usuario {
 	private String _id;

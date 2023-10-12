@@ -1,7 +1,7 @@
-package domain.entities;
+package es.uclm.library.business.entity;
 
 import java.util.Vector;
-import domain.entities.Titulo;
+import es.uclm.library.business.entity.Titulo;
 
 public class Autor {
 	private String _nombre;

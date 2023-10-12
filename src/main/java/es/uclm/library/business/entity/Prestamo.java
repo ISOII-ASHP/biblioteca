@@ -1,4 +1,6 @@
-package domain.entities;
+package es.uclm.library.business.entity;
+
+import java.util.Date;
 
 public class Prestamo {
 	private Date _fechaInicio;

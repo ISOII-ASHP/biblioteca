@@ -1,7 +1,7 @@
-package domain.controllers;
+package es.uclm.library.business.controller;
 
-import persistencia.PrestamoDAO;
-import persistencia.ReservaDAO;
+import es.uclm.library.business.entity.PrestamoDAO;
+import es.uclm.library.business.entity.ReservaDAO;
 
 public class GestorPrestamos {
 	public PrestamoDAO _prestamoDAO;

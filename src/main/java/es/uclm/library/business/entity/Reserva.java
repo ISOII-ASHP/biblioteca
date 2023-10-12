@@ -1,4 +1,6 @@
-package domain.entities;
+package es.uclm.library.business.entity;
+
+import java.sql.Date;
 
 public class Reserva {
 	private Date _fecha;

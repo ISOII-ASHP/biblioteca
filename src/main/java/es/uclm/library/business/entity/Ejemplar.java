@@ -1,4 +1,4 @@
-package domain.entities;
+package es.uclm.library.business.entity;
 
 public class Ejemplar {
 	private String _id;

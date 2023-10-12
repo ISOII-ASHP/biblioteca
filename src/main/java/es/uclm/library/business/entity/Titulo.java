@@ -1,10 +1,10 @@
-package domain.entities;
+package es.uclm.library.business.entity;
 
 import java.util.Vector;
-import domain.entities.Autor;
-import domain.entities.Ejemplar;
-import domain.entities.Prestamo;
-import domain.entities.Reserva;
+import es.uclm.library.business.entity.Autor;
+import es.uclm.library.business.entity.Ejemplar;
+import es.uclm.library.business.entity.Prestamo;
+import es.uclm.library.business.entity.Reserva;
 
 public class Titulo {
 	private String _titulo;

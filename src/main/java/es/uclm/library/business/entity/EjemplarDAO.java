@@ -1,4 +1,4 @@
-package persistencia;
+package es.uclm.library.business.entity;
 
 public class EjemplarDAO extends EntityDAO {
 

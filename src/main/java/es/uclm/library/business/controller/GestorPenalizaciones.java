@@ -1,7 +1,7 @@
-package domain.controllers;
+package es.uclm.library.business.controller;
 
-import persistencia.UsuarioDAO;
-import domain.entities.Usuario;
+import es.uclm.library.business.entity.Usuario;
+import es.uclm.library.business.entity.UsuarioDAO;
 
 public class GestorPenalizaciones {
 	public UsuarioDAO _usuarioDAO;
@@ -10,7 +10,7 @@ public class GestorPenalizaciones {
 		throw new UnsupportedOperationException();
 	}
 
-	public void comprobarPenalización(Usuario aU) {
+	public void comprobarPenalizacion(Usuario aU) {
 		throw new UnsupportedOperationException();
 	}
 }
