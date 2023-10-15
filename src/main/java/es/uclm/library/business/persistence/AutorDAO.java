@@ -1,4 +1,4 @@
-package es.uclm.library.business.entity;
+package es.uclm.library.business.persistence;
 
 public class AutorDAO extends EntityDAO {
 

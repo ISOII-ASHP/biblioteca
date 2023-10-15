@@ -1,6 +1,6 @@
-package es.uclm.library.business.entity;
+package es.uclm.library.business.persistence;
 
-public class UsuarioDAO extends EntityDAO {
+public class PrestamoDAO extends EntityDAO {
 
 	public Object select(String aId) {
 		throw new UnsupportedOperationException();

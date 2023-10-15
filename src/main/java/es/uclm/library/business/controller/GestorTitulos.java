@@ -1,9 +1,9 @@
 package es.uclm.library.business.controller;
 
-import es.uclm.library.business.entity.TituloDAO;
-import es.uclm.library.business.entity.EjemplarDAO;
-import es.uclm.library.business.entity.AutorDAO;
 import es.uclm.library.business.entity.Titulo;
+import es.uclm.library.business.persistence.AutorDAO;
+import es.uclm.library.business.persistence.EjemplarDAO;
+import es.uclm.library.business.persistence.TituloDAO;
 
 public class GestorTitulos {
 	public TituloDAO _tituloDAO;
