@@ -1,4 +1,4 @@
-package es.uclm.library.business.entity;
+package com.ASHP.library.business.persistence;
 
 public abstract class EntityDAO<E> {
 

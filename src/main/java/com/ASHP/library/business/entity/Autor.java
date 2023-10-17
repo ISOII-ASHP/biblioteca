@@ -1,7 +1,8 @@
-package es.uclm.library.business.entity;
+package com.ASHP.library.business.entity;
 
 import java.util.Vector;
-import es.uclm.library.business.entity.Titulo;
+
+import com.ASHP.library.business.entity.Titulo;
 
 public class Autor {
 	private String _nombre;

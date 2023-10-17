@@ -1,4 +1,4 @@
-package es.uclm.library.business.entity;
+package com.ASHP.library.business.entity;
 
 public class Greeting {
 	private String person;

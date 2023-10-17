@@ -1,8 +1,8 @@
-package com.example.library;
+package com.ASHP.library;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-//jj
+
 @SpringBootApplication
 public class LibraryApplication {
 

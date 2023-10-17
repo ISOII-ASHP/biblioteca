@@ -1,7 +1,7 @@
-package es.uclm.library.business.controller;
+package com.ASHP.library.business.controller;
 
-import es.uclm.library.business.entity.Usuario;
-import es.uclm.library.business.entity.UsuarioDAO;
+import com.ASHP.library.business.entity.Usuario;
+import com.ASHP.library.business.persistence.UsuarioDAO;
 
 public class GestorPenalizaciones {
 	public UsuarioDAO _usuarioDAO;

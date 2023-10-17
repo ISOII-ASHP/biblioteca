@@ -1,10 +1,11 @@
-package es.uclm.library.business.entity;
+package com.ASHP.library.business.entity;
 
 import java.util.Vector;
-import es.uclm.library.business.entity.Autor;
-import es.uclm.library.business.entity.Ejemplar;
-import es.uclm.library.business.entity.Prestamo;
-import es.uclm.library.business.entity.Reserva;
+
+import com.ASHP.library.business.entity.Autor;
+import com.ASHP.library.business.entity.Ejemplar;
+import com.ASHP.library.business.entity.Prestamo;
+import com.ASHP.library.business.entity.Reserva;
 
 public class Titulo {
 	private String _titulo;

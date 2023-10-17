@@ -1,4 +1,4 @@
-package es.uclm.library.business.entity;
+package com.ASHP.library.business.entity;
 
 import java.util.Date;
 

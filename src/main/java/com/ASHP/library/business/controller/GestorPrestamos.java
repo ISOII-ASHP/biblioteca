@@ -1,7 +1,7 @@
-package es.uclm.library.business.controller;
+package com.ASHP.library.business.controller;
 
-import es.uclm.library.business.entity.PrestamoDAO;
-import es.uclm.library.business.entity.ReservaDAO;
+import com.ASHP.library.business.persistence.PrestamoDAO;
+import com.ASHP.library.business.persistence.ReservaDAO;
 
 public class GestorPrestamos {
 	public PrestamoDAO _prestamoDAO;

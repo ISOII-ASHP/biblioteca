@@ -1,10 +1,11 @@
-package es.uclm.library.business.entity;
+package com.ASHP.library.business.entity;
 
 import java.sql.ResultSet;
 
 public class AgenteBD {
 	private AgenteBD _instanciaAgenteBD;
 
+	
 	public boolean conectar() {
 		throw new UnsupportedOperationException();
 	}

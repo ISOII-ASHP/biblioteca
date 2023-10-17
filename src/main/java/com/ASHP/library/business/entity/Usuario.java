@@ -1,9 +1,10 @@
-package es.uclm.library.business.entity;
+package com.ASHP.library.business.entity;
 
 import java.util.Date;
 import java.util.Vector;
-import es.uclm.library.business.entity.Prestamo;
-import es.uclm.library.business.entity.Reserva;
+
+import com.ASHP.library.business.entity.Prestamo;
+import com.ASHP.library.business.entity.Reserva;
 
 public class Usuario {
 	private String _id;

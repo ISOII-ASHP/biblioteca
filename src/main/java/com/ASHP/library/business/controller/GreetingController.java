@@ -1,4 +1,4 @@
-package es.uclm.library.business.controller;
+package com.ASHP.library.business.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import es.uclm.library.business.entity.Greeting;
+import com.ASHP.library.business.entity.Greeting;
 
 @Controller
 public class GreetingController {
