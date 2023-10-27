@@ -1,4 +1,4 @@
-package com.ASHP.library.business.entity;
+package com.ASHP.library.business.persistence;
 
 import java.sql.ResultSet;
 
