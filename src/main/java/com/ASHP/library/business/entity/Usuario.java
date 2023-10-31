@@ -1,33 +1,41 @@
 package com.ASHP.library.business.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.Vector;
+import java.util.List;
 
-import com.ASHP.library.business.entity.Prestamo;
-import com.ASHP.library.business.entity.Reserva;
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
+	@Column
 	private String nombre;
+	@Column
 	private String apellidos;
+	@Column
 	private Date fechaFinPenalizacion;
+	@Column
 	private Object attribute;
-	public Vector<Prestamo> prestamos = new Vector<Prestamo>();
-	public Vector<Reserva> reservas = new Vector<Reserva>();
+	
+    @OneToMany
+	public List<Prestamo> prestamos = new ArrayList<Prestamo>();
+    
+    @OneToMany
+	public List<Reserva> reservas = new ArrayList<Reserva>();
 
 	public Usuario() {
 	}
 
 	public Usuario(String nombre, String apellidos, Date fechaFinPenalizacion, Object attribute,
-			Vector<Prestamo> prestamos, Vector<Reserva> reservas) {
+			List<Prestamo> prestamos, List<Reserva> reservas) {
 		super();
 		this.nombre = nombre;
 		this.apellidos = apellidos;
@@ -77,19 +85,19 @@ public class Usuario {
 		this.attribute = attribute;
 	}
 
-	public Vector<Prestamo> getPrestamos() {
+	public List<Prestamo> getPrestamos() {
 		return prestamos;
 	}
 
-	public void setPrestamos(Vector<Prestamo> prestamos) {
+	public void setPrestamos(List<Prestamo> prestamos) {
 		this.prestamos = prestamos;
 	}
 
-	public Vector<Reserva> getReservas() {
+	public List<Reserva> getReservas() {
 		return reservas;
 	}
 
-	public void setReservas(Vector<Reserva> reservas) {
+	public void setReservas(List<Reserva> reservas) {
 		this.reservas = reservas;
 	}
 

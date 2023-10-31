@@ -2,12 +2,22 @@ package com.ASHP.library.business.entity;
 
 import java.sql.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 public class Reserva {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	@Column
 	private Date fecha;
+	@Column
 	public Usuario usuario;
+	@Column
 	public Titulo titulo;
 
 	public Reserva() {
@@ -18,6 +28,14 @@ public class Reserva {
 		this.fecha = fecha;
 		this.usuario = usuario;
 		this.titulo = titulo;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Date getFecha() {
@@ -46,7 +64,7 @@ public class Reserva {
 
 	@Override
 	public String toString() {
-		return "Reserva [fecha=" + fecha + ", usuario=" + usuario + ", titulo=" + titulo + "]";
+		return "Reserva [id=" + id + ", fecha=" + fecha + ", usuario=" + usuario + ", titulo=" + titulo + "]";
 	}
 
 }

@@ -1,26 +1,45 @@
 package com.ASHP.library.business.entity;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.ASHP.library.business.entity.Titulo;
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Autor {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	@Column
 	private String nombre;
+	@Column
 	private String apellido;
-	public Vector<Titulo> titulos = new Vector<Titulo>();
+	
+    @ManyToMany
+	public List<Titulo> titulos = new ArrayList<Titulo>();
 
 	public Autor() {
-
+		super();
 	}
 
-	public Autor(String nombre, String apellido, Vector<Titulo> titulos) {
+	public Autor(String nombre, String apellido, List<Titulo> titulos) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.titulos = titulos;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNombre() {
@@ -39,17 +58,17 @@ public class Autor {
 		this.apellido = apellido;
 	}
 
-	public Vector<Titulo> getTitulos() {
+	public List<Titulo> getTitulos() {
 		return titulos;
 	}
 
-	public void setTitulos(Vector<Titulo> titulos) {
+	public void setTitulos(List<Titulo> titulos) {
 		this.titulos = titulos;
 	}
 
 	@Override
 	public String toString() {
-		return "Autor [nombre=" + nombre + ", apellido=" + apellido + ", titulos=" + titulos + "]";
+		return "Autor [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", titulos=" + titulos + "]";
 	}
 
 }

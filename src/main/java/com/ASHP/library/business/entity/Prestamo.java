@@ -2,14 +2,26 @@ package com.ASHP.library.business.entity;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 public class Prestamo {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	@Column
 	private Date fechaInicio;
+	@Column
 	private Date fechaFin;
+	@Column
 	private Boolean activo;
+	@Column
 	public Usuario usuario;
+	@Column
 	public Titulo titulo;
 
 	public Prestamo() {
@@ -23,6 +35,16 @@ public class Prestamo {
 		this.activo = activo;
 		this.usuario = usuario;
 		this.titulo = titulo;
+	}
+
+	
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Date getFechaInicio() {
@@ -67,8 +89,10 @@ public class Prestamo {
 
 	@Override
 	public String toString() {
-		return "Prestamo [fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", activo=" + activo + ", usuario="
-				+ usuario + ", titulo=" + titulo + "]";
+		return "Prestamo [id=" + id + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", activo=" + activo
+				+ ", usuario=" + usuario + ", titulo=" + titulo + "]";
 	}
+
+	
 
 }
