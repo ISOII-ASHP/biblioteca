@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Prestamo {
@@ -19,9 +20,9 @@ public class Prestamo {
 	private Date fechaFin;
 	@Column
 	private Boolean activo;
-	@Column
+	@ManyToOne
 	public Usuario usuario;
-	@Column
+	@ManyToOne
 	public Titulo titulo;
 
 	public Prestamo() {
@@ -37,8 +38,6 @@ public class Prestamo {
 		this.titulo = titulo;
 	}
 
-	
-	
 	public Long getId() {
 		return id;
 	}
@@ -92,7 +91,5 @@ public class Prestamo {
 		return "Prestamo [id=" + id + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", activo=" + activo
 				+ ", usuario=" + usuario + ", titulo=" + titulo + "]";
 	}
-
-	
 
 }

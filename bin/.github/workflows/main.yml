@@ -1,0 +1,28 @@
+name: despliegue
+on:
+push:
+branches: [ "main" ]
+pull_request:
+branches: [ "main" ]
+workflow_dispatch:
+permissions: write-all
+jobs:
+build:
+runs-on: ubuntu-latest
+steps:
+- uses: actions/checkout@v3
+with:
+repository: ISOOII-ASHP/ISOOII-ASHP
+ACCESODGSILAB: ${{ secrets.ACCESODGSILAB }}
+- name: Realizar despliegue continuo
+env:
+clave1: ${{ vars.ACCESOJAB }}
+run: |
+git clone "https://usuario:$(echo $clave1)@github.com/ISOOII-ASHP/Project.git"
+cp -R jab/html/* .
+rm -rd jab
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+git add .
+git commit -m "Despliegue continuo"
+git push

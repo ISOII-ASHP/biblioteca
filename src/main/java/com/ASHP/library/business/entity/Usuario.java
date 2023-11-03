@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Usuario {
@@ -22,13 +23,11 @@ public class Usuario {
 	private String apellidos;
 	@Column
 	private Date fechaFinPenalizacion;
-	@Column
-	private Object attribute;
-	
+		
     @OneToMany
 	public List<Prestamo> prestamos = new ArrayList<Prestamo>();
     
-    @OneToMany
+   @OneToMany
 	public List<Reserva> reservas = new ArrayList<Reserva>();
 
 	public Usuario() {
@@ -40,7 +39,6 @@ public class Usuario {
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.fechaFinPenalizacion = fechaFinPenalizacion;
-		this.attribute = attribute;
 		this.prestamos = prestamos;
 		this.reservas = reservas;
 	}
@@ -77,14 +75,6 @@ public class Usuario {
 		this.fechaFinPenalizacion = fechaFinPenalizacion;
 	}
 
-	public Object getAttribute() {
-		return attribute;
-	}
-
-	public void setAttribute(Object attribute) {
-		this.attribute = attribute;
-	}
-
 	public List<Prestamo> getPrestamos() {
 		return prestamos;
 	}
@@ -104,8 +94,8 @@ public class Usuario {
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", fechaFinPenalizacion="
-				+ fechaFinPenalizacion + ", attribute=" + attribute + ", prestamos=" + prestamos + ", reservas="
-				+ reservas + "]";
+				+ fechaFinPenalizacion + ", prestamos=" + prestamos + ", reservas=" + reservas + "]";
 	}
 
+	
 }

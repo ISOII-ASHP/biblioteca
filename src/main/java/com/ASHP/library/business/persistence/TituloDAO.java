@@ -8,11 +8,5 @@ import com.ASHP.library.business.entity.Titulo;
 @Repository
 public interface TituloDAO extends JpaRepository<Titulo, Long> {
 
-	public Object select(String aId);
-
-	public int insert(Object aObject);
-
-	public int update(Object aObject);
-
-	public void delete(Titulo titulo);
+	
 }

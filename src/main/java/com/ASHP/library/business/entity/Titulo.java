@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Titulo {
@@ -22,6 +23,7 @@ public class Titulo {
 	private String isbn;
 	@Column
 	private String numReserva;
+	
 	
     @ManyToMany
 	public List<Autor> autores = new ArrayList<Autor>();

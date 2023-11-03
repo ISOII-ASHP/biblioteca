@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Reserva {
@@ -15,9 +16,9 @@ public class Reserva {
 	private Long id;
 	@Column
 	private Date fecha;
-	@Column
+	@ManyToOne
 	public Usuario usuario;
-	@Column
+	@ManyToOne
 	public Titulo titulo;
 
 	public Reserva() {
