@@ -1,18 +1,40 @@
 <!DOCTYPE HTML>
 <html xmlns:th="https://www.thymeleaf.org">
-	<head>
-		<title>Inserción de Titulo</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	</head>
-	<body>
-		<h1>Form</h1>
-		<form action="#" th:action="@{/titulo}" th:object="${titulo}" method="post">
-			<p>titulo: <input type="text" th:field="*{titulo}" /></p>
-			<p>isbn: <input type="text" th:field="*{isbn}" /></p>
-			<p>numero de reserva: <input type="text" th:field="*{numReserva}" /></p>
-			<p>
-				<input type="submit" value="Submit" /> <input type="reset" value="Reset" />
-			</p>
-		</form>
-	</body>
+<div th:insert="~{cabecera}"></div>
+
+<body>
+
+	<div class="container mt2 mb-2">
+		<div class="row justify-content-center mt-3">
+			<div class="row justify-content-center mt-1">
+				<p class="text-center alert alert-primary" role="alert">
+					Alta Título
+				</p>
+			</div>
+			<form action="#" th:action="@{/titulo}" th:object="${titulo}" method="post">
+
+				<div class="form-floating mb-3">
+					<input type="text" th:field="*{titulo}" class="form-control" id="floatingInput"
+						placeholder="Título">
+					<label for="floatingInput">Título</label>
+				</div>
+				<div class="form-floating">
+					<input type="number" th:field="*{isbn}" class="form-control" id="floatingPassword"
+						placeholder="ISBN">
+					<label for="floatingPassword">ISBN</label>
+				</div>
+				<div class="form-floating">
+					<input type="number" th:field="*{numReserva}" class="form-control" id="floatingPassword"
+						placeholder="Número de reserva">
+					<label for="floatingPassword">Número de reserva</label>
+				</div>
+
+				<button type="submit" class="btn btn-primary">Submit</button>
+				</p>
+			</form>
+
+		</div>
+	</div>
+</body>
+
 </html>
