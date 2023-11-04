@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ASHP.library.business.entity.Ejemplar;
 import com.ASHP.library.business.entity.Titulo;
 import com.ASHP.library.business.persistence.AutorDAO;
 import com.ASHP.library.business.persistence.EjemplarDAO;
 import com.ASHP.library.business.persistence.TituloDAO;
+import com.ASHP.library.business.servicios.EjemplarService;
 import com.ASHP.library.business.servicios.TituloServices;
 
 @RestController
@@ -64,6 +66,13 @@ public class GestorTitulos {
 	public void altaEjemplar(Titulo aT) {
 		throw new UnsupportedOperationException();
 	}
+	
+	@PostMapping("/altaEjemplar")
+    public String altaEjemplar(@ModelAttribute("ejemplar") Ejemplar ejemplar) {
+        EjemplarService ejemplarService = new EjemplarService();
+        ejemplarService.save(ejemplar);
+        return "redirect:/";
+    }
 
 	public void bajaEjemplar(Titulo aT) {
 		throw new UnsupportedOperationException();
