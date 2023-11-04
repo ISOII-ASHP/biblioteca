@@ -1,20 +1,12 @@
 package com.ASHP.library.business.persistence;
 
-public class PrestamoDAO extends EntityDAO {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-	public Object select(String aId) {
-		throw new UnsupportedOperationException();
-	}
+import com.ASHP.library.business.entity.Prestamo;
 
-	public int insert(Object aObject) {
-		throw new UnsupportedOperationException();
-	}
+@Repository
+public interface PrestamoDAO extends JpaRepository<Prestamo, Long> {
 
-	public int update(Object aObject) {
-		throw new UnsupportedOperationException();
-	}
-
-	public int delete(Object aObject) {
-		throw new UnsupportedOperationException();
-	}
+	
 }
