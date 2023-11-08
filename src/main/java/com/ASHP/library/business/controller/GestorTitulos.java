@@ -11,16 +11,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+
 
 import com.ASHP.library.business.entity.Autor;
 import com.ASHP.library.business.entity.Titulo;
 import com.ASHP.library.business.persistence.AutorDAO;
-import com.ASHP.library.business.persistence.EjemplarDAO;
 import com.ASHP.library.business.persistence.TituloDAO;
-import com.ASHP.library.business.servicios.AutorServices;
-import com.ASHP.library.business.servicios.TituloServices;
+
+
 
 @Controller
 public class GestorTitulos {
@@ -37,31 +35,41 @@ public class GestorTitulos {
 	// @Autowired
 	// private TituloServices tituloService;
 
+	
+
 	@Autowired
 	private AutorDAO autorDAO;
 
 	public GestorTitulos(TituloDAO tituloDAO, AutorDAO autorDAO) {
+
 		super();
 		this.tituloDAO = tituloDAO;
+
 		this.autorDAO = autorDAO;
+
 	}
 
-	@GetMapping("/titulo")
-	public String verTitulo(Model model) {
-		List<Autor> autores = autorDAO.findAll();
-	    Titulo titulo = new Titulo();
-	    titulo.setAutores(new ArrayList<>());
-	    model.addAttribute("titulo", titulo);
-	    model.addAttribute("autores", autores);
-		return "titulo";
-	}
+	
 
-	@PostMapping("/titulo")
+	@PostMapping("/altaTitulo")
 	public String altaTitulo(@ModelAttribute Titulo titulo, Model model) {
-		model.addAttribute("titulo", titulo);
+		model.addAttribute("titulo",titulo);
 		tituloDAO.save(titulo);
 		return "vista-titulo";
 	}
+
+	@GetMapping("/vistaFormTituloAutor")
+	public String verFormulario(Model model) {
+	    Titulo titulo = new Titulo();
+	    Autor autor = new Autor();
+	    titulo.setAutores(new ArrayList<>());
+	    	    
+	    model.addAttribute("titulo", titulo);
+	    model.addAttribute("autor", autor);
+	
+		return "titulo";
+	}
+
 
 	public void actualizarTitulo(Titulo aT) {
 		throw new UnsupportedOperationException();
