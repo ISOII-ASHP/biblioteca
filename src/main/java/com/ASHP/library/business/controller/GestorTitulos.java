@@ -17,25 +17,24 @@ import com.ASHP.library.business.entity.Titulo;
 import com.ASHP.library.business.persistence.AutorDAO;
 import com.ASHP.library.business.persistence.EjemplarDAO;
 import com.ASHP.library.business.persistence.TituloDAO;
-import com.ASHP.library.business.servicios.TituloServices;
 
 @RestController
 public class GestorTitulos {
 
 	private static final Logger log = LoggerFactory.getLogger(GestorTitulos.class);
 
-//	@Autowired
-//	public TituloDAO _tituloDAO;
+	@Autowired
+	public TituloDAO tituloDAO;
 //	@Autowired
 //	public EjemplarDAO _ejemplarDAO;
 //	@Autowired
 //	public AutorDAO _autorDAO;
 
-	private TituloServices tituloService;
+	
 
-	public GestorTitulos(TituloServices tituloService) {
+	public GestorTitulos(TituloDAO tituloDAO) {
 		super();
-		this.tituloService = tituloService;
+		this.tituloDAO = tituloDAO;
 	}
 
 	
@@ -43,7 +42,7 @@ public class GestorTitulos {
 	@PostMapping("/titulo")
 	public String altaTitulo(@ModelAttribute Titulo titulo, Model model) {
 		model.addAttribute("titulo",titulo);
-		Titulo titul = tituloService.save(titulo);
+		Titulo titul = tituloDAO.save(titulo);
 		return "vista-titulo";
 	}
 
