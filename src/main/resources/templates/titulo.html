@@ -1,18 +1,23 @@
 <!DOCTYPE HTML>
 <html xmlns:th="https://www.thymeleaf.org">
-	<head>
-		<title>Inserción de Titulo</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	</head>
-	<body>
-		<h1>Form</h1>
-		<form action="#" th:action="@{/titulo}" th:object="${titulo}" method="post">
-			<p>titulo: <input type="text" th:field="*{titulo}" /></p>
-			<p>isbn: <input type="text" th:field="*{isbn}" /></p>
-			<p>numero de reserva: <input type="text" th:field="*{numReserva}" /></p>
-			<p>
-				<input type="submit" value="Submit" /> <input type="reset" value="Reset" />
-			</p>
-		</form>
-	</body>
+
+<head>
+	<title>Inserción de Titulo</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+	<h1>Form</h1>
+	<form action="#" th:action="@{/titulo}" th:object="${titulo}" method="POST">
+		<p>titulo: <input type="text" th:field="*{titulo}" /></p>
+		<p>isbn: <input type="text" th:field="*{isbn}" /></p>
+		<p>numero de reserva: <input type="text" th:field="*{numReserva}" /></p>
+		<select th:field="*{autores}">
+			<option th:each="autor : ${autores}" th:value="${autor.id}" th:text="${autor.nombre + ' ' + autor.apellido}"></option>
+		</select>
+		<input type="submit" value="Submit" /> <input type="reset" value="Reset" />
+		</p>
+	</form>
+</body>
+
 </html>

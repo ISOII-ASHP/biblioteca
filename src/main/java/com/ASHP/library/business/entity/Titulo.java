@@ -23,20 +23,26 @@ public class Titulo {
 	private String isbn;
 	@Column
 	private String numReserva;
-	
-	
-    @ManyToMany
+
+	@ManyToMany
 	public List<Autor> autores = new ArrayList<Autor>();
-    @OneToMany
+	@OneToMany
 	public List<Ejemplar> ejemplares = new ArrayList<Ejemplar>();
-    
-    @OneToMany
+
+	@OneToMany
 	public List<Prestamo> prestamos = new ArrayList<Prestamo>();
-    
-    @OneToMany
+
+	@OneToMany
 	public List<Reserva> reservas = new ArrayList<Reserva>();
 
 	public Titulo() {
+	}
+
+	public Titulo(String titulo, String isbn, String numReserva) {
+		super();
+		this.titulo = titulo;
+		this.isbn = isbn;
+		this.numReserva = numReserva;
 	}
 
 	public Titulo(String titulo, String isbn, String numReserva, List<Autor> autores, List<Ejemplar> ejemplares,
