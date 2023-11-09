@@ -25,15 +25,16 @@ public class Titulo {
 	private String numReserva;
 
 	@ManyToMany
-	public List<Autor> autores = new ArrayList<Autor>();
+	protected List<Autor> autores = new ArrayList<Autor>();
+	
 	@OneToMany
-	public List<Ejemplar> ejemplares = new ArrayList<Ejemplar>();
+	protected List<Ejemplar> ejemplares = new ArrayList<Ejemplar>();
 
 	@OneToMany
-	public List<Prestamo> prestamos = new ArrayList<Prestamo>();
+	protected List<Prestamo> prestamos = new ArrayList<Prestamo>();
 
 	@OneToMany
-	public List<Reserva> reservas = new ArrayList<Reserva>();
+	protected List<Reserva> reservas = new ArrayList<Reserva>();
 
 	public Titulo() {
 	}
@@ -120,6 +121,7 @@ public class Titulo {
 	public void setReservas(List<Reserva> reservas) {
 		this.reservas = reservas;
 	}
+	
 
 	@Override
 	public String toString() {

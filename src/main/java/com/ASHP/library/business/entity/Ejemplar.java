@@ -14,14 +14,13 @@ public class Ejemplar {
 	private Long id;
 
 	@ManyToOne
-	public Titulo titulo;
+	private Titulo titulo;
 
 	public Ejemplar() {
 		super();
 	}
 
 	public Ejemplar(Titulo titulo) {
-		super();
 		this.titulo = titulo;
 	}
 

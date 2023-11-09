@@ -17,6 +17,7 @@ import com.ASHP.library.business.entity.Autor;
 import com.ASHP.library.business.entity.Ejemplar;
 import com.ASHP.library.business.entity.Titulo;
 import com.ASHP.library.business.persistence.AutorDAO;
+import com.ASHP.library.business.persistence.EjemplarDAO;
 import com.ASHP.library.business.persistence.TituloDAO;
 
 @Controller
@@ -26,47 +27,83 @@ public class GestorTitulos {
 
 	@Autowired
 	public TituloDAO tituloDAO;
-//	@Autowired
-//	public EjemplarDAO _ejemplarDAO;
-//	@Autowired
-//	public AutorDAO _autorDAO;
+	@Autowired
+	public EjemplarDAO ejemplarDAO;
+	@Autowired
+	public AutorDAO autorDAO;
 
 	// @Autowired
 	// private TituloServices tituloService;
 
-	@Autowired
-	private AutorDAO autorDAO;
-
-	public GestorTitulos(TituloDAO tituloDAO, AutorDAO autorDAO) {
+	public GestorTitulos(TituloDAO tituloDAO, AutorDAO autorDAO, EjemplarDAO ejemplarDAO) {
 
 		super();
 		this.tituloDAO = tituloDAO;
 
 		this.autorDAO = autorDAO;
 
+		this.ejemplarDAO = ejemplarDAO;
+
 	}
+
+	/**
+	 * Metodo para dar de alta titulos con sus ejemplares y autores
+	 * 
+	 * @param titulo
+	 * @param autor
+	 * @param model
+	 * @return
+	 */
 
 	@PostMapping("/altaTitulo")
 	public String altaTitulo(@RequestParam List<String> titulo, @RequestParam List<String> autor, Model model) {
 
 		String nombreTitulo, numReserva, isbn, nombreAutor, apellidoAutor;
 
+		// Recojo los datos del formulario
 		nombreTitulo = titulo.get(0);
 		isbn = titulo.get(1);
 		numReserva = titulo.get(2);
 
+		// Creo los objetos
 		Titulo t = new Titulo(nombreTitulo, isbn, numReserva);
-		Ejemplar e = new Ejemplar(t);
-
+		
 		nombreAutor = autor.get(0);
 		apellidoAutor = autor.get(1);
+
 		List<Titulo> titulos = new ArrayList<Titulo>();
 		titulos.add(t);
+
 		Autor a = new Autor(nombreAutor, apellidoAutor, titulos);
 
-		model.addAttribute("titulo", titulo);
-		//tituloDAO.save(titulo);
+		// Guardo en la base de datos
+		model.addAttribute("titulo", t);
+		System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: "+ t.toString());
+		System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: "+ a.toString());
+		tituloDAO.save(t);
+		autorDAO.save(a);
+		
+		Titulo tituloPorNombre = getTituloByName(nombreTitulo);
+		
+		Ejemplar e = new Ejemplar(tituloPorNombre);
+		List<Ejemplar> ejemplares = new ArrayList<Ejemplar>();
+		ejemplares.add(e);
+		
+		tituloPorNombre.setEjemplares(ejemplares);
+		//ejemplarDAO.save(e);
+
 		return "vista-titulo";
+	}
+
+	private Titulo getTituloByName(String nombreTitulo) {
+		List<Titulo> t = tituloDAO.findAll();
+		for (Titulo titulo : t) {
+			if(titulo.getTitulo().equals(nombreTitulo))
+				return titulo;
+		}
+		return null;
+		
+		
 	}
 
 	@GetMapping("/vistaFormTituloAutor")
