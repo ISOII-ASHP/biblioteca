@@ -11,14 +11,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ASHP.library.business.entity.Autor;
+import com.ASHP.library.business.entity.Ejemplar;
 import com.ASHP.library.business.entity.Titulo;
 import com.ASHP.library.business.persistence.AutorDAO;
 import com.ASHP.library.business.persistence.TituloDAO;
-
-
 
 @Controller
 public class GestorTitulos {
@@ -35,8 +34,6 @@ public class GestorTitulos {
 	// @Autowired
 	// private TituloServices tituloService;
 
-	
-
 	@Autowired
 	private AutorDAO autorDAO;
 
@@ -49,27 +46,40 @@ public class GestorTitulos {
 
 	}
 
-	
-
 	@PostMapping("/altaTitulo")
-	public String altaTitulo(@ModelAttribute Titulo titulo, Model model) {
-		model.addAttribute("titulo",titulo);
-		tituloDAO.save(titulo);
+	public String altaTitulo(@RequestParam List<String> titulo, @RequestParam List<String> autor, Model model) {
+
+		String nombreTitulo, numReserva, isbn, nombreAutor, apellidoAutor;
+
+		nombreTitulo = titulo.get(0);
+		isbn = titulo.get(1);
+		numReserva = titulo.get(2);
+
+		Titulo t = new Titulo(nombreTitulo, isbn, numReserva);
+		Ejemplar e = new Ejemplar(t);
+
+		nombreAutor = autor.get(0);
+		apellidoAutor = autor.get(1);
+		List<Titulo> titulos = new ArrayList<Titulo>();
+		titulos.add(t);
+		Autor a = new Autor(nombreAutor, apellidoAutor, titulos);
+
+		model.addAttribute("titulo", titulo);
+		//tituloDAO.save(titulo);
 		return "vista-titulo";
 	}
 
 	@GetMapping("/vistaFormTituloAutor")
 	public String verFormulario(Model model) {
-	    Titulo titulo = new Titulo();
-	    Autor autor = new Autor();
-	    titulo.setAutores(new ArrayList<>());
-	    	    
-	    model.addAttribute("titulo", titulo);
-	    model.addAttribute("autor", autor);
-	
+		Titulo titulo = new Titulo();
+		Autor autor = new Autor();
+		titulo.setAutores(new ArrayList<>());
+
+		model.addAttribute("titulo", titulo);
+		model.addAttribute("autor", autor);
+
 		return "titulo";
 	}
-
 
 	public void actualizarTitulo(Titulo aT) {
 		throw new UnsupportedOperationException();
