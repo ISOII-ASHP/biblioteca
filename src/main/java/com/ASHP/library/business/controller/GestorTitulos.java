@@ -1,5 +1,6 @@
 package com.ASHP.library.business.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -13,52 +14,73 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ASHP.library.business.entity.Autor;
 import com.ASHP.library.business.entity.Titulo;
 import com.ASHP.library.business.persistence.AutorDAO;
 import com.ASHP.library.business.persistence.EjemplarDAO;
 import com.ASHP.library.business.persistence.TituloDAO;
-import com.ASHP.library.business.servicios.TituloServices;
 
-@RestController
+@Controller
 public class GestorTitulos {
 
 	private static final Logger log = LoggerFactory.getLogger(GestorTitulos.class);
 
-//	@Autowired
-//	public TituloDAO _tituloDAO;
+	@Autowired
+	public TituloDAO tituloDAO;
 //	@Autowired
 //	public EjemplarDAO _ejemplarDAO;
 //	@Autowired
 //	public AutorDAO _autorDAO;
 
-	private TituloServices tituloService;
+	// @Autowired
+	// private TituloServices tituloService;
 
-	public GestorTitulos(TituloServices tituloService) {
+	
+
+	@Autowired
+	private AutorDAO autorDAO;
+
+	public GestorTitulos(TituloDAO tituloDAO, AutorDAO autorDAO) {
+
 		super();
-		this.tituloService = tituloService;
+		this.tituloDAO = tituloDAO;
+
+		this.autorDAO = autorDAO;
+
 	}
 
 	
 
-	@PostMapping("/titulo")
+	@PostMapping("/altaTitulo")
 	public String altaTitulo(@ModelAttribute Titulo titulo, Model model) {
 		model.addAttribute("titulo",titulo);
-		Titulo titul = tituloService.save(titulo);
+		tituloDAO.save(titulo);
 		return "vista-titulo";
 	}
 
-	@GetMapping("/titulo")
-	public String veriTitulo(Model model) {
-		model.addAttribute("titulo", new Titulo());
+	@GetMapping("/vistaFormTituloAutor")
+	public String verFormulario(Model model) {
+	    Titulo titulo = new Titulo();
+	    Autor autor = new Autor();
+	    titulo.setAutores(new ArrayList<>());
+	    	    
+	    model.addAttribute("titulo", titulo);
+	    model.addAttribute("autor", autor);
+	
 		return "titulo";
 	}
 
-	public void actualizarTitulo(Titulo aT) {
-		throw new UnsupportedOperationException();
+	@PostMapping("/altaTitulo")
+	public String actualizarTitulo(Titulo titulo, Model model) {
+		tituloDAO.findById(titulo.getId());
+		tituloDAO.save(titulo);
+		return "vista-titulo";
 	}
 
-	public void borrarTitulo(Titulo aT) {
-		throw new UnsupportedOperationException();
+	@PostMapping("/altaTitulo")
+	public String borrarTitulo(@ModelAttribute Titulo titulo, Model model) {
+		tituloDAO.delete(titulo);
+		return "vista-titulo";
 	}
 
 	public void altaEjemplar(Titulo aT) {
