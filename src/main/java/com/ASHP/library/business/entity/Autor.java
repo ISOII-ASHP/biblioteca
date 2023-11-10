@@ -8,10 +8,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Transient;
+import jakarta.persistence.Table;
+import jakarta.persistence.JoinColumn;
 
 @Entity
+@Table(name = "AUTOR")
 public class Autor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +25,11 @@ public class Autor {
 	private String apellido;
 	
     @ManyToMany
+    @JoinTable(
+            name = "AUTOR_TITULO",
+            joinColumns = {@JoinColumn(name = "autor_id")},
+            inverseJoinColumns = {@JoinColumn(name = "titulo_id")}
+    )
 	public List<Titulo> titulos = new ArrayList<Titulo>();
 
 	public Autor() {

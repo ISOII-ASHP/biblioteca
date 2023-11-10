@@ -8,11 +8,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
 @Entity
+@Table(name = "TITULO")
 public class Titulo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,17 +26,20 @@ public class Titulo {
 	private String isbn;
 	@Column
 	private String numReserva;
-	
-	
-    @ManyToMany
+
+	@ManyToMany(mappedBy = "titulos")
 	public List<Autor> autores = new ArrayList<Autor>();
-    @OneToMany
+
+	@OneToMany
+	@JoinColumn(name = "TITULO_id")
 	public List<Ejemplar> ejemplares = new ArrayList<Ejemplar>();
-    
-    @OneToMany
+
+	@OneToMany
+	@JoinColumn(name = "TITULO_id")
 	public List<Prestamo> prestamos = new ArrayList<Prestamo>();
-    
-    @OneToMany
+
+	@OneToMany
+	@JoinColumn(name = "TITULO_id")
 	public List<Reserva> reservas = new ArrayList<Reserva>();
 
 	public Titulo() {
