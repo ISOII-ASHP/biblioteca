@@ -67,7 +67,7 @@ public class GestorTitulos {
 		titulos.add(t);
 		Autor a = new Autor(nombreAutor, apellidoAutor, titulos);
 		
-		model.addAttribute("titulo",titulo);
+		model.addAttribute("titulo", titulo);
 		//tituloDAO.save(titulo);
 		return "vista-titulo";
 	}
