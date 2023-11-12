@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <div>Nombre de usuario</div>
+    </header>
+    <main>
+        <h1>Nuevo prestamo</h1>
+        <form action="" method="POST">
+            <label for="titulo">Titulo</label>
+            <select name="" id="titulo">
+                <option value="">--- Selecciona título ---</option>
+                <option th:value="${t.id}" th:each="t : ${titulos}"
+                                 th:text="${t.titulo + ' ' + t.isbn}"></option>
+            </select>
+
+            <label for="usuario">Usuario</label>
+            <select name="" id="usuario">
+                <option value="">--- Selecciona usuario ---</option>
+                <option th:each="u : ${usuarios}"
+                            th:value="${u.id}" 
+                            th:text="${u.nombre + ' ' + u.apellidos}"></option>
+            </select>
+        </form>
+    </main>
+</body>
+</html>
