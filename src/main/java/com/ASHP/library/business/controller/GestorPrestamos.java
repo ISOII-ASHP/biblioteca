@@ -25,6 +25,25 @@ public class GestorPrestamos {
 	public PrestamoDAO _prestamoDAO;
 	@Autowired
 	public ReservaDAO _reservaDAO;
+	@Autowired
+	public TituloDAO _tituloDAO;
+	@Autowired
+	public UsuarioDAO _usuarioDAO;
+	
+	@GetMapping("/prestamo")
+	public String menuPrestamos() { return "prestamo"; }
+	
+	@GetMapping("/nuevo-prestamo")
+	public String menuNuevoPrestamo(Model model) {
+		List<Titulo> todosLosTitulos = _tituloDAO.findAll();
+		List<Usuario> todosLosUsuarios = _usuarioDAO.findAll();
+
+		model.addAttribute("titulos", todosLosTitulos);
+		model.addAttribute("usuarios", todosLosUsuarios);
+
+		return "nuevo-prestamo";
+	}
+
 
 	public void realizarPrestamo(String aIsbn, String aIdEjemplar, String aIdUsuario) {
 		throw new UnsupportedOperationException();
