@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+	<head>
+		<title>Inserción de Titulo</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		<h1>Form</h1>
+		<form action="#" th:action="@{/titulo}" th:object="${titulo}" method="post">
+			<p>titulo: <input type="text" th:field="*{titulo}" /></p>
+			<p>isbn: <input type="text" th:field="*{isbn}" /></p>
+			<p>numero de reserva: <input type="text" th:field="*{numReserva}" /></p>
+			<p>
+				<input type="submit" value="Submit" /> <input type="reset" value="Reset" />
+			</p>
+		</form>
+	</body>
+</html>
