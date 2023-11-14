@@ -20,11 +20,54 @@
 
 ## Sprints
   <p align="justify">
-   Antes de definir el antes y después de cada sprint, vamos a indicar que nuestros sprints son cada 2 semanas.
+   Antes de definir el antes y después de cada sprint, vamos a indicar que nuestros sprints son de cada 2 semanas.
 </p>
 
-#Sprint 1
+#### Sprint 1
 
+![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/9d9725b2-d22f-4b7e-a855-93125f63b834)
+
+<p align="justify">
+Tareas:
+•	Crear un backlog de producto con tareas priorizadas.
+•	Configurar el entorno de desarrollo y el repositorio en GitHub.
+•	Integrar Maven para la gestión de dependencias y la automatización de la construcción del proyecto.
+•	Desarrollar una estructura básica del proyecto con la implementación inicial de Maven (archivos pom.xml).
+•	Realizar caso de uso dar de alta nuevos títulos.
+Retrospectiva:
+•	Revisar lo que funcionó bien y lo que podría mejorarse.
+•	Planificar mejoras para el siguiente sprint.
+Antes y después de cada Sprint:
+•	Después: Como no fuimos capaz de completar Dar de alta nuevos títulos, lo metimos en el siguiente sprint.
+
+</p>
+
+#### Sprint 2
+
+![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/4a04fc19-3e5d-4031-bb37-b299e3a143e6)
+
+<p align="justify">
+Tareas:
+•	Configurar dependencias de Spring JPA en el pom.xml.
+•	Crear un entorno en que podamos planificarnos para cada sprint y los issues.
+•	Realizar caso de uso dar de alta nuevos títulos.
+•	Obtener de la UML un código base.
+•	Crear página index.html y la implementación de la herramienta hibernar
+Retrospectiva:
+•	Analizar cómo la introducción de Spring JPA ha afectado el proceso de desarrollo.
+•	Revisar la configuración y el código para identificar posibles mejoras o problemas.
+
+Antes y después de cada Sprint:
+•	Después: Como no fuimos capaz de completar Dar de alta nuevos títulos, lo metimos en el siguiente sprint. En este sprint, nos dimos cuenta que necesitamos un código base pero que sea funcional para poder empezar a realizar los casos de uso. Nos queríamos centrar en un código base que funcione correctamente y mejorarlo para realizar mas tarde las funcionalidades. Por esta razón, algunos issues no fuimos capaces de completarlos También realizamos un pequeño mockup para mostrarle al usuario. Y mostrar las funcionalidades que tendrá cada actor.
+</p>
+
+![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/c5fa4f90-03a8-449c-bc0d-3bc54a9ccdfb)
+
+ <p align="justify">
+   La imagen muestra una serie de diagramas de flujo de casos de uso para la gestión de bibliotecas, organizados por roles de usuario: Administrador, Bibliotecario, Usuario y acciones comunes a todos. Cuando un usuario inicia sesión, en una misma página pueden reflejarse múltiples casos de uso, como ver, listar o mostrar información.
+
+Se muestra una mockup de la vista del bibliotecario y usuario con detalles de penalizaciones, préstamos y reservas. Por ejemplo, para el usuario "Paco", se muestra que está penalizado hasta una fecha específica y se detallan los préstamos y reservas activos con sus fechas correspondientes y los títulos de los libros.
+</p>
 
 ## Workflows
 <p align="justify">
@@ -176,9 +219,11 @@ Estas dependencias están configuradas para ser gestionadas por Maven, lo que si
 
 `steps:` Los pasos que se llevarán a cabo en el trabajo, que incluyen:
 
-        `Checkout Repo:` Utiliza la acción actions/checkout@v3 para clonar el repositorio y poder trabajar con él.
+  •	`Checkout Repo:` Utiliza la acción actions/checkout@v3 para clonar el repositorio y poder trabajar con él.
+  •	`Set up JDK 11:` Utiliza la acción actions/setup-java@v2 para configurar el entorno Java Development Kit (JDK) versión 11, usando la distribución 'temurin'.
+        
 
-        `Set up JDK 11:` Utiliza la acción actions/setup-java@v2 para configurar el entorno Java Development Kit (JDK) versión 11, usando la distribución 'temurin'.
+        
         
 <p align="justify">
 Este es un flujo de trabajo de despliegue y se ocupará de preparar el entorno necesario para compilar.
