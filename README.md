@@ -25,6 +25,41 @@
 
 
 ## Workflows
+![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/f4712d69-a4f7-4693-ae2c-fb353c030543)
+<p align="justify">
+ Cuando se agrega un elemento al proyecto, en este caso los problemas y las solicitudes de extracción, el valor se ajusta por defecto para que aparezca en producto backlog.
+</p>
+
+![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/a23b85b5-6574-4389-a538-9476bd4d4c0c)
+<p align="justify">
+Cuando se vuelve a abrir un problema o una solicitud de extracción el estado de cada elemento estará en revisión.
+</p>
+
+![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/683c18e5-5a3c-4af7-a2c1-372d80425683)
+<p align="justify">
+Cuando un problema está cerrado su estado pasa a listo.
+</p>
+
+![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/7052430a-6f44-403d-8e41-2e38d663d87a)
+<p align="justify">
+Cuando una solicitud de extracción tiene una revisión que solicita cambios su estado se modifica a en revisión.
+</p>
+
+![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/a385ccf6-c26f-43d5-a0e2-4ce044cc5b3a)
+<p align="justify">
+Cuando se aprueba una solicitud de extracción se cambia su estado a listo.
+</p>
+
+![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/a11bda44-a865-4f99-8add-903a48df79bf)
+<p align="justify">
+Cuando se fusiona una solicitud de extracción, quiere decir que se ha aceptado la solicitud y por lo tanto, su estado pasaría a listo.
+</p>
+
+![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/a6fd6722-488f-4bdd-bd63-6e2e30da1b74)
+<p align="justify">
+Cuando el filtro coincide con un elemento nuevo o actualizado, en este caso los filtros relacionados con un problema o si está abierto, se agrega el artículo al proyecto.
+</p>
+
 
 
 
@@ -57,8 +92,8 @@ Estas dependencias están configuradas para ser gestionadas por Maven, lo que si
 
 
 ## Ramas y merges
+![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/73a3a5f8-a3d5-4afb-9efd-9c192d99924d)
 
-![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/193bd82b-292b-4b6e-b50f-f58beacd23ff)
 
 
 <p align="justify">
