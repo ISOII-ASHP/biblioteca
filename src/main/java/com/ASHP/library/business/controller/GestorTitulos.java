@@ -70,14 +70,14 @@ public class GestorTitulos {
 		return "titulo";
 	}
 
-	@PostMapping("/altaTitulo")
+	@PostMapping("/actualizarTitulo")
 	public String actualizarTitulo(Titulo titulo, Model model) {
 		tituloDAO.findById(titulo.getId());
 		tituloDAO.save(titulo);
 		return "vista-titulo";
 	}
 
-	@PostMapping("/altaTitulo")
+	@PostMapping("/borrarTitulo")
 	public String borrarTitulo(@ModelAttribute Titulo titulo, Model model) {
 		tituloDAO.delete(titulo);
 		return "vista-titulo";
