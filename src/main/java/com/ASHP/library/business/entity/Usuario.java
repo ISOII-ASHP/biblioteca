@@ -30,9 +30,10 @@ public class Usuario {
     @OneToMany
     @JoinColumn(name = "USUARIO_id")
 	public List<Prestamo> prestamos = new ArrayList<Prestamo>();
-    
+
    @OneToMany
    @JoinColumn(name = "USUARIO_id")
+
 	public List<Reserva> reservas = new ArrayList<Reserva>();
 
 	public Usuario() {

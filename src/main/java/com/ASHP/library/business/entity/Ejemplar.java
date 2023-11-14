@@ -23,6 +23,11 @@ public class Ejemplar {
 		super();
 	}
 
+	public Ejemplar(Titulo titulo) {
+		super();
+		this.titulo = titulo;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -45,4 +50,3 @@ public class Ejemplar {
 	}
 
 }
-
