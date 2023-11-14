@@ -47,9 +47,8 @@ Estas dependencias están configuradas para ser gestionadas por Maven, lo que si
 
 ## Pom
 
-:Realizar cadastro dos usuários, podendo ser paciente ou profissional de saúde.
 
-:heavy_check_mark: `Funcionalidade 2:` Armazenar dados do usuário, como glicemia, atividade física, alimentação, medicação, administração de insulina e peso no banco de dados na Cloud Firestore.
+:`Funcionalidade 2:` Armazenar dados do usuário, como glicemia, atividade física, alimentação, medicação, administração de insulina e peso no banco de dados na Cloud Firestore.
 
 :heavy_check_mark: `Funcionalidade 3:` Plotar gráfico com histórico dos níveis glicêmicos do paciente.
 
