@@ -51,6 +51,11 @@ public class GestorTitulos {
 
 		String nombreTitulo, numReserva, isbn, nombreAutor, apellidoAutor;
 
+	@PostMapping("/altaTitulo")
+	public String altaTitulo(@ModelAttribute Titulo titulo, Model model) {
+		model.addAttribute("titulo",titulo);
+		tituloDAO.save(titulo);
+
 		nombreTitulo = titulo.get(0);
 		isbn = titulo.get(1);
 		numReserva = titulo.get(2);
@@ -71,6 +76,13 @@ public class GestorTitulos {
 
 	@GetMapping("/vistaFormTituloAutor")
 	public String verFormulario(Model model) {
+	    Titulo titulo = new Titulo();
+	    Autor autor = new Autor();
+	    titulo.setAutores(new ArrayList<>());
+	    	    
+	    model.addAttribute("titulo", titulo);
+	    model.addAttribute("autor", autor);
+	
 		Titulo titulo = new Titulo();
 		Autor autor = new Autor();
 		titulo.setAutores(new ArrayList<>());
@@ -81,12 +93,17 @@ public class GestorTitulos {
 		return "titulo";
 	}
 
-	public void actualizarTitulo(Titulo aT) {
-		throw new UnsupportedOperationException();
+	@PostMapping("/actualizarTitulo")
+	public String actualizarTitulo(Titulo titulo, Model model) {
+		tituloDAO.findById(titulo.getId());
+		tituloDAO.save(titulo);
+		return "vista-titulo";
 	}
 
-	public void borrarTitulo(Titulo aT) {
-		throw new UnsupportedOperationException();
+	@PostMapping("/borrarTitulo")
+	public String borrarTitulo(@ModelAttribute Titulo titulo, Model model) {
+		tituloDAO.delete(titulo);
+		return "vista-titulo";
 	}
 
 	public void altaEjemplar(Titulo aT) {
