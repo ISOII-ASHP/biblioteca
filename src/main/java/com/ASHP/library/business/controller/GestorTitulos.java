@@ -46,43 +46,66 @@ public class GestorTitulos {
 
 	}
 
+	/**
+	 * Metodo para dar de alta titulos con sus ejemplares y autores
+	 * 
+	 * @param titulo
+	 * @param autor
+	 * @param model
+	 * @return
+	 */
+
 	@PostMapping("/altaTitulo")
 	public String altaTitulo(@RequestParam List<String> titulo, @RequestParam List<String> autor, Model model) {
 
 		String nombreTitulo, numReserva, isbn, nombreAutor, apellidoAutor;
 
-	@PostMapping("/altaTitulo")
-	public String altaTitulo(@ModelAttribute Titulo titulo, Model model) {
-		model.addAttribute("titulo",titulo);
-		tituloDAO.save(titulo);
-
+		// Recojo los datos del formulario
 		nombreTitulo = titulo.get(0);
 		isbn = titulo.get(1);
 		numReserva = titulo.get(2);
 
+		// Creo los objetos
 		Titulo t = new Titulo(nombreTitulo, isbn, numReserva);
-		Ejemplar e = new Ejemplar(t);
-
+		
 		nombreAutor = autor.get(0);
 		apellidoAutor = autor.get(1);
+
 		List<Titulo> titulos = new ArrayList<Titulo>();
 		titulos.add(t);
+
 		Autor a = new Autor(nombreAutor, apellidoAutor, titulos);
 
-		model.addAttribute("titulo", titulo);
-		//tituloDAO.save(titulo);
+		// Guardo en la base de datos
+		model.addAttribute("titulo", t);
+		tituloDAO.save(t);
+		autorDAO.save(a);
+		
+		Titulo tituloPorNombre = getTituloByName(nombreTitulo);
+		
+		Ejemplar e = new Ejemplar(tituloPorNombre);
+		List<Ejemplar> ejemplares = new ArrayList<Ejemplar>();
+		ejemplares.add(e);
+		
+		tituloPorNombre.setEjemplares(ejemplares);
+		//ejemplarDAO.save(e);
+
 		return "vista-titulo";
+	}
+
+	private Titulo getTituloByName(String nombreTitulo) {
+		List<Titulo> t = tituloDAO.findAll();
+		for (Titulo titulo : t) {
+			if(titulo.getTitulo().equals(nombreTitulo))
+				return titulo;
+		}
+		return null;
+		
+		
 	}
 
 	@GetMapping("/vistaFormTituloAutor")
 	public String verFormulario(Model model) {
-	    Titulo titulo = new Titulo();
-	    Autor autor = new Autor();
-	    titulo.setAutores(new ArrayList<>());
-	    	    
-	    model.addAttribute("titulo", titulo);
-	    model.addAttribute("autor", autor);
-	
 		Titulo titulo = new Titulo();
 		Autor autor = new Autor();
 		titulo.setAutores(new ArrayList<>());
