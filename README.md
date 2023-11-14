@@ -26,9 +26,11 @@
 
 ## Workflows
 
+
+
+## Pom
+
 (![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/47db923d-0964-45d7-b9f5-cac88308440a)
-
-
 
 <p align="justify">
   El archivo pom.xml, indica las siguientes dependencias gestionadas:
@@ -43,14 +45,9 @@
 Estas dependencias están configuradas para ser gestionadas por Maven, lo que significa que Maven se encargará de descargar y mantener actualizadas estas librerías de acuerdo con las versiones especificadas en tu archivo pom.xml.
 
 </p>
+`Spring Boot Starter Thymeleaf:` Para integrar el motor de plantillas Thymeleaf.
 
-
-## Pom
-
-
-:`Funcionalidade 2:` Armazenar dados do usuário, como glicemia, atividade física, alimentação, medicação, administração de insulina e peso no banco de dados na Cloud Firestore.
-
-:heavy_check_mark: `Funcionalidade 3:` Plotar gráfico com histórico dos níveis glicêmicos do paciente.
+`Spring Boot Starter Web:` Proporciona todas las dependencias necesarias para construir aplicaciones web, incluyendo Spring MVC, Tomcat como el contenedor por defecto, etc.
 
 :heavy_check_mark: `Funcionalidade 4:` Chat com entre o paciente e profissional da saúde.
 
