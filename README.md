@@ -35,14 +35,26 @@
 <p align="justify">
   El archivo pom.xml, indica las siguientes dependencias gestionadas:
 
-Estas dependencias están configuradas para ser gestionadas por Maven, lo que significa que Maven se encargará de descargar y mantener actualizadas estas librerías de acuerdo con las versiones especificadas en tu archivo pom.xml.
-
 </p>
+
 `Spring Boot Starter Thymeleaf:` Para integrar el motor de plantillas Thymeleaf.
 
 `Spring Boot Starter Web:` Proporciona todas las dependencias necesarias para construir aplicaciones web, incluyendo Spring MVC, Tomcat como el contenedor por defecto, etc.
 
-:heavy_check_mark: `Funcionalidade 4:` Chat com entre o paciente e profissional da saúde.
+`Spring Boot Starter Test:` Incluye herramientas de testing como JUnit, Hamcrest y Mockito.
+
+`Spring Boot Starter Data JPA:` Facilita la implementación de repositorios JPA.
+
+`Apache Derby:` Una base de datos en memoria que se utiliza para la persistencia de datos.
+
+`Apache Derby Tools:` Una base de datos en memoria que se utiliza para la persistencia de datos.
+    Apache Derby Tools: Herramientas para trabajar con la base de datos Derby.
+
+<p align="justify">
+
+Estas dependencias están configuradas para ser gestionadas por Maven, lo que significa que Maven se encargará de descargar y mantener actualizadas estas librerías de acuerdo con las versiones especificadas en tu archivo pom.xml.
+
+</p>
 
 
 ## Ramas y merges
