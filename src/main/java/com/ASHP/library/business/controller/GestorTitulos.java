@@ -19,6 +19,7 @@ import com.ASHP.library.business.entity.Titulo;
 import com.ASHP.library.business.persistence.AutorDAO;
 import com.ASHP.library.business.persistence.TituloDAO;
 
+
 @Controller
 public class GestorTitulos {
 
@@ -129,10 +130,15 @@ public class GestorTitulos {
 		return "vista-titulo";
 	}
 
-	public void altaEjemplar(Titulo aT) {
-		throw new UnsupportedOperationException();
+	@PostMapping("/altaEjemplar")
+	public String altaEjemplar(@ModelAttribute("ejemplar") Ejemplar ejemplar, @RequestParam("tituloId") Long tituloId) {
+	    Titulo titulo = tituloDAO.findById(tituloId).orElseThrow(() -> new IllegalArgumentException("Invalid titulo Id:" + tituloId));
+	    titulo.getEjemplares().add(ejemplar);
+	    tituloDAO.save(titulo);
+	    return "redirect:/vistaFormTituloAutor";
 	}
 
+	
 	public void bajaEjemplar(Titulo aT) {
 		throw new UnsupportedOperationException();
 	}

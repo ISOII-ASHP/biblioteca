@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    	<title>Añadir nuevo ejemplar</title>
+    	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	</head>
+	<body>
+
+		<h1>Añadir nuevo ejemplar</h1>
+
+	    <form action="#" th:action="@{/altaEjemplar}" th:object="${ejemplar}" method="POST">
+	        <label>Titulo</label>
+	        <select name="titulo" id="id">
+	            <!-- Las opciones se añadirán aquí -->
+	            <option>Seleccionar titulo</option>
+	            <option>Titulo 1</option>
+	        </select>
+	        
+	        
+	        
+	        <!--
+	        <div class="dropdown">
+  				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    				Titulos
+  				</button>
+  				<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+    				<button class="dropdown-item" type="button">Action</button>
+    				<button class="dropdown-item" type="button">Another action</button>
+    				<button class="dropdown-item" type="button">Something else here</button>
+  				</div>
+			</div>
+	        
+	        
+	        -->
+	        
+	        <button type="submit" class="btn btn-info col-2"> Guardar</button>
+	    </form>
+	
+	
+		<!--Esto se supone que hace que salgan los titulos ahi recorriendo la lista de titulos-->
+	    <script>
+	        var titulos;
+	        var select = document.getElementById("id");
+	        for(var i = 0; i < lenguajes.length; i++) {
+	            var opt = lenguajes[i];
+	            var el = document.createElement("option");
+	            el.textContent = opt;
+	            el.value = opt;
+	            select.appendChild(el);
+	        }
+	    </script>
+	</body>
+</html>
+
+
+
+
+<!--
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+    	<title>Añadir nuevo ejemplar</title>
+    	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	</head>
+
+	<body>
+
+        <h1>Añadir nuevo ejemplar</h1>
+
+        <form action="#" th:action="@{/altaEjemplar}" th:object="${ejemplar}" method="POST">
+			<p>titulo: <input type="text" th:field="*{titulo}" /></p>
+            <button type="submit" class="btn btn-info col-2"> Guardar</button>
+        </form>
+
+	</body>
+
+</html>
+
+-->
