@@ -41,9 +41,13 @@ Tareas:
 •	Realizar caso de uso dar de alta nuevos títulos.
 
 Retrospectiva:
+
 •	Revisar lo que funcionó bien y lo que podría mejorarse.
+
 •	Planificar mejoras para el siguiente sprint.
+
 Antes y después de cada Sprint:
+
 •	Después: Como no fuimos capaz de completar Dar de alta nuevos títulos, lo metimos en el siguiente sprint.
 
 </p>
@@ -53,17 +57,27 @@ Antes y después de cada Sprint:
 ![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/4a04fc19-3e5d-4031-bb37-b299e3a143e6)
 
 <p align="justify">
-Tareas:
+
+  Tareas:
+  
 •	Configurar dependencias de Spring JPA en el pom.xml.
+
 •	Crear un entorno en que podamos planificarnos para cada sprint y los issues.
+
 •	Realizar caso de uso dar de alta nuevos títulos.
+
 •	Obtener de la UML un código base.
+
 •	Crear página index.html y la implementación de la herramienta hibernar
+
 Retrospectiva:
+
 •	Analizar cómo la introducción de Spring JPA ha afectado el proceso de desarrollo.
+
 •	Revisar la configuración y el código para identificar posibles mejoras o problemas.
 
 Antes y después de cada Sprint:
+
 •	Después: Como no fuimos capaz de completar Dar de alta nuevos títulos, lo metimos en el siguiente sprint. En este sprint, nos dimos cuenta que necesitamos un código base pero que sea funcional para poder empezar a realizar los casos de uso. Nos queríamos centrar en un código base que funcione correctamente y mejorarlo para realizar mas tarde las funcionalidades. Por esta razón, algunos issues no fuimos capaces de completarlos También realizamos un pequeño mockup para mostrarle al usuario. Y mostrar las funcionalidades que tendrá cada actor.
 </p>
 
@@ -81,18 +95,30 @@ Se muestra una mockup de la vista del bibliotecario y usuario con detalles de pe
 
 
 <p align="justify">
-Tareas:
+  Tareas:
+  
 •	Identificar y priorizar los casos de uso clave para el sprint.
+
 •	Implementar las vistas y controladores requeridos para los casos de uso seleccionados.
+
 •	Asegurar que cada caso de uso se integre correctamente con la capa de persistencia.
+
 •	Continuar la refactorización y mejora del código base según sea necesario.
+
 •	Añadimos un .yml para mejorar los work flows y la configuración del proyecto.
+
 Retrospectiva:
+
 •	Evaluar la implementación de los casos de uso y la eficacia del trabajo en equipo.
+
 •	Identificar desafíos técnicos encontrados y cómo se resolvieron.
+
 •	Revisar y ajustar las prácticas de desarrollo si es necesario para mejorar la productividad.
+
 •	Recoger retroalimentación para ajustar y mejorar los siguientes sprints.
+
 Antes y después de cada Sprint:
+
 •	Al no ser capaz de completar los casos de uso, vamos a introducirlos en el siguiente sprint, a pesar de ello, hemos realizado algunas fusiones para avanzar en el proyecto y de esta manera ver que se ha seguido avanzando
 </p>
 
@@ -102,18 +128,31 @@ Antes y después de cada Sprint:
 
 <p align="justify">
 Tareas:
+  
 •	Continuar con la implementación de casos de uso pendientes y documentación.
+
 •	Implementar las vistas y controladores requeridos para los casos de uso seleccionados.
+
 •	Configurar SonarCloud en el proyecto y conectarlo con el repositorio de GitHub.
+
 •	Establecer umbrales de calidad y reglas de análisis para el proyecto.
+
 •	Ajustar el archivo pom.xml para incluir el plugin de SonarCloud si es necesario.
+
 •	Ejecutar análisis iniciales y resolver problemas críticos o bloqueantes encontrados.
+
 •	Implementar las vistas y controladores requeridos para los casos de uso seleccionados.
+
 •	Refinar la automatización de CI/CD para incluir análisis de SonarCloud.
+
 Retrospectiva:
+
 •	Evaluar la implementación de los casos de uso y la eficacia del trabajo en equipo.
+
 •	Evaluar la integración de SonarCloud y su impacto en el flujo de trabajo del equipo.
+
 •	Revisar y ajustar las prácticas de desarrollo si es necesario para mejorar la productividad.
+
 •	Recoger retroalimentación para ajustar y mejorar los siguientes sprints.
 </p>
 
