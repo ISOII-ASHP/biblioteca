@@ -25,37 +25,48 @@
 
 
 ## Workflows
+<p align="justify">
+Los workflows, o flujos de trabajo, son secuencias de procesos o pasos necesarios para llevar a cabo una tarea o proyecto. Un workflow representa la automatización de procesos de negocio, donde las tareas, la información o los documentos se pasan de un participante a otro para realizar acciones según un conjunto de reglas procedimentales. Estos pueden ser manuales o automatizados y son fundamentales para organizar y optimizar las operaciones y tareas dentro de un proyecto.
+</p>
+
 ![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/f4712d69-a4f7-4693-ae2c-fb353c030543)
+
 <p align="justify">
  Cuando se agrega un elemento al proyecto, en este caso los problemas y las solicitudes de extracción, el valor se ajusta por defecto para que aparezca en producto backlog.
 </p>
 
 ![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/a23b85b5-6574-4389-a538-9476bd4d4c0c)
+
 <p align="justify">
 Cuando se vuelve a abrir un problema o una solicitud de extracción el estado de cada elemento estará en revisión.
 </p>
 
 ![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/683c18e5-5a3c-4af7-a2c1-372d80425683)
+
 <p align="justify">
 Cuando un problema está cerrado su estado pasa a listo.
 </p>
 
 ![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/7052430a-6f44-403d-8e41-2e38d663d87a)
+
 <p align="justify">
 Cuando una solicitud de extracción tiene una revisión que solicita cambios su estado se modifica a en revisión.
 </p>
 
 ![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/a385ccf6-c26f-43d5-a0e2-4ce044cc5b3a)
+
 <p align="justify">
 Cuando se aprueba una solicitud de extracción se cambia su estado a listo.
 </p>
 
 ![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/a11bda44-a865-4f99-8add-903a48df79bf)
+
 <p align="justify">
 Cuando se fusiona una solicitud de extracción, quiere decir que se ha aceptado la solicitud y por lo tanto, su estado pasaría a listo.
 </p>
 
 ![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/a6fd6722-488f-4bdd-bd63-6e2e30da1b74)
+
 <p align="justify">
 Cuando el filtro coincide con un elemento nuevo o actualizado, en este caso los filtros relacionados con un problema o si está abierto, se agrega el artículo al proyecto.
 </p>
@@ -81,8 +92,7 @@ Cuando el filtro coincide con un elemento nuevo o actualizado, en este caso los 
 
 `Apache Derby:` Una base de datos en memoria que se utiliza para la persistencia de datos.
 
-`Apache Derby Tools:` Una base de datos en memoria que se utiliza para la persistencia de datos.
-    Apache Derby Tools: Herramientas para trabajar con la base de datos Derby.
+`Apache Derby Tools:` Herramientas para trabajar con la base de datos Derby.
 
 <p align="justify">
 
@@ -92,9 +102,8 @@ Estas dependencias están configuradas para ser gestionadas por Maven, lo que si
 
 
 ## Ramas y merges
+
 ![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/73a3a5f8-a3d5-4afb-9efd-9c192d99924d)
-
-
 
 <p align="justify">
  La gestión de configuración de ramas en un proyecto que utiliza Git y sigue el modelo de branching por características junto con las ramas master y develop se organiza generalmente de la siguiente manera:
@@ -117,9 +126,63 @@ Estas dependencias están configuradas para ser gestionadas por Maven, lo que si
 
 ## Proyecto weight
 
+![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/ba032d07-7628-4cb6-8e97-d2f912585658)
+
+<p align="justify">
+ La asignación de un peso a los issues es una forma de priorización basada en importancia y urgencia. Un issue con un peso de 5 indica máxima prioridad y debe ser abordado antes que otros. Estos suelen ser críticos para el negocio o la funcionalidad. Un peso de 1 indica una tarea de menor importancia, que aunque debe completarse, puede esperar sin afectar significativamente el progreso general del proyecto. Esta técnica de priorización ayuda al equipo a enfocarse en los problemas más impactantes y a gestionar eficientemente el flujo de trabajo del proyecto.
+</p>
+
 ## Product Backlog
 
+![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/ef5383ed-906b-4780-8714-e3f8f82a44bc)
+
+<p align="justify">
+ Este método una metodología ágil de gestión de proyecto. Contiene los siguientes términos:
+</p>
+
+`Product Backlog:` Lista priorizada de todo el trabajo o funcionalidades que se desean en el producto final. Es dinámica y puede cambiar a lo largo del desarrollo del proyecto.
+
+`Sprint Backlog:` Subconjunto de items del Product Backlog seleccionados para el Sprint, más un plan para entregar el incremento del producto y alcanzar el objetivo del Sprint.
+
+`In Process:` Tareas que actualmente se están trabajando. Una vez que comienza el Sprint, los items se mueven aquí desde el Sprint Backlog.
+
+`In Review:` Tareas completadas pero que están en proceso de ser revisadas por calidad, funcionalidad o cumplimiento de requisitos. Es un paso antes de ser consideradas "hechas".
+
+`Done:` Tareas que han sido completadas y han pasado todas las revisiones necesarias, cumpliendo con la definición de "hecho" del equipo. Están listas para ser entregadas o han sido entregadas al cliente.
+
+<p align="justify">
+ Esta estructura ayuda a visualizar el progreso del trabajo y asegura que todas las tareas pasen por las etapas necesarias antes de ser consideradas completas.
+</p>
+
 ## Deployment
+
+![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/69b55c87-68b0-40a0-8c86-3ec3f39bf4b8)
+
+<p align="justify">
+ Deployment.yml automatizará el proceso de despliegue cuando ocurran eventos específicos en la rama main. Aquí está lo que hace cada sección:
+</p>
+
+`name:` El nombre del flujo de trabajo es "Deployment".
+
+`on:` Define los eventos que desencadenan el flujo de trabajo. En este caso, cualquier push o pull request a la rama main, además del evento workflow_dispatch, que permite la ejecución manual del flujo de trabajo.
+
+`permissions:` Configura los permisos del token de GitHub, dando permiso para escribir en los contenidos del repositorio.
+
+`jobs:` Define los trabajos que el flujo de trabajo ejecutará, que en este caso es build-and-deploy.
+
+`runs-on:` Especifica que el trabajo se ejecutará en el último entorno de Windows disponible.
+
+`steps:` Los pasos que se llevarán a cabo en el trabajo, que incluyen:
+
+        `Checkout Repo:` Utiliza la acción actions/checkout@v3 para clonar el repositorio y poder           trabajar con él.
+
+        `Set up JDK 11:` tiliza la acción actions/setup-java@v2 para configurar el entorno Java             Development Kit (JDK) versión 11, usando la distribución 'temurin'.
+        
+<p align="justify">
+Este es un flujo de trabajo de despliegue y se ocupará de preparar el entorno necesario para compilar.
+</p>
+
+
 
 
 
