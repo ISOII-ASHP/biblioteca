@@ -29,11 +29,17 @@
 
 <p align="justify">
 Tareas:
+  
 •	Crear un backlog de producto con tareas priorizadas.
+
 •	Configurar el entorno de desarrollo y el repositorio en GitHub.
+
 •	Integrar Maven para la gestión de dependencias y la automatización de la construcción del proyecto.
+
 •	Desarrollar una estructura básica del proyecto con la implementación inicial de Maven (archivos pom.xml).
+
 •	Realizar caso de uso dar de alta nuevos títulos.
+
 Retrospectiva:
 •	Revisar lo que funcionó bien y lo que podría mejorarse.
 •	Planificar mejoras para el siguiente sprint.
