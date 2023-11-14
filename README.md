@@ -29,8 +29,7 @@
 
 
 ## Pom
-
-(![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/47db923d-0964-45d7-b9f5-cac88308440a)
+![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/47db923d-0964-45d7-b9f5-cac88308440a)
 
 <p align="justify">
   El archivo pom.xml, indica las siguientes dependencias gestionadas:
@@ -58,6 +57,26 @@ Estas dependencias están configuradas para ser gestionadas por Maven, lo que si
 
 
 ## Ramas y merges
+
+![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/193bd82b-292b-4b6e-b50f-f58beacd23ff)
+
+
+<p align="justify">
+ La gestión de configuración de ramas en un proyecto que utiliza Git y sigue el modelo de branching por características junto con las ramas master y develop se organiza generalmente de la siguiente manera:
+
+</p>
+
+`Rama Master:` Sirve como la rama principal donde el código refleja el estado de producción. Las actualizaciones a master se hacen a través de merges cuidadosamente revisados desde develop o ramas de hotfix, en caso de error.
+
+`Rama Develop:` Actúa como una rama de integración para las características que se están desarrollando. Esta es la rama donde todas las características (feature branches) se unen (merge) antes de ser llevadas a master.
+
+`Feature Branches:` Por cada nueva característica o mejora significativa, se crea una nueva rama desde develop. Esto permite trabajar en la característica de manera aislada. Una vez que la característica está completa y ha pasado todas las pruebas, se hace merge de vuelta a develop.
+
+`Merges:` Los merges de las ramas de características a develop se hacen con frecuencia para integrar y probar nuevas funcionalidades. Antes de un lanzamiento, develop se fusiona con master para reflejar la nueva versión.
+
+<p align="justify">
+ Este enfoque ayuda a mantener organizado el desarrollo, facilita la integración continua y la entrega continua (CI/CD), y asegura que la rama de producción siempre mantenga un estado estable.
+</p>
 
 ## Commits
 
