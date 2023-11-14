@@ -69,6 +69,48 @@ Antes y después de cada Sprint:
 Se muestra una mockup de la vista del bibliotecario y usuario con detalles de penalizaciones, préstamos y reservas. Por ejemplo, para el usuario "Paco", se muestra que está penalizado hasta una fecha específica y se detallan los préstamos y reservas activos con sus fechas correspondientes y los títulos de los libros.
 </p>
 
+#### Sprint 3
+
+![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/53c02034-233e-423b-b93f-c431e406998f)
+
+
+<p align="justify">
+Tareas:
+•	Identificar y priorizar los casos de uso clave para el sprint.
+•	Implementar las vistas y controladores requeridos para los casos de uso seleccionados.
+•	Asegurar que cada caso de uso se integre correctamente con la capa de persistencia.
+•	Continuar la refactorización y mejora del código base según sea necesario.
+•	Añadimos un .yml para mejorar los work flows y la configuración del proyecto.
+Retrospectiva:
+•	Evaluar la implementación de los casos de uso y la eficacia del trabajo en equipo.
+•	Identificar desafíos técnicos encontrados y cómo se resolvieron.
+•	Revisar y ajustar las prácticas de desarrollo si es necesario para mejorar la productividad.
+•	Recoger retroalimentación para ajustar y mejorar los siguientes sprints.
+Antes y después de cada Sprint:
+•	Al no ser capaz de completar los casos de uso, vamos a introducirlos en el siguiente sprint, a pesar de ello, hemos realizado algunas fusiones para avanzar en el proyecto y de esta manera ver que se ha seguido avanzando
+</p>
+
+#### Sprint 4
+
+![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/d0c9bc3f-8c3a-4662-a0d6-7d1f41c5b074)
+
+<p align="justify">
+Tareas:
+•	Continuar con la implementación de casos de uso pendientes y documentación.
+•	Implementar las vistas y controladores requeridos para los casos de uso seleccionados.
+•	Configurar SonarCloud en el proyecto y conectarlo con el repositorio de GitHub.
+•	Establecer umbrales de calidad y reglas de análisis para el proyecto.
+•	Ajustar el archivo pom.xml para incluir el plugin de SonarCloud si es necesario.
+•	Ejecutar análisis iniciales y resolver problemas críticos o bloqueantes encontrados.
+•	Implementar las vistas y controladores requeridos para los casos de uso seleccionados.
+•	Refinar la automatización de CI/CD para incluir análisis de SonarCloud.
+Retrospectiva:
+•	Evaluar la implementación de los casos de uso y la eficacia del trabajo en equipo.
+•	Evaluar la integración de SonarCloud y su impacto en el flujo de trabajo del equipo.
+•	Revisar y ajustar las prácticas de desarrollo si es necesario para mejorar la productividad.
+•	Recoger retroalimentación para ajustar y mejorar los siguientes sprints.
+</p>
+
 ## Workflows
 <p align="justify">
 Los workflows, o flujos de trabajo, son secuencias de procesos o pasos necesarios para llevar a cabo una tarea o proyecto. Un workflow representa la automatización de procesos de negocio, donde las tareas, la información o los documentos se pasan de un participante a otro para realizar acciones según un conjunto de reglas procedimentales. Estos pueden ser manuales o automatizados y son fundamentales para organizar y optimizar las operaciones y tareas dentro de un proyecto.
