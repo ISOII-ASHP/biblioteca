@@ -256,6 +256,12 @@ Estas dependencias están configuradas para ser gestionadas por Maven, lo que si
 
 ## Commits
 
+<img width="958" alt="image" src="https://github.com/ISOII-ASHP/biblioteca/assets/91836109/dd349d55-ca08-4c6a-904f-553ae3c1317a">
+
+<p align="justify">
+Actualmente, tenemos 54 commits.
+</p>
+
 ## Proyecto weight
 
 ![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/ba032d07-7628-4cb6-8e97-d2f912585658)
