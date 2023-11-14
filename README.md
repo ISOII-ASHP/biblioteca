@@ -20,8 +20,10 @@
 
 ## Sprints
   <p align="justify">
- 
+   Antes de definir el antes y después de cada sprint, vamos a indicar que nuestros sprints son cada 2 semanas.
 </p>
+
+#Sprint 1
 
 
 ## Workflows
@@ -176,7 +178,7 @@ Estas dependencias están configuradas para ser gestionadas por Maven, lo que si
 
         `Checkout Repo:` Utiliza la acción actions/checkout@v3 para clonar el repositorio y poder trabajar con él.
 
-        `Set up JDK 11:` tiliza la acción actions/setup-java@v2 para configurar el entorno Java Development Kit (JDK) versión 11, usando la distribución 'temurin'.
+        `Set up JDK 11:` Utiliza la acción actions/setup-java@v2 para configurar el entorno Java Development Kit (JDK) versión 11, usando la distribución 'temurin'.
         
 <p align="justify">
 Este es un flujo de trabajo de despliegue y se ocupará de preparar el entorno necesario para compilar.
