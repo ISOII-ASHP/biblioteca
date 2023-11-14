@@ -16,7 +16,7 @@ import jakarta.persistence.Transient;
 public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String id;
+	private Long id;
 	@Column
 	private String nombre;
 	@Column
@@ -27,7 +27,7 @@ public class Usuario {
     @OneToMany
 	public List<Prestamo> prestamos = new ArrayList<Prestamo>();
     
-   @OneToMany
+    @OneToMany
 	public List<Reserva> reservas = new ArrayList<Reserva>();
 
 	public Usuario() {
@@ -43,11 +43,11 @@ public class Usuario {
 		this.reservas = reservas;
 	}
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
