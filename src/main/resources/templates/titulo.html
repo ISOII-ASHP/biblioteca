@@ -1,5 +1,9 @@
 <!DOCTYPE HTML>
 <html xmlns:th="https://www.thymeleaf.org">
+<div th:insert="~{cabecera}"></div>
+
+<body>
+
 
 <head>
 	<title>Inserción de Titulo</title>
@@ -24,6 +28,31 @@
 		<div class="row justify-content-center mt-3">
 			<div class="row justify-content-center mt-1">
 				<p class="text-center alert alert-primary" role="alert">
+					Alta Título
+				</p>
+			</div>
+			<form action="#" th:action="@{/titulo}" th:object="${titulo}" method="post">
+
+				<div class="form-floating mb-3">
+					<input type="text" th:field="*{titulo}" class="form-control" id="floatingInput"
+						placeholder="Título">
+					<label for="floatingInput">Título</label>
+				</div>
+				<div class="form-floating">
+					<input type="number" th:field="*{isbn}" class="form-control" id="floatingPassword"
+						placeholder="ISBN">
+					<label for="floatingPassword">ISBN</label>
+				</div>
+				<div class="form-floating">
+					<input type="number" th:field="*{numReserva}" class="form-control" id="floatingPassword"
+						placeholder="Número de reserva">
+					<label for="floatingPassword">Número de reserva</label>
+				</div>
+
+				<button type="submit" class="btn btn-primary">Submit</button>
+				</p>
+			</form>
+
 					Índice
 				</p>
 			</div>
