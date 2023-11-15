@@ -1,17 +1,107 @@
 package com.ASHP.library.business.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.Vector;
+import java.util.List;
 
-import com.ASHP.library.business.entity.Prestamo;
-import com.ASHP.library.business.entity.Reserva;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
+@Entity
+@Table(name = "USUARIO")
 public class Usuario {
-	private String _id;
-	private String _nombre;
-	private String _apellidos;
-	private Date _fechaFinPenalizacion;
-	private Object _attribute;
-	public Vector<Prestamo> _prestamos = new Vector<Prestamo>();
-	public Vector<Reserva> _reservas = new Vector<Reserva>();
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	@Column
+	private String nombre;
+	@Column
+	private String apellidos;
+	@Column
+	private Date fechaFinPenalizacion;
+		
+    @OneToMany
+    @JoinColumn(name = "USUARIO_id")
+	public List<Prestamo> prestamos = new ArrayList<Prestamo>();
+
+   @OneToMany
+   @JoinColumn(name = "USUARIO_id")
+
+	public List<Reserva> reservas = new ArrayList<Reserva>();
+
+	public Usuario() {
+	}
+
+	public Usuario(String nombre, String apellidos, Date fechaFinPenalizacion, Object attribute,
+			List<Prestamo> prestamos, List<Reserva> reservas) {
+		super();
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.fechaFinPenalizacion = fechaFinPenalizacion;
+		this.prestamos = prestamos;
+		this.reservas = reservas;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getApellidos() {
+		return apellidos;
+	}
+
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
+
+	public Date getFechaFinPenalizacion() {
+		return fechaFinPenalizacion;
+	}
+
+	public void setFechaFinPenalizacion(Date fechaFinPenalizacion) {
+		this.fechaFinPenalizacion = fechaFinPenalizacion;
+	}
+
+	public List<Prestamo> getPrestamos() {
+		return prestamos;
+	}
+
+	public void setPrestamos(List<Prestamo> prestamos) {
+		this.prestamos = prestamos;
+	}
+
+	public List<Reserva> getReservas() {
+		return reservas;
+	}
+
+	public void setReservas(List<Reserva> reservas) {
+		this.reservas = reservas;
+	}
+
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", fechaFinPenalizacion="
+				+ fechaFinPenalizacion + ", prestamos=" + prestamos + ", reservas=" + reservas + "]";
+	}
+
+	
 }

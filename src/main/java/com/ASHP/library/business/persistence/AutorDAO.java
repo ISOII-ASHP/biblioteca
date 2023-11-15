@@ -1,20 +1,10 @@
 package com.ASHP.library.business.persistence;
 
-public class AutorDAO extends EntityDAO {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-	public Object select(String aId) {
-		throw new UnsupportedOperationException();
-	}
+import com.ASHP.library.business.entity.Autor;
 
-	public int insert(Object aObject) {
-		throw new UnsupportedOperationException();
-	}
-
-	public int update(Object aObject) {
-		throw new UnsupportedOperationException();
-	}
-
-	public int delete(Object aObject) {
-		throw new UnsupportedOperationException();
-	}
+@Repository
+public interface AutorDAO extends JpaRepository<Autor, Long> {	
 }

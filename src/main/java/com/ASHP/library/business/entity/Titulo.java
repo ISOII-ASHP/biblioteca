@@ -1,64 +1,140 @@
 package com.ASHP.library.business.entity;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.ASHP.library.business.entity.Autor;
-import com.ASHP.library.business.entity.Ejemplar;
-import com.ASHP.library.business.entity.Prestamo;
-import com.ASHP.library.business.entity.Reserva;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
+@Entity
+@Table(name = "TITULO")
 public class Titulo {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	@Column
 	private String titulo;
+	@Column
 	private String isbn;
+	@Column
 	private String numReserva;
-	public Vector<Autor> autores = new Vector<Autor>();
-	public Vector<Ejemplar> ejemplares = new Vector<Ejemplar>();
-	public Vector<Prestamo> prestamos = new Vector<Prestamo>();
-	public Vector<Reserva> reservas = new Vector<Reserva>();
-	
+
+
+	@ManyToMany(mappedBy = "titulos")
+	public List<Autor> autores = new ArrayList<Autor>();
+
+	@OneToMany
+	@JoinColumn(name = "TITULO_id")
+	public List<Ejemplar> ejemplares = new ArrayList<Ejemplar>();
+
+	@OneToMany
+	@JoinColumn(name = "TITULO_id")
+	public List<Prestamo> prestamos = new ArrayList<Prestamo>();
+
+	@OneToMany
+	@JoinColumn(name = "TITULO_id")
+
+	public List<Reserva> reservas = new ArrayList<Reserva>();
+
+	public Titulo() {
+	}
+
+	public Titulo(String titulo, String isbn, String numReserva) {
+		super();
+		this.titulo = titulo;
+		this.isbn = isbn;
+		this.numReserva = numReserva;
+	}
+
+	public Titulo(String titulo, String isbn, String numReserva, List<Autor> autores, List<Ejemplar> ejemplares,
+			List<Prestamo> prestamos, List<Reserva> reservas) {
+		super();
+		this.titulo = titulo;
+		this.isbn = isbn;
+		this.numReserva = numReserva;
+		this.autores = autores;
+		this.ejemplares = ejemplares;
+		this.prestamos = prestamos;
+		this.reservas = reservas;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getTitulo() {
 		return titulo;
 	}
+
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
+
 	public String getIsbn() {
 		return isbn;
 	}
+
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
+
 	public String getNumReserva() {
 		return numReserva;
 	}
+
 	public void setNumReserva(String numReserva) {
 		this.numReserva = numReserva;
 	}
-	public Vector<Autor> getAutores() {
+
+	public List<Autor> getAutores() {
 		return autores;
 	}
-	public void setAutores(Vector<Autor> autores) {
+
+	public void setAutores(List<Autor> autores) {
 		this.autores = autores;
 	}
-	public Vector<Ejemplar> getEjemplares() {
+
+	public List<Ejemplar> getEjemplares() {
 		return ejemplares;
 	}
-	public void setEjemplares(Vector<Ejemplar> ejemplares) {
+
+	public void setEjemplares(List<Ejemplar> ejemplares) {
 		this.ejemplares = ejemplares;
 	}
-	public Vector<Prestamo> getPrestamos() {
+
+	public List<Prestamo> getPrestamos() {
 		return prestamos;
 	}
-	public void setPrestamos(Vector<Prestamo> prestamos) {
+
+	public void setPrestamos(List<Prestamo> prestamos) {
 		this.prestamos = prestamos;
 	}
-	public Vector<Reserva> getReservas() {
+
+	public List<Reserva> getReservas() {
 		return reservas;
 	}
-	public void setReservas(Vector<Reserva> reservas) {
+
+	public void setReservas(List<Reserva> reservas) {
 		this.reservas = reservas;
 	}
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "Titulo [id=" + id + ", titulo=" + titulo + ", isbn=" + isbn + ", numReserva=" + numReserva
+				+ ", autores=" + autores + ", ejemplares=" + ejemplares + ", prestamos=" + prestamos + ", reservas="
+				+ reservas + "]";
+	}
+
 }
