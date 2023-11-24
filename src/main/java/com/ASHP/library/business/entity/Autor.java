@@ -9,19 +9,23 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
 @Entity
+@Table(name = "autor")
 public class Autor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@Column
 	private String nombre;
+	
 	@Column
 	private String apellido;
 	
-    @ManyToMany
+    @ManyToMany(mappedBy = "autores")
 	public List<Titulo> titulos = new ArrayList<Titulo>();
 
 	public Autor() {

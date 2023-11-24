@@ -3,37 +3,52 @@ package com.ASHP.library.business.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Transient;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "titulo")
 public class Titulo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@Column
 	private String titulo;
+	
 	@Column
 	private String isbn;
+	
 	@Column
 	private String numReserva;
 
-	@ManyToMany
+	 @ManyToMany(cascade = {
+	            CascadeType.PERSIST,
+	            CascadeType.MERGE
+	    })
+	    @JoinTable(
+	            name = "titulo_autor",
+	            joinColumns = {@JoinColumn(name = "titulo_id")},
+	            inverseJoinColumns = {@JoinColumn(name = "autor_id")}
+	    )
 	protected List<Autor> autores = new ArrayList<Autor>();
 	
-	@OneToMany
+	@OneToMany(mappedBy = "titulo")
 	protected List<Ejemplar> ejemplares = new ArrayList<Ejemplar>();
 
-	@OneToMany
+	@OneToMany(mappedBy = "titulo")
 	protected List<Prestamo> prestamos = new ArrayList<Prestamo>();
 
-	@OneToMany
+	@OneToMany(mappedBy = "titulo")
 	protected List<Reserva> reservas = new ArrayList<Reserva>();
 
 	public Titulo() {
