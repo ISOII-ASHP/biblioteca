@@ -12,18 +12,21 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "RESERVA")
+@Table(name = "reserva")
 public class Reserva {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@Column
 	private Date fecha;
+	
 	@ManyToOne
-	@JoinColumn(name = "USUARIO_id")
+	@JoinColumn(name = "usuario_id")
 	public Usuario usuario;
+	
 	@ManyToOne
-	@JoinColumn(name = "TITULO_id")
+	@JoinColumn(name = "titulo_id")
 	public Titulo titulo;
 
 	public Reserva() {

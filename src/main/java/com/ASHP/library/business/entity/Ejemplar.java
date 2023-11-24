@@ -9,22 +9,21 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "EJEMPLAR")
+@Table(name = "ejemplar")
 public class Ejemplar {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@ManyToOne
-	@JoinColumn(name = "TITULO_id")
-	protected Titulo titulo;
+	@JoinColumn(name = "titulo_id")
+	private Titulo titulo;
 
 	public Ejemplar() {
 		super();
 	}
 
 	public Ejemplar(Titulo titulo) {
-		super();
 		this.titulo = titulo;
 	}
 

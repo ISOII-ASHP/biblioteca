@@ -9,31 +9,30 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
 @Entity
-@Table(name = "USUARIO")
+@Table(name = "usuario")
 public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@Column
 	private String nombre;
+	
 	@Column
 	private String apellidos;
+	
 	@Column
 	private Date fechaFinPenalizacion;
 		
-    @OneToMany
-    @JoinColumn(name = "USUARIO_id")
+    @OneToMany(mappedBy = "usuario")
 	public List<Prestamo> prestamos = new ArrayList<Prestamo>();
-
-   @OneToMany
-   @JoinColumn(name = "USUARIO_id")
-
+    
+    @OneToMany(mappedBy = "usuario")
 	public List<Reserva> reservas = new ArrayList<Reserva>();
 
 	public Usuario() {
