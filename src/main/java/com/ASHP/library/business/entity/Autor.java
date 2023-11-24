@@ -32,6 +32,12 @@ public class Autor {
 		super();
 	}
 
+	public Autor( String nombre, String apellido) {
+		super();
+		this.nombre = nombre;
+		this.apellido = apellido;
+	}
+
 	public Autor(String nombre, String apellido, List<Titulo> titulos) {
 		super();
 		this.nombre = nombre;

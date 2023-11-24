@@ -23,7 +23,6 @@ import com.ASHP.library.business.persistence.TituloDAO;
 @Controller
 public class GestorTitulos {
 
-	private static final Logger log = LoggerFactory.getLogger(GestorTitulos.class);
 
 	@Autowired
 	public TituloDAO tituloDAO;
@@ -60,6 +59,13 @@ public class GestorTitulos {
 
 		String nombreTitulo, numReserva, isbn, nombreAutor, apellidoAutor;
 
+		
+		// Recojo los datos del formulario
+		nombreAutor = autor.get(0);
+		apellidoAutor = autor.get(1);
+
+		Autor a = new Autor(nombreAutor, apellidoAutor);
+		
 		// Recojo los datos del formulario
 		nombreTitulo = titulo.get(0);
 		isbn = titulo.get(1);
@@ -67,21 +73,13 @@ public class GestorTitulos {
 
 		// Creo los objetos
 		Titulo t = new Titulo(nombreTitulo, isbn, numReserva);
+		t.addAutor(a);
 		
-		nombreAutor = autor.get(0);
-		apellidoAutor = autor.get(1);
-
-		List<Titulo> titulos = new ArrayList<Titulo>();
-		titulos.add(t);
-
-		Autor a = new Autor(nombreAutor, apellidoAutor, titulos);
 
 		// Guardo en la base de datos
 		model.addAttribute("titulo", t);
-		System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: "+ t.toString());
-		System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: "+ a.toString());
 		tituloDAO.save(t);
-		autorDAO.save(a);
+//		autorDAO.save(a);
 		
 		Titulo tituloPorNombre = getTituloByName(nombreTitulo);
 		
@@ -90,7 +88,7 @@ public class GestorTitulos {
 		ejemplares.add(e);
 		
 		tituloPorNombre.setEjemplares(ejemplares);
-		//ejemplarDAO.save(e);
+		ejemplarDAO.save(e);
 
 		return "vista-titulo";
 	}

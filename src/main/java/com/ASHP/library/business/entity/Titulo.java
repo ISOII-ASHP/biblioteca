@@ -31,16 +31,15 @@ public class Titulo {
 	@Column
 	private String numReserva;
 
-	 @ManyToMany(cascade = {
-	            CascadeType.PERSIST,
-	            CascadeType.MERGE
-	    })
-	    @JoinTable(
+	 @JoinTable(
 	            name = "titulo_autor",
 	            joinColumns = {@JoinColumn(name = "titulo_id")},
 	            inverseJoinColumns = {@JoinColumn(name = "autor_id")}
 	    )
-	protected List<Autor> autores = new ArrayList<Autor>();
+	 @ManyToMany(cascade = {
+	            CascadeType.ALL
+	    })
+	protected List<Autor> autores;
 	
 	@OneToMany(mappedBy = "titulo")
 	protected List<Ejemplar> ejemplares = new ArrayList<Ejemplar>();
@@ -73,6 +72,15 @@ public class Titulo {
 		this.reservas = reservas;
 	}
 
+	
+	 public void addAutor(Autor autor){
+	        if(this.autores == null){
+	            this.autores = new ArrayList<>();
+	        }
+	        
+	        this.autores.add(autor);
+	    }
+	
 	public Long getId() {
 		return id;
 	}
