@@ -20,6 +20,7 @@ import com.ASHP.library.business.persistence.AutorDAO;
 import com.ASHP.library.business.persistence.EjemplarDAO;
 import com.ASHP.library.business.persistence.TituloDAO;
 
+
 @Controller
 public class GestorTitulos {
 
@@ -65,7 +66,7 @@ public class GestorTitulos {
 		apellidoAutor = autor.get(1);
 
 		Autor a = new Autor(nombreAutor, apellidoAutor);
-		
+
 		// Recojo los datos del formulario
 		nombreTitulo = titulo.get(0);
 		isbn = titulo.get(1);
@@ -79,7 +80,7 @@ public class GestorTitulos {
 		// Guardo en la base de datos
 		model.addAttribute("titulo", t);
 		tituloDAO.save(t);
-//		autorDAO.save(a);
+		autorDAO.save(a);
 		
 		Titulo tituloPorNombre = getTituloByName(nombreTitulo);
 		
@@ -116,18 +117,28 @@ public class GestorTitulos {
 		return "titulo";
 	}
 
-	public void actualizarTitulo(Titulo aT) {
-		throw new UnsupportedOperationException();
+	@PostMapping("/actualizarTitulo")
+	public String actualizarTitulo(Titulo titulo, Model model) {
+		tituloDAO.findById(titulo.getId());
+		tituloDAO.save(titulo);
+		return "vista-titulo";
 	}
 
-	public void borrarTitulo(Titulo aT) {
-		throw new UnsupportedOperationException();
+	@PostMapping("/borrarTitulo")
+	public String borrarTitulo(@ModelAttribute Titulo titulo, Model model) {
+		tituloDAO.delete(titulo);
+		return "vista-titulo";
 	}
 
-	public void altaEjemplar(Titulo aT) {
-		throw new UnsupportedOperationException();
+	@PostMapping("/altaEjemplar")
+	public String altaEjemplar(@ModelAttribute("ejemplar") Ejemplar ejemplar, @RequestParam("tituloId") Long tituloId) {
+	    Titulo titulo = tituloDAO.findById(tituloId).orElseThrow(() -> new IllegalArgumentException("Invalid titulo Id:" + tituloId));
+	    titulo.getEjemplares().add(ejemplar);
+	    tituloDAO.save(titulo);
+	    return "redirect:/vistaFormTituloAutor";
 	}
 
+	
 	public void bajaEjemplar(Titulo aT) {
 		throw new UnsupportedOperationException();
 	}

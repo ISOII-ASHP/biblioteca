@@ -35,3 +35,5 @@ build/
 /derby.log
 /database/
 .dat
+/bin/
+*.dat
