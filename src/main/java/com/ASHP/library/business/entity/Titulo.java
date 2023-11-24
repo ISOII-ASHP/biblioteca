@@ -15,27 +15,32 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-@Entity @Table(name="titulo")
-
+@Entity
+@Table(name = "titulo")
 public class Titulo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
 	@Column
 	private String titulo;
-
+	
 	@Column
 	private String isbn;
-
+	
 	@Column
 	private String numReserva;
 
-	@JoinTable(name = "titulo_autor", joinColumns = { @JoinColumn(name = "titulo_id") }, inverseJoinColumns = {
-			@JoinColumn(name = "autor_id") })
-	@ManyToMany(cascade = { CascadeType.ALL })
+	 @JoinTable(
+	            name = "titulo_autor",
+	            joinColumns = {@JoinColumn(name = "titulo_id")},
+	            inverseJoinColumns = {@JoinColumn(name = "autor_id")}
+	    )
+	 @ManyToMany(cascade = {
+	            CascadeType.ALL
+	    })
 	protected List<Autor> autores;
-
+	
 	@OneToMany(mappedBy = "titulo")
 	protected List<Ejemplar> ejemplares = new ArrayList<Ejemplar>();
 
@@ -67,14 +72,15 @@ public class Titulo {
 		this.reservas = reservas;
 	}
 
-	public void addAutor(Autor autor) {
-		if (this.autores == null) {
-			this.autores = new ArrayList<>();
-		}
-
-		this.autores.add(autor);
-	}
-
+	
+	 public void addAutor(Autor autor){
+	        if(this.autores == null){
+	            this.autores = new ArrayList<>();
+	        }
+	        
+	        this.autores.add(autor);
+	    }
+	
 	public Long getId() {
 		return id;
 	}
@@ -138,6 +144,7 @@ public class Titulo {
 	public void setReservas(List<Reserva> reservas) {
 		this.reservas = reservas;
 	}
+	
 
 	@Override
 	public String toString() {
