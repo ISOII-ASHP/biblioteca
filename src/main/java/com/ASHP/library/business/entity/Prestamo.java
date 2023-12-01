@@ -25,17 +25,19 @@ public class Prestamo {
 	@ManyToOne
 	public Titulo titulo;
 
-	public Prestamo() {
+	@ManyToOne
+	public Ejemplar ejemplar;
 
-	}
+	public Prestamo() {}
 
-	public Prestamo(Date fechaInicio, Date fechaFin, Boolean activo, Usuario usuario, Titulo titulo) {
+	public Prestamo(Date fechaInicio, Date fechaFin, Boolean activo, Usuario usuario, Titulo titulo, Ejemplar ejemplar) {
 		super();
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 		this.activo = activo;
 		this.usuario = usuario;
 		this.titulo = titulo;
+		this.ejemplar = ejemplar;
 	}
 
 	public Long getId() {

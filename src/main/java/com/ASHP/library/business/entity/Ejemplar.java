@@ -19,7 +19,7 @@ public class Ejemplar {
 	public Ejemplar() {
 		super();
 	}
-	
+
 	public Ejemplar(Titulo titulo) {
 		super();
 		this.titulo = titulo;
@@ -43,8 +43,7 @@ public class Ejemplar {
 
 	@Override
 	public String toString() {
-		return "Ejemplar [id=" + id + ", titulo=" + titulo + "]";
+		return "Ejemplar [id=" + id + ", titulo=" + titulo.getTitulo() + "]";
 	}
 
 }
-
