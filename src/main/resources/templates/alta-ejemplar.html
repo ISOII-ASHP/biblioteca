@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+	<head>
+    	<title>Añadir nuevo ejemplar</title>
+    	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
+    	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	</head>
+	<body>
+
+		<h1>Añadir nuevo ejemplar</h1>
+
+	    <form action="#" th:action="@{/altaEjemplar}" th:object="${ejemplar}" method="POST">
+	        <label>Titulo</label>
+	        <select name="titulo" id="id">
+        		<option value="" selected>Seleccionar titulo</option>
+        		<option th:each="titulo : ${titulos}" th:value="${titulo.id}" th:text="${titulo.titulo}"></option>
+    		</select>
+    		<label>Número de ejemplares</label>
+    		<input type="number" id="numEjemplares" name="numEjemplares" min="1" required>
+	        <button type="submit" class="btn btn-info col-2"> Guardar</button>
+	    </form>
+	</body>
+</html>

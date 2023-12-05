@@ -80,6 +80,15 @@ public class Titulo {
 	        
 	        this.autores.add(autor);
 	    }
+	 
+	 
+	public void addEjemplar(Ejemplar ejemplar) {
+		if (this.ejemplares == null) {
+			this.ejemplares = new ArrayList<>();
+		}
+		this.ejemplares.add(ejemplar);
+	}
+
 	
 	public Long getId() {
 		return id;
@@ -145,12 +154,5 @@ public class Titulo {
 		this.reservas = reservas;
 	}
 	
-
-	@Override
-	public String toString() {
-		return "Titulo [id=" + id + ", titulo=" + titulo + ", isbn=" + isbn + ", numReserva=" + numReserva
-				+ ", autores=" + autores + ", ejemplares=" + ejemplares + ", prestamos=" + prestamos + ", reservas="
-				+ reservas + "]";
-	}
 
 }
