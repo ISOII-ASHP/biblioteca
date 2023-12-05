@@ -3,43 +3,64 @@ package com.ASHP.library.business.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Transient;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "titulo")
 public class Titulo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@Column
 	private String titulo;
+	
 	@Column
 	private String isbn;
+	
 	@Column
 	private String numReserva;
+
+	 @JoinTable(
+	            name = "titulo_autor",
+	            joinColumns = {@JoinColumn(name = "titulo_id")},
+	            inverseJoinColumns = {@JoinColumn(name = "autor_id")}
+	    )
+	 @ManyToMany(cascade = {
+	            CascadeType.ALL
+	    })
+	protected List<Autor> autores;
 	
-	
-    @ManyToMany
-	public List<Autor> autores = new ArrayList<Autor>();
-    @OneToMany
-	public List<Ejemplar> ejemplares = new ArrayList<Ejemplar>();
-    
-    @OneToMany
-	public List<Prestamo> prestamos = new ArrayList<Prestamo>();
-    
-    @OneToMany
-	public List<Reserva> reservas = new ArrayList<Reserva>();
+	@OneToMany(mappedBy = "titulo")
+	protected List<Ejemplar> ejemplares = new ArrayList<Ejemplar>();
+
+	@OneToMany(mappedBy = "titulo")
+	protected List<Prestamo> prestamos = new ArrayList<Prestamo>();
+
+	@OneToMany(mappedBy = "titulo")
+	protected List<Reserva> reservas = new ArrayList<Reserva>();
 
     public Titulo() {
 	}
     
     public Titulo(String titulo, String isbn, String numReserva) {
+		super();
+		this.titulo = titulo;
+		this.isbn = isbn;
+		this.numReserva = numReserva;
+	}
+
+	public Titulo(String titulo, String isbn, String numReserva) {
 		super();
 		this.titulo = titulo;
 		this.isbn = isbn;
@@ -58,6 +79,15 @@ public class Titulo {
 		this.reservas = reservas;
 	}
 
+	
+	 public void addAutor(Autor autor){
+	        if(this.autores == null){
+	            this.autores = new ArrayList<>();
+	        }
+	        
+	        this.autores.add(autor);
+	    }
+	
 	public Long getId() {
 		return id;
 	}
@@ -121,6 +151,7 @@ public class Titulo {
 	public void setReservas(List<Reserva> reservas) {
 		this.reservas = reservas;
 	}
+	
 
 	@Override
 	public String toString() {
