@@ -45,7 +45,7 @@ public class Ejemplar {
 
 	@Override
 	public String toString() {
-		return "Ejemplar [id=" + id + ", titulo=" + titulo + "]";
+		return "Ejemplar [id=" + id + ", titulo=" + titulo.getTitulo() + "]";
 	}
 
 }
