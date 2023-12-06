@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ASHP.library.business.entity.Autor;
 import com.ASHP.library.business.entity.Ejemplar;
 import com.ASHP.library.business.entity.Titulo;
+import com.ASHP.library.business.persistence.EjemplarDAO;
 import com.ASHP.library.business.persistence.AutorDAO;
 import com.ASHP.library.business.persistence.TituloDAO;
 
@@ -37,6 +38,8 @@ public class GestorTitulos {
 	public GestorTitulos(TituloDAO tituloDAO, AutorDAO autorDAO, EjemplarDAO ejemplarDAO) {
 
 		super();
+		
+		
 		this.tituloDAO = tituloDAO;
 
 		this.autorDAO = autorDAO;
