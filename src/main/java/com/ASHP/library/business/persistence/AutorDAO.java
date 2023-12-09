@@ -6,7 +6,5 @@ import org.springframework.stereotype.Repository;
 import com.ASHP.library.business.entity.Autor;
 
 @Repository
-public interface AutorDAO extends JpaRepository<Autor, Long> {
-
-	
+public interface AutorDAO extends JpaRepository<Autor, Long> {	
 }

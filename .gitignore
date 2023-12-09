@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+/database/
+/derby.log
+/database/
+.dat
+/bin/
+*.dat
