@@ -136,8 +136,46 @@ public class GestorPrestamos {
 		return "confirmacion-prestamo";
 	}
 
-	public void realizarDevolucion(String aIsbn, String aIdEjemplar, String aIdUsuario) {
-		throw new UnsupportedOperationException();
+
+	@GetMapping("/devolucion")
+	public String vistaDevolucion() {
+		
+		return "devolucion";
+	}
+
+	@PostMapping("/devolucion")
+	public String realizarDevolucion(@RequestParam Long id, Model model) {
+		Optional<Ejemplar> ejemplar = _ejemplarDAO.findById(id);
+
+		ArrayList<String> errores = new ArrayList();
+
+		if (ejemplar.isPresent()) {		
+			// TODO: partir todo esto con otros métodos de cara a testear
+			Prestamo prestamoActivo = 
+					_prestamoDAO.findPrestamoActivoPorEjemplar(ejemplar.get());
+
+			prestamoActivo.setActivo(false);
+			
+			// TODO: si fecha actual > fecha limite de devolucion, penalizar
+			Date fechaActual = new Date();
+			Date fechaFin = prestamoActivo.getFechaFin();
+			if (fechaActual.compareTo(fechaFin) > 0) {
+				Calendar calendar = Calendar.getInstance();
+				calendar.setTime(fechaFin);
+				calendar.add(Calendar.DAY_OF_YEAR, 30);
+				Date fechaPenalizacion = calendar.getTime();
+				prestamoActivo.usuario.setFechaFinPenalizacion(fechaPenalizacion);
+				_usuarioDAO.save(prestamoActivo.usuario);
+			}
+
+			_prestamoDAO.save(prestamoActivo);
+			System.out.println(prestamoActivo);
+		} else {
+			errores.add("No se encontró ejemplar con ID " + id);
+		}
+
+		model.addAttribute("errores", errores);
+		return "devolucion";
 	}
 
 	public void realizarReserva(String aIdUsuario, String aIsbn) {
