@@ -22,7 +22,7 @@
 						<form action="#" th:action="@{/altaEjemplar}" th:object="${ejemplar}" method="POST">
 							<div class="form-group">
 								<label>Titulo</label>
-								<select name="titulo" id="id" class="form-control" required oninvalid="this.setCustomValidity('Por favor, selecciona un título válido.')" oninput="this.setCustomValidity('')">
+								<select name="titulo" id="id" class="form-control" required>
 									<option value="" disabled selected>Seleccionar titulo</option>
 									<option th:each="titulo : ${titulos}" th:value="${titulo.id}" th:text="${titulo.titulo}"></option>
 								</select>
