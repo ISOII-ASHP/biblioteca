@@ -50,15 +50,16 @@ public class Titulo {
 	@OneToMany(mappedBy = "titulo")
 	protected List<Reserva> reservas = new ArrayList<Reserva>();
 
-	public Titulo() {
+    public Titulo() {
 	}
-
-	public Titulo(String titulo, String isbn, String numReserva) {
+    
+    public Titulo(String titulo, String isbn, String numReserva) {
 		super();
 		this.titulo = titulo;
 		this.isbn = isbn;
 		this.numReserva = numReserva;
 	}
+
 
 	public Titulo(String titulo, String isbn, String numReserva, List<Autor> autores, List<Ejemplar> ejemplares,
 			List<Prestamo> prestamos, List<Reserva> reservas) {

@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,10 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ASHP.library.business.entity.Autor;
 import com.ASHP.library.business.entity.Ejemplar;
 import com.ASHP.library.business.entity.Titulo;
-import com.ASHP.library.business.persistence.AutorDAO;
 import com.ASHP.library.business.persistence.EjemplarDAO;
+import com.ASHP.library.business.persistence.AutorDAO;
 import com.ASHP.library.business.persistence.TituloDAO;
-
 
 @Controller
 public class GestorTitulos {
@@ -39,6 +39,8 @@ public class GestorTitulos {
 	public GestorTitulos(TituloDAO tituloDAO, AutorDAO autorDAO, EjemplarDAO ejemplarDAO) {
 
 		super();
+		
+		
 		this.tituloDAO = tituloDAO;
 
 		this.autorDAO = autorDAO;
@@ -105,7 +107,7 @@ public class GestorTitulos {
 		
 		
 	}
-
+  
 	@GetMapping("/vistaFormTituloAutor")
 	public String verFormulario(Model model) {
 		Titulo titulo = new Titulo();
