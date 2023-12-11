@@ -14,19 +14,5 @@ public class Libro extends Titulo {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	@Override
-	public String toString() {
-		return "Libro [autores=" + autores + ", ejemplares=" + ejemplares + ", prestamos=" + prestamos + ", reservas="
-				+ reservas + "]";
-	}
-	
-	
-
-
-
-	
-
-	
 	
 }
