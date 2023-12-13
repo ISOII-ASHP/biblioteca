@@ -124,17 +124,27 @@ public class GestorTitulos {
 		return "vista-titulo";
 	}
 
-	@GetMapping("/actualizarTitulo")
-	public String llevaraactualizarTitulo(@RequestParam("tituloId") Long tituloId) {
-		tituloDAO.findById(tituloId);
-		System.out.println(tituloId + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-		return "modificar-titulo";
+	@GetMapping("/iractualizarTitulo")
+	public String llevaraactualizarTitulo(@RequestParam("tituloId") Long tituloId, Model model) {
+	    Titulo titulo = tituloDAO.findById(tituloId).orElseThrow(() -> new IllegalArgumentException("Invalid titulo Id:" + tituloId));
+	    model.addAttribute("titulo", titulo);
+	    return "modificar-titulo";
+	}
+	
+	@PostMapping("/actualizarTitulo")
+	public String actualizarTitulo(@RequestParam("tituloId") Long tituloId, Model model) {
+	    Titulo titulo = tituloDAO.findById(tituloId).orElseThrow(() -> new IllegalArgumentException("Invalid titulo Id:" + tituloId));
+	    model.addAttribute("titulo", titulo);
+	    tituloDAO.save(titulo);
+	    return "redirect:/vista-titulo";
 	}
 
-	@GetMapping("/borrarTitulo")
-	public String borrarTitulo(@ModelAttribute Titulo titulo, Model model) {
-		tituloDAO.delete(titulo);
-		return "vista-titulo";
+
+	@PostMapping("/borrarTitulo")
+	public String borrarTitulo(@RequestParam("tituloId") Long tituloId) {
+	    Titulo titulo = tituloDAO.findById(tituloId).orElseThrow(() -> new IllegalArgumentException("Invalid titulo Id:" + tituloId));
+	    tituloDAO.delete(titulo);
+	    return "redirect:/vista-titulo";
 	}
 
 	@PostMapping("/altaEjemplar")
