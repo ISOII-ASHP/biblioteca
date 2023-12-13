@@ -146,11 +146,6 @@ public class Titulo {
 	}
 	
 
-	@Override
-	public String toString() {
-		return "Titulo [id=" + id + ", titulo=" + titulo + ", isbn=" + isbn + ", numReserva=" + numReserva
-				+ ", autores=" + autores + ", ejemplares=" + ejemplares + ", prestamos=" + prestamos + ", reservas="
-				+ reservas + "]";
-	}
+	
 
 }

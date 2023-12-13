@@ -91,7 +91,7 @@ public class GestorTitulos {
 		tituloPorNombre.setEjemplares(ejemplares);
 		ejemplarDAO.save(e);
 
-		return "vista-titulo";
+		return "redirect:/vista-titulo";
 	}
 
 	private Titulo getTituloByName(String nombreTitulo) {
@@ -116,15 +116,22 @@ public class GestorTitulos {
 
 		return "titulo";
 	}
-
-	@PostMapping("/actualizarTitulo")
-	public String actualizarTitulo(Titulo titulo, Model model) {
-		tituloDAO.findById(titulo.getId());
-		tituloDAO.save(titulo);
+	
+	@GetMapping("/vista-titulo")
+	public String verListaLibros(Model model) {
+		List<Titulo> titulos = tituloDAO.findAll();
+		model.addAttribute("listaLibros", titulos);
 		return "vista-titulo";
 	}
 
-	@PostMapping("/borrarTitulo")
+	@GetMapping("/actualizarTitulo")
+	public String llevaraactualizarTitulo(@RequestParam("tituloId") Long tituloId) {
+		tituloDAO.findById(tituloId);
+		System.out.println(tituloId + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		return "modificar-titulo";
+	}
+
+	@GetMapping("/borrarTitulo")
 	public String borrarTitulo(@ModelAttribute Titulo titulo, Model model) {
 		tituloDAO.delete(titulo);
 		return "vista-titulo";
