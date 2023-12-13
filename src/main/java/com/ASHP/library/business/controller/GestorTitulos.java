@@ -134,7 +134,12 @@ public class GestorTitulos {
 	@PostMapping("/actualizarTitulo")
 	public String actualizarTitulo(@RequestParam("tituloId") Long tituloId, Model model) {
 	    Titulo titulo = tituloDAO.findById(tituloId).orElseThrow(() -> new IllegalArgumentException("Invalid titulo Id:" + tituloId));
-	    model.addAttribute("titulo", titulo);
+	    // Actualizar los campos del título con los valores del formulario
+	    titulo.setTitulo(titulo.getTitulo());
+	    titulo.setIsbn(titulo.getIsbn());
+	    titulo.setNumReserva(titulo.getNumReserva());
+
+	    // Guardar los cambios en la base de datos
 	    tituloDAO.save(titulo);
 	    return "redirect:/vista-titulo";
 	}
