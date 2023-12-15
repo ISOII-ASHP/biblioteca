@@ -143,7 +143,7 @@ public class GestorPrestamos {
 	// Método para reservar un título
 	@PostMapping("/reservarEjemplar")
 	public String reservarTitulo(Model model, @RequestParam("titulo") Long tituloId, @RequestParam("usuario") Long usuarioId) {
-	    // Obtener el título por su ID
+		// Obtener el título por su ID
 	    Optional<Titulo> tOptional = tituloDAO.findById(tituloId);
 	    Titulo t = tOptional.get();
 
@@ -153,33 +153,36 @@ public class GestorPrestamos {
 	    Usuario u = uOptional.get();
 
 	    // Comprobar si hay ejemplares disponibles
-	    List<Ejemplar> ejemplares = ejemplarDAO.findByTitulo(t);
-	    
-	    boolean hayEjemplaresDisponibles = ejemplares.size() > 1;
+	    List<Ejemplar> ejemplares = t.getEjemplares();
 
-	    if (!hayEjemplaresDisponibles) {
-	        mensaje("No hay ejemplares disponibles de este título.", "reservar-ejemplar", model);
+	    if (ejemplares.isEmpty()) {
+	        mensaje("No hay ejemplares disponibles de este título.", model);
+	    } else {
+	        // Obtener un ejemplar de la lista
+	        Ejemplar ejemplarParaReservar = ejemplares.get(0);
+
+	        // Si hay ejemplares disponibles, realizar la reserva
+	        Reserva reserva = new Reserva();
+	        reserva.setTitulo(t);
+	        reserva.setUsuario(u);
+	        Date fechaInicio = new Date();
+	        java.sql.Date sqlDate = new java.sql.Date(fechaInicio.getTime());
+	        reserva.setFecha(sqlDate); // Fecha actual
+	        reservaDAO.save(reserva);
+
+	        // Eliminar el ejemplar reservado de la base de datos
+	        ejemplarDAO.delete(ejemplarParaReservar);
+
+	        mensaje("Reserva realizada con éxito.", model);
 	    }
-	    /*
-		Date fechaInicio = new Date();
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(fechaInicio);
-*/
-	    // Si hay ejemplares disponibles, realizar la reserva
-	    Reserva reserva = new Reserva();
-	    reserva.setTitulo(t);
-	    reserva.setUsuario(u);
-	    //reserva.setFecha((java.sql.Date) (fechaInicio)); // Fecha actual
-	    reservaDAO.save(reserva);
-	    
-        mensaje("Reserva realizada con éxito.", "reservar-ejemplar", model);
 
 	    return "reservar-ejemplar";
+
 	}
 
 	
 	@GetMapping("/reservarEjemplar")
-	public String altaEjemplar(Model model) {
+	public String reservaEjemplar(Model model) {
 		List<Titulo> titulos = tituloDAO.findAll();
 		List<Usuario> usuarios = usuarioDAO.findAll();
 		
@@ -194,8 +197,8 @@ public class GestorPrestamos {
 		return list;
 	}
 	
-	public String mensaje(String mensaje, String pagina, Model model) {
+	public void mensaje(String mensaje, Model model) {
 		model.addAttribute("mensaje", mensaje);
-		return pagina;
+		reservaEjemplar(model);
 	}
 }
