@@ -158,7 +158,7 @@ public class GestorPrestamos {
 	    boolean hayEjemplaresDisponibles = ejemplares.size() > 1;
 
 	    if (!hayEjemplaresDisponibles) {
-	        mensajeError("No hay ejemplares disponibles de este título.", "reservar-ejemplar", model);
+	        mensaje("No hay ejemplares disponibles de este título.", "reservar-ejemplar", model);
 	    }
 	    /*
 		Date fechaInicio = new Date();
@@ -171,6 +171,8 @@ public class GestorPrestamos {
 	    reserva.setUsuario(u);
 	    //reserva.setFecha((java.sql.Date) (fechaInicio)); // Fecha actual
 	    reservaDAO.save(reserva);
+	    
+        mensaje("Reserva realizada con éxito.", "reservar-ejemplar", model);
 
 	    return "reservar-ejemplar";
 	}
@@ -192,7 +194,7 @@ public class GestorPrestamos {
 		return list;
 	}
 	
-	public String mensajeError(String mensaje, String pagina, Model model) {
+	public String mensaje(String mensaje, String pagina, Model model) {
 		model.addAttribute("mensaje", mensaje);
 		return pagina;
 	}
