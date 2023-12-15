@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<div th:insert="~{cabecera}"></div>
+<title>Reservar ejemplar</title>
+<style>
+	.btn-left {
+		margin-top: 30px;
+		float: right;
+	}
+</style>
+</head>
+
+<body>
+	<div class="container mt2 mb-2">
+		<div class="row justify-content-center mt-3">
+			<div class="row justify-content-center mt-1 text-center">
+
+				<div th:if="${mensaje != null and mensaje != ''}">
+					<div class="alert alert-secondary" role="alert">
+						<p th:text="${mensaje}"></p>
+					</div>
+				</div>
+				<div th:unless="${mensaje != null}">
+					<p class=" alert alert-primary" role="alert">
+				</div>
+
+				<h1>Reservar ejemplar</h1>
+				</p>
+			</div>
+
+			<div class="row justify-content-center">
+				<form action="#" th:action="@{/reservarEjemplar}" method="POST">
+					<div class="row">
+						<div class="col">
+							<label>Titulo</label>
+							<select name="titulo" id="idTitulo" class="form-control" required>
+								<option value="" disabled selected>Seleccionar titulo</option>
+								<option th:each="titulo : ${titulos}" th:value="${titulo.id}"
+									th:text="${titulo.titulo}"></option>
+							</select>
+						</div>
+						<div class="col">
+							<label>Usuario</label>
+							<select name="usuario" id="idUsu" class="form-control" required>
+								<option value="" disabled selected>Seleccionar usuario</option>
+								<option th:each="usuario : ${usuarios}" th:value="${usuario.id}"
+									th:text="${usuario.nombre}+ ' ' +${usuario.apellidos}"></option>
+							</select>
+							<button type="submit" class="btn btn-info btn-left">Reservar</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
