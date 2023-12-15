@@ -229,5 +229,12 @@ public class GestorTitulos {
 
 	    return "vista-titulo";
 	}
+	
+	@GetMapping("/bajaEjemplar")
+	public String bajaEjemplar(Model model) {
+		List<Titulo> titulos = tituloDAO.findAll();
+		model.addAttribute("titulos", titulos);
+		return "baja-ejemplar";
+	}
 
 }
