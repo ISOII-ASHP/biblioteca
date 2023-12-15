@@ -226,11 +226,37 @@ Cuando el filtro coincide con un elemento nuevo o actualizado, en este caso los 
 
 `Apache Derby Tools:` Herramientas para trabajar con la base de datos Derby.
 
+`JUnit Platform launcer:` Proporciona capacidades para lanzar el marco de pruebas de JUnit.
+
+`JUnit JUnit:` La biblioteca de JUnit para pruebas unitarias, marcada también para uso exclusivo en pruebas (<scope>test</scope>).
+
 <p align="justify">
 
-Estas dependencias están configuradas para ser gestionadas por Maven, lo que significa que Maven se encargará de descargar y mantener actualizadas estas librerías de acuerdo con las versiones especificadas en tu archivo pom.xml.
+El proyecto está configurado para el desarrollo de una aplicación web con Spring Boot, aprovechando Thymeleaf como motor de plantillas y Spring Data JPA para la gestión de la persistencia de datos. La base de datos Derby se utiliza para el almacenamiento de datos, facilitando un entorno de base de datos integrado. Para las pruebas unitarias, el proyecto se apoya en JUnit.
 
 </p>
+
+
+<p align="justify">
+  Además, el archivo pom.xml incluye configuraciones relacionadas con:
+
+</p>
+
+`JaCoCo:` Configurado a través del plugin jacoco-maven-plugin. Este plugin se utiliza para medir y reportar la cobertura de código de las pruebas. Hay dos ejecuciones configuradas para JaCoCo: una para inicializar JaCoCo (jacoco-initialize) y otra para crear reportes de cobertura durante la fase de empaquetado (jacoco-site).
+
+`SonarCloud:` Mencionado en las propiedades del proyecto con las claves sonar.organization y sonar.host.url. SonarCloud es un servicio de análisis de código en la nube que ayuda a identificar problemas de calidad y seguridad en el código. Aunque el plugin de SonarCloud no está explícitamente configurado en el pom.xml, las propiedades mencionadas sugieren que el proyecto está preparado para integrarse con SonarCloud.
+
+`Surefire:` Configurado a través del plugin maven-surefire-report-plugin. Este plugin se usa para ejecutar pruebas unitarias y generar informes de estas pruebas. La configuración especifica que no se debe omitir el informe si no hay pruebas (<skipEmptyReport>false</skipEmptyReport>), asegurando así que se generen informes incluso cuando no hay pruebas o estas no se ejecutan.
+
+<p align="justify">
+
+Estos componentes son esenciales en proyectos de software modernos, ya que JaCoCo proporciona información vital sobre la cobertura de pruebas, SonarCloud ayuda a mantener la calidad del código y Surefire asegura que las pruebas unitarias se ejecuten correctamente y se generen informes de las mismas.
+
+Estas herramientas juntas ofrecen un entorno robusto para el desarrollo, prueba, y mantenimiento de aplicaciones web de alta calidad y con buenas prácticas de ingeniería de software.
+
+</p>
+
+
 
 
 ## Ramas y merges
