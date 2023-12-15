@@ -94,7 +94,7 @@ public class GestorTitulos {
 		tituloPorNombre.setEjemplares(ejemplares);
 		ejemplarDAO.save(e);
 
-		return "vista-titulo";
+		return "redirect:/vista-titulo";
 	}
 
 	private Titulo getTituloByName(String nombreTitulo) {
@@ -119,18 +119,45 @@ public class GestorTitulos {
 
 		return "titulo";
 	}
-
-	@PostMapping("/actualizarTitulo")
-	public String actualizarTitulo(Titulo titulo, Model model) {
-		tituloDAO.findById(titulo.getId());
-		tituloDAO.save(titulo);
+	
+	@GetMapping("/vista-titulo")
+	public String verListaLibros(Model model) {
+		List<Titulo> titulos = tituloDAO.findAll();
+		model.addAttribute("listaLibros", titulos);
 		return "vista-titulo";
 	}
 
+	@GetMapping("/iractualizarTitulo")
+	public String llevaraactualizarTitulo(@RequestParam("tituloId") Long tituloId, Model model) {
+	    Titulo titulo = tituloDAO.findById(tituloId).orElseThrow(() -> new IllegalArgumentException("Invalid titulo Id:" + tituloId));
+	    model.addAttribute("titulo", titulo);
+	    return "modificar-titulo";
+	}
+	
+	@PostMapping("/actualizarTitulo")
+	public String actualizarTitulo(@ModelAttribute("form") Titulo tituloActualizado) {
+	    // Obtener el título existente de la base de datos
+	    Titulo tituloExistente = tituloDAO.findById(tituloActualizado.getId())
+	            .orElseThrow(() -> new IllegalArgumentException("Invalid titulo Id:" + tituloActualizado.getId()));
+
+	    // Actualizar los campos del título existente con los valores del título actualizado
+	    tituloExistente.setTitulo(tituloActualizado.getTitulo());
+	    tituloExistente.setIsbn(tituloActualizado.getIsbn());
+	    tituloExistente.setNumReserva(tituloActualizado.getNumReserva());
+	    // Actualizar otros campos según sea necesario
+
+	    // Guardar los cambios en la base de datos
+	    tituloDAO.save(tituloExistente);
+
+	    return "redirect:/vista-titulo";
+	}
+
 	@PostMapping("/borrarTitulo")
-	public String borrarTitulo(@ModelAttribute Titulo titulo, Model model) {
-		tituloDAO.delete(titulo);
-		return "vista-titulo";
+	public String borrarTitulo(@RequestParam("tituloId") Long tituloId, Model model) {
+		Titulo titulo = tituloDAO.findById(tituloId).orElseThrow(() -> new IllegalArgumentException("Invalid titulo Id:" + tituloId));
+	    model.addAttribute("titulo", titulo);
+	    tituloDAO.delete(titulo);
+	    return "redirect:/vista-titulo";
 	}
 	
 	/** Dar de alta ejemplar

@@ -160,5 +160,4 @@ public class Titulo {
 		this.reservas = reservas;
 	}
 	
-
 }
