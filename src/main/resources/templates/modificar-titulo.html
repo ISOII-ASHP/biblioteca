@@ -13,8 +13,8 @@
         <h1>Modificar titulo</h1>
 			<form action="#" th:action="@{/actualizarTitulo}" th:object="${titulo}" method="POST">
     			<!-- Add hidden form field to handle update -->
-    			<input type="hidden" name="tituloId" th:value="${titulo.id}" />
-			
+    			<input type="hidden" name="id" th:value="${titulo.id}" />
+				<p>ID: <input type="text" th:field="*{id}" class="form-control mb-4 col-4"></p>
 			    <p>Titulo: <input type="text" th:field="*{titulo}" class="form-control mb-4 col-4"></p>
 			    <p>ISBN: <input type="text" th:field="*{isbn}" class="form-control mb-4 col-4"></p>
 			    <p>Numero reserva: <input type="text" th:field="*{numReserva}" class="form-control mb-4 col-4"></p>
