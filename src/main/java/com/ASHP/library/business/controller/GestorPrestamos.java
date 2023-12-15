@@ -2,8 +2,10 @@ package com.ASHP.library.business.controller;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -140,19 +142,14 @@ public class GestorPrestamos {
 	
 	// Método para reservar un título
 	@PostMapping("/reservarEjemplar")
-	public String reservarTitulo(Long tituloId, Long usuarioId) {
+	public String reservarTitulo(Model model, @RequestParam("titulo") Long tituloId, @RequestParam("usuario") Long usuarioId) {
 	    // Obtener el título por su ID
 	    Optional<Titulo> tOptional = tituloDAO.findById(tituloId);
-	    if (!tOptional.isPresent()) {
-	        return "Título no encontrado.";
-	    }
 	    Titulo t = tOptional.get();
 
 	    // Obtener el usuario por su ID
 	    Optional<Usuario> uOptional = usuarioDAO.findById(usuarioId);
-	    if (!uOptional.isPresent()) {
-	        return "Usuario no encontrado.";
-	    }
+
 	    Usuario u = uOptional.get();
 
 	    // Comprobar si hay ejemplares disponibles
@@ -161,23 +158,31 @@ public class GestorPrestamos {
 	    boolean hayEjemplaresDisponibles = ejemplares.size() > 1;
 
 	    if (!hayEjemplaresDisponibles) {
-	        return "No hay ejemplares disponibles de este título.";
+	        mensajeError("No hay ejemplares disponibles de este título.", "reservar-ejemplar", model);
 	    }
-
+	    /*
+		Date fechaInicio = new Date();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(fechaInicio);
+*/
 	    // Si hay ejemplares disponibles, realizar la reserva
 	    Reserva reserva = new Reserva();
 	    reserva.setTitulo(t);
 	    reserva.setUsuario(u);
-	    reserva.setFecha((java.sql.Date) new Date()); // Fecha actual
+	    //reserva.setFecha((java.sql.Date) (fechaInicio)); // Fecha actual
 	    reservaDAO.save(reserva);
 
-	    return "Reserva realizada con éxito.";
+	    return "reservar-ejemplar";
 	}
+
 	
 	@GetMapping("/reservarEjemplar")
 	public String altaEjemplar(Model model) {
 		List<Titulo> titulos = tituloDAO.findAll();
+		List<Usuario> usuarios = usuarioDAO.findAll();
+		
 		model.addAttribute("titulos", titulos);
+		model.addAttribute("usuarios", usuarios);
 		return "reservar-ejemplar";
 	}
 
@@ -185,5 +190,10 @@ public class GestorPrestamos {
 		List<T> list = new ArrayList<>();
 		optional.ifPresent(list::add);
 		return list;
+	}
+	
+	public String mensajeError(String mensaje, String pagina, Model model) {
+		model.addAttribute("mensaje", mensaje);
+		return pagina;
 	}
 }

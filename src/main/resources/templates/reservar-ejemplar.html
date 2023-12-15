@@ -17,22 +17,39 @@
 						<h1>Reservar ejemplar</h1>
 					</p>
 				</div>
+				
+				<div th:if="${mensaje != null and mensaje != ''}">
+				    
+				    <div class="alert alert-primary d-flex align-items-center" role="alert">
+					<svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16"
+						role="img" aria-label="Warning:">
+						<path
+							d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+					</svg>
+					<div>
+						<p th:text="${mensaje}"></p>
+					</div>
+					</div>
+				</div>
+
 				<div class="row justify-content-center">
-					<form action="#" th:action="@{/reservarEjemplar}" th:object="${ejemplar}" method="POST">
+					<form action="#" th:action="@{/reservarEjemplar}" method="POST">
 						<div class="row">
 							<div class="col">
 								<label>Titulo</label>
-									<select name="titulo" id="id" class="form-control" required>
+									<select name="titulo" id="idTitulo" class="form-control" required>
 										<option value="" disabled selected>Seleccionar titulo</option>
 										<option th:each="titulo : ${titulos}" th:value="${titulo.id}"
 											th:text="${titulo.titulo}"></option>
 									</select>
 						  	</div>
 						  	<div class="col">
-								<div class="form-group">
-									<label>Usuario</label>
-									<input type="text" id="idUsuario" name="usu" required class="form-control">
-								</div>
+								<label>Usuario</label>
+									<select name="usuario" id="idUsu" class="form-control" required>
+										<option value="" disabled selected>Seleccionar usuario</option>
+										<option th:each="usuario : ${usuarios}" th:value="${usuario.id}"
+											th:text="${usuario.nombre}+ ' ' +${usuario.apellidos}"></option>
+									</select>
 								<button type="submit" class="btn btn-info btn-left">Reservar</button>
 						  	</div>
 						</div>

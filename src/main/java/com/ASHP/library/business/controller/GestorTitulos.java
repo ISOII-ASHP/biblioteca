@@ -179,14 +179,10 @@ public class GestorTitulos {
 		for (int i = 1; i < numEjemplares; i++) {
 			Ejemplar e = new Ejemplar(titulo);
 			ejemplares.add(e);
-			//titulo.setEjemplares(ejemplares);
 			titulo.addEjemplar(e);
 			ejemplarDAO.save(e);
 	    }
-		
 
-		//titulo.getEjemplares().add(ejemplar);
-		//tituloDAO.save(titulo);
 		return "vista-titulo";
 	}
 	
