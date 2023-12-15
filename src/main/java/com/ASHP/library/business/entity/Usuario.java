@@ -19,7 +19,6 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	@Column
 	private String nombre;
 	
@@ -95,12 +94,4 @@ public class Usuario {
 	public void setReservas(List<Reserva> reservas) {
 		this.reservas = reservas;
 	}
-
-	@Override
-	public String toString() {
-		return "Usuario [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", fechaFinPenalizacion="
-				+ fechaFinPenalizacion + ", prestamos=" + prestamos + ", reservas=" + reservas + "]";
-	}
-
-	
 }

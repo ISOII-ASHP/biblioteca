@@ -2,12 +2,14 @@ package com.ASHP.library.business.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,10 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ASHP.library.business.entity.Autor;
 import com.ASHP.library.business.entity.Ejemplar;
 import com.ASHP.library.business.entity.Titulo;
-import com.ASHP.library.business.persistence.AutorDAO;
 import com.ASHP.library.business.persistence.EjemplarDAO;
+import com.ASHP.library.business.persistence.AutorDAO;
 import com.ASHP.library.business.persistence.TituloDAO;
-
 
 @Controller
 public class GestorTitulos {
@@ -38,6 +39,8 @@ public class GestorTitulos {
 	public GestorTitulos(TituloDAO tituloDAO, AutorDAO autorDAO, EjemplarDAO ejemplarDAO) {
 
 		super();
+		
+		
 		this.tituloDAO = tituloDAO;
 
 		this.autorDAO = autorDAO;
@@ -104,7 +107,7 @@ public class GestorTitulos {
 		
 		
 	}
-
+  
 	@GetMapping("/vistaFormTituloAutor")
 	public String verFormulario(Model model) {
 		Titulo titulo = new Titulo();
@@ -156,16 +159,57 @@ public class GestorTitulos {
 	    tituloDAO.delete(titulo);
 	    return "redirect:/vista-titulo";
 	}
-
+	
+	/** Dar de alta ejemplar
+	 * 
+	 * @param ejemplar
+	 * @param tituloId
+	 * @return
+	 */
 	@PostMapping("/altaEjemplar")
-	public String altaEjemplar(@ModelAttribute("ejemplar") Ejemplar ejemplar, @RequestParam("tituloId") Long tituloId) {
-	    Titulo titulo = tituloDAO.findById(tituloId).orElseThrow(() -> new IllegalArgumentException("Invalid titulo Id:" + tituloId));
-	    titulo.getEjemplares().add(ejemplar);
-	    tituloDAO.save(titulo);
-	    return "redirect:/vistaFormTituloAutor";
+	public String altaEjemplar(@ModelAttribute Ejemplar ejemplar, @RequestParam("titulo") Long tituloId,
+			@RequestParam("numEjemplares") int numEjemplares) {
+		Titulo titulo = tituloDAO.findById(tituloId)
+				.orElseThrow(() -> new IllegalArgumentException("Invalid titulo Id:" + tituloId));
+
+
+		Optional<Ejemplar> optionalEjemplar = ejemplarDAO.findById(tituloId);
+		List<Ejemplar> ejemplares = optionalToList(optionalEjemplar);
+		
+		for (int i = 1; i < numEjemplares; i++) {
+			Ejemplar e = new Ejemplar(titulo);
+			ejemplares.add(e);
+			//titulo.setEjemplares(ejemplares);
+			titulo.addEjemplar(e);
+			ejemplarDAO.save(e);
+	    }
+		
+
+		//titulo.getEjemplares().add(ejemplar);
+		//tituloDAO.save(titulo);
+		return "vista-titulo";
+	}
+	
+	@GetMapping("/altaEjemplar")
+	public String altaEjemplar(Model model) {
+		List<Titulo> titulos = tituloDAO.findAll();
+		model.addAttribute("titulos", titulos);
+		return "alta-ejemplar";
+	}
+	
+	/**
+	 * Convertir Optional a List
+	 * 
+	 * @param <T>
+	 * @param optional
+	 * @return
+	 */
+	public <T> List<T> optionalToList(Optional<T> optional) {
+		List<T> list = new ArrayList<>();
+		optional.ifPresent(list::add);
+		return list;
 	}
 
-	
 	public void bajaEjemplar(Titulo aT) {
 		throw new UnsupportedOperationException();
 	}

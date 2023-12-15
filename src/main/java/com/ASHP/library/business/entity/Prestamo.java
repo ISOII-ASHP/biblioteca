@@ -35,17 +35,19 @@ public class Prestamo {
 	@JoinColumn(name = "titulo_id")
 	public Titulo titulo;
 
-	public Prestamo() {
+	@ManyToOne
+	public Ejemplar ejemplar;
 
-	}
+	public Prestamo() {}
 
-	public Prestamo(Date fechaInicio, Date fechaFin, Boolean activo, Usuario usuario, Titulo titulo) {
+	public Prestamo(Date fechaInicio, Date fechaFin, Boolean activo, Usuario usuario, Titulo titulo, Ejemplar ejemplar) {
 		super();
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 		this.activo = activo;
 		this.usuario = usuario;
 		this.titulo = titulo;
+		this.ejemplar = ejemplar;
 	}
 
 	public Long getId() {
@@ -95,11 +97,4 @@ public class Prestamo {
 	public void setTitulo(Titulo titulo) {
 		this.titulo = titulo;
 	}
-
-	@Override
-	public String toString() {
-		return "Prestamo [id=" + id + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", activo=" + activo
-				+ ", usuario=" + usuario + ", titulo=" + titulo + "]";
-	}
-
 }

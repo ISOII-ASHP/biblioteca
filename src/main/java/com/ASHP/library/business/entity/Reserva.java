@@ -70,10 +70,4 @@ public class Reserva {
 	public void setTitulo(Titulo titulo) {
 		this.titulo = titulo;
 	}
-
-	@Override
-	public String toString() {
-		return "Reserva [id=" + id + ", fecha=" + fecha + ", usuario=" + usuario + ", titulo=" + titulo + "]";
-	}
-
 }
