@@ -183,7 +183,24 @@ public class GestorTitulos {
 		return list;
 	}
 
-	public void bajaEjemplar(Titulo aT) {
-		throw new UnsupportedOperationException();
+	@PostMapping("/bajaEjemplar")
+	public String bajaEjemplar(@RequestParam("titulo") Long tituloId,
+	        @RequestParam("numEjemplares") int numEjemplares) {
+	    Titulo titulo = tituloDAO.findById(tituloId)
+	            .orElseThrow(() -> new IllegalArgumentException("Invalid titulo Id:" + tituloId));
+
+	    Optional<Ejemplar> optionalEjemplar = ejemplarDAO.findById(tituloId);
+	    List<Ejemplar> ejemplares = optionalToList(optionalEjemplar);
+
+	    int ejemplaresToRemove = Math.min(numEjemplares, ejemplares.size());
+
+	    for (int i = 0; i < ejemplaresToRemove; i++) {
+	        Ejemplar ejemplarToRemove = ejemplares.remove(ejemplares.size() - 1);
+	        titulo.removeEjemplar(ejemplarToRemove);
+	        ejemplarDAO.delete(ejemplarToRemove);
+	    }
+
+	    return "vista-titulo";
 	}
+
 }
