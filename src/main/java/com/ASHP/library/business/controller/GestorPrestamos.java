@@ -173,6 +173,13 @@ public class GestorPrestamos {
 
 	    return "Reserva realizada con éxito.";
 	}
+	
+	@GetMapping("/reservarEjemplar")
+	public String altaEjemplar(Model model) {
+		List<Titulo> titulos = tituloDAO.findAll();
+		model.addAttribute("titulos", titulos);
+		return "reservar-ejemplar";
+	}
 
 	public <T> List<T> optionalToList(Optional<T> optional) {
 		List<T> list = new ArrayList<>();

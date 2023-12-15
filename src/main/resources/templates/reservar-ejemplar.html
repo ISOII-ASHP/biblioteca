@@ -1,8 +1,14 @@
 <!DOCTYPE HTML>
 <html xmlns:th="https://www.thymeleaf.org">
-		<div th:insert="~{cabecera}"></div>	
-		<title>Reservar ejemplar</title>
-	</head>
+<div th:insert="~{cabecera}"></div>	
+<title>Reservar ejemplar</title>
+<style>
+	.btn-left {
+		margin-top: 30px;
+		float: right;
+	}
+</style>
+</head>
 	<body>
 		<div class="container mt2 mb-2">
 			<div class="row justify-content-center mt-3">
@@ -12,20 +18,26 @@
 					</p>
 				</div>
 				<div class="row justify-content-center">
-					<div class="col-md-6">
-						<form action="#" th:action="@{}" th:object="${}" method="POST">
-							<div class="form-group">
+					<form action="#" th:action="@{/reservarEjemplar}" th:object="${ejemplar}" method="POST">
+						<div class="row">
+							<div class="col">
 								<label>Titulo</label>
-								<select name="titulo" id="id" class="form-control" required>
-									<option value="" disabled selected>Seleccionar titulo</option>
-									<option th:each="titulo : ${titulos}" th:value="${titulo.id}" th:text="${titulo.titulo}"></option>
-								</select>
-
-							</div>
-						</form>
-					</div>
-	
-				
+									<select name="titulo" id="id" class="form-control" required>
+										<option value="" disabled selected>Seleccionar titulo</option>
+										<option th:each="titulo : ${titulos}" th:value="${titulo.id}"
+											th:text="${titulo.titulo}"></option>
+									</select>
+						  	</div>
+						  	<div class="col">
+								<div class="form-group">
+									<label>Usuario</label>
+									<input type="text" id="idUsuario" name="usu" required class="form-control">
+								</div>
+								<button type="submit" class="btn btn-info btn-left">Reservar</button>
+						  	</div>
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
 	</body>
