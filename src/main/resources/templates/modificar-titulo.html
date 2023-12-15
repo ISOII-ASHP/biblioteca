@@ -11,24 +11,21 @@
 <body>
     <div class="container">
         <h1>Modificar titulo</h1>
-
-        <form action="#" th:action="@{/actualizarTitulo}" th:object="${titulo}" method="POST">
-
-            <!-- Add hidden form field to handle update -->
-            <input type="hidden" th:field="*{id}" />
-
-            <p>Titulo: <input type="text" th:field="*{titulo}" class="form-control mb-4 col-4"></p>
-            <p>isbn: <input type="text" th:field="*{isb}" class="form-control mb-4 col-4"></p>
-            <p>Numero reserva: <input type="text" th:field="*{numReserva}" class="form-control mb-4 col-4"></p>
-            <p>Autores: <input type="text" th:field="*{autores}" class="form-control mb-4 col-4"></p>
-            <p>Ejemplares: <input type="text" th:field="*{ejemplares}" class="form-control mb-4 col-4"></p>
-            <p>Prestamos: <input type="text" th:field="*{prestamos}" class="form-control mb-4 col-4"></p>
-            <p>Reservas: <input type="text" th:field="*{reservas}" class="form-control mb-4 col-4"></p>
-			
-
-            <button type="submit" class="btn btn-info col-2"> Modificar </button>
-        </form>
-
+			<form action="#" th:action="@{/actualizarTitulo}" th:object="${titulo}" method="POST">
+    			<!-- Add hidden form field to handle update -->
+    			<input type="hidden" name="id" th:value="${titulo.id}" />
+				<p>ID: <input type="text" th:field="*{id}" class="form-control mb-4 col-4"></p>
+			    <p>Titulo: <input type="text" th:field="*{titulo}" class="form-control mb-4 col-4"></p>
+			    <p>ISBN: <input type="text" th:field="*{isbn}" class="form-control mb-4 col-4"></p>
+			    <p>Numero reserva: <input type="text" th:field="*{numReserva}" class="form-control mb-4 col-4"></p>
+			    <p>Autores: <input type="text" th:field="*{autores}" class="form-control mb-4 col-4"></p>
+			    <p>Ejemplares: <input type="text" th:field="*{ejemplares}" class="form-control mb-4 col-4"></p>
+			    <p>Prestamos: <input type="text" th:field="*{prestamos}" class="form-control mb-4 col-4"></p>
+			    <p>Reservas: <input type="text" th:field="*{reservas}" class="form-control mb-4 col-4"></p>
+				
+				<!-- Botón de tipo submit con estilo de botón de acción -->
+    			<button type="submit" class="btn btn-info col-2" style="background-color: dodgerblue;">Update</button>
+			</form>
     </div>
 </body>
 
