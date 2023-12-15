@@ -149,11 +149,10 @@ public class GestorTitulos {
 	    return "redirect:/vista-titulo";
 	}
 
-
-
 	@PostMapping("/borrarTitulo")
-	public String borrarTitulo(@RequestParam("tituloId") Long tituloId) {
-	    Titulo titulo = tituloDAO.findById(tituloId).orElseThrow(() -> new IllegalArgumentException("Invalid titulo Id:" + tituloId));
+	public String borrarTitulo(@RequestParam("tituloId") Long tituloId, Model model) {
+		Titulo titulo = tituloDAO.findById(tituloId).orElseThrow(() -> new IllegalArgumentException("Invalid titulo Id:" + tituloId));
+	    model.addAttribute("titulo", titulo);
 	    tituloDAO.delete(titulo);
 	    return "redirect:/vista-titulo";
 	}
