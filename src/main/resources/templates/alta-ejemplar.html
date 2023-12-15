@@ -1,50 +1,48 @@
 <!DOCTYPE HTML>
 <html xmlns:th="https://www.thymeleaf.org">
-		<div th:insert="~{cabecera}"></div>	
-		<title>Alta ejemplar</title>
-		<style>
-			.btn-left {
-				margin-top: 30px;
-				float: right;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="container mt2 mb-2">
-			<div class="row justify-content-center mt-3">
-				<div class="row justify-content-center mt-1 text-center">
-					<p class=" alert alert-primary" role="alert">
-						<h1>Añadir nuevos ejemplares</h1>
-					</p>
-				</div>
-				<div class="row justify-content-center">
-					<div class="col-md-6">
-						<form action="#" th:action="@{/altaEjemplar}" th:object="${ejemplar}" method="POST">
-							<div class="form-group">
-								<label>Titulo</label>
+<div th:insert="~{cabecera}"></div>
+<title>Alta ejemplar</title>
+<style>
+	.btn-left {
+		margin-top: 30px;
+		float: right;
+	}
+</style>
+</head>
+
+<body>
+	<div class="container mt2 mb-2">
+		<div class="row justify-content-center mt-3">
+			<div class="row justify-content-center mt-1 text-center">
+				<p class=" alert alert-primary" role="alert">
+				<h1>Añadir nuevos ejemplares</h1>
+				</p>
+			</div>
+			<div class="row justify-content-center">
+				<form action="#" th:action="@{/altaEjemplar}" th:object="${ejemplar}" method="POST">
+					<div class="row">
+						<div class="col">
+							<label>Titulo</label>
 								<select name="titulo" id="id" class="form-control" required>
 									<option value="" disabled selected>Seleccionar titulo</option>
-									<option th:each="titulo : ${titulos}" th:value="${titulo.id}" th:text="${titulo.titulo}"></option>
+									<option th:each="titulo : ${titulos}" th:value="${titulo.id}"
+										th:text="${titulo.titulo}"></option>
 								</select>
-
-							</div>
-						</form>
-					</div>
-					<div class="col-md-6">
-						<form action="#" th:action="@{/altaEjemplar}" th:object="${ejemplar}" method="POST">
+					  	</div>
+					  	<div class="col">
 							<div class="form-group">
 								<label>Número de ejemplares</label>
-								<input type="number" id="numEjemplares" name="numEjemplares" min="1" required class="form-control">
+								<input type="number" id="numEjemplares" name="numEjemplares" min="1" required
+									class="form-control">
 							</div>
-							<div class="form-group">
-								<button type="submit" class="btn btn-info btn-left"> Guardar</button>
-							</div>
-						</form>
+							<button type="submit" class="btn btn-info btn-left"> Guardar</button>
+					  	</div>
 					</div>
-				</div>
+				</form>
 			</div>
+
 		</div>
-	</body>
+	</div>
+</body>
+
 </html>
-
-
