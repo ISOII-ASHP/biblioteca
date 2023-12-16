@@ -89,7 +89,12 @@ public class Titulo {
 		}
 		this.ejemplares.add(ejemplar);
 	}
-
+	
+	public void removeEjemplar(Ejemplar ejemplar) {
+	    if (this.ejemplares != null) {
+	        this.ejemplares.remove(ejemplar);
+	    }
+	}
 	
 	public Long getId() {
 		return id;
