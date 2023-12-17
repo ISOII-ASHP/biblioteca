@@ -99,11 +99,4 @@ public class Prestamo {
 	public void setTitulo(Titulo titulo) {
 		this.titulo = titulo;
 	}
-
-	@Override
-	public String toString() {
-		return "Prestamo [id=" + id + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", activo=" + activo
-				+ ", usuario=" + usuario + ", titulo=" + titulo + "]";
-	}
-
 }

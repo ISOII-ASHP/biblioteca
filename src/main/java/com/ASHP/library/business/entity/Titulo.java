@@ -56,7 +56,29 @@ public class Titulo {
 		this.prestamos = prestamos;
 		this.reservas = reservas;
 	}
-
+	
+	 public void addAutor(Autor autor){
+	        if(this.autores == null){
+	            this.autores = new ArrayList<>();
+	        }
+	        
+	        this.autores.add(autor);
+	    }
+	 
+	 
+	public void addEjemplar(Ejemplar ejemplar) {
+		if (this.ejemplares == null) {
+			this.ejemplares = new ArrayList<>();
+		}
+		this.ejemplares.add(ejemplar);
+	}
+	
+	public void removeEjemplar(Ejemplar ejemplar) {
+	    if (this.ejemplares != null) {
+	        this.ejemplares.remove(ejemplar);
+	    }
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -127,5 +149,4 @@ public class Titulo {
 				+ ", autores=" + autores + ", ejemplares=" + ejemplares + ", prestamos=" + prestamos + ", reservas="
 				+ reservas + "]";
 	}
-
 }

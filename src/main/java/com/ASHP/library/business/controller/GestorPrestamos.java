@@ -2,8 +2,10 @@ package com.ASHP.library.business.controller;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -12,11 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ASHP.library.business.entity.Autor;
 import com.ASHP.library.business.entity.Ejemplar;
 import com.ASHP.library.business.entity.Prestamo;
+import com.ASHP.library.business.entity.Reserva;
 import com.ASHP.library.business.entity.Titulo;
 import com.ASHP.library.business.entity.Usuario;
 import com.ASHP.library.business.persistence.EjemplarDAO;
@@ -35,22 +40,24 @@ public class GestorPrestamos {
 	@Autowired
 	public PrestamoDAO _prestamoDAO;
 	@Autowired
-	public ReservaDAO _reservaDAO;
+	public ReservaDAO reservaDAO;
 	@Autowired
-	public TituloDAO _tituloDAO;
+	public TituloDAO tituloDAO;
 	@Autowired
-	public EjemplarDAO _ejemplarDAO;
+	public EjemplarDAO ejemplarDAO;
 
 	@Autowired
-	public UsuarioDAO _usuarioDAO;
+	public UsuarioDAO usuarioDAO;
 
 	@GetMapping("/prestamo")
-	public String menuPrestamos() { return "prestamo"; }
+	public String menuPrestamos() {
+		return "prestamo";
+	}
 
 	@GetMapping("/nuevo-prestamo")
 	public String menuNuevoPrestamo(Model model) {
-		List<Titulo> todosLosTitulos = _tituloDAO.findAll();
-		List<Usuario> todosLosUsuarios = _usuarioDAO.findAll();
+		List<Titulo> todosLosTitulos = tituloDAO.findAll();
+		List<Usuario> todosLosUsuarios = usuarioDAO.findAll();
 		model.addAttribute("titulos", todosLosTitulos);
 		model.addAttribute("usuarios", todosLosUsuarios);
 
@@ -115,15 +122,14 @@ public class GestorPrestamos {
 		}
 
 		if (errores.size() > 0) {
-			List<Titulo> todosLosTitulos = _tituloDAO.findAll();
-			List<Usuario> todosLosUsuarios = _usuarioDAO.findAll();
+			List<Titulo> todosLosTitulos = tituloDAO.findAll();
+			List<Usuario> todosLosUsuarios = usuarioDAO.findAll();
 			model.addAttribute("titulos", todosLosTitulos);
 			model.addAttribute("usuarios", todosLosUsuarios);
 			model.addAttribute("tituloYUsuarioSeleccionado", false);
 		} else {
 			model.addAttribute("tituloYUsuarioSeleccionado", true);
 		}
-		
 		model.addAttribute("ejemplares", ejemplares);
 		model.addAttribute("titulo", t);
 		model.addAttribute("usuario", u);
@@ -165,9 +171,68 @@ public class GestorPrestamos {
 
 		_prestamoDAO.save(prestamoActivo);
 	}
+	
+	
+	// Método para reservar un título
+	@PostMapping("/reservarEjemplar")
+	public String reservarTitulo(Model model, @RequestParam("titulo") Long tituloId, @RequestParam("usuario") Long usuarioId) {
+		// Obtener el título por su ID
+	    Optional<Titulo> tOptional = tituloDAO.findById(tituloId);
+	    Titulo t = tOptional.get();
 
-	public void realizarReserva(String aIdUsuario, String aIsbn) {
-		throw new UnsupportedOperationException();
+	    // Obtener el usuario por su ID
+	    Optional<Usuario> uOptional = usuarioDAO.findById(usuarioId);
+
+	    Usuario u = uOptional.get();
+
+	    // Comprobar si hay ejemplares disponibles
+	    List<Ejemplar> ejemplares = t.getEjemplares();
+
+	    if (ejemplares.isEmpty()) {
+	        mensaje("No hay ejemplares disponibles de este título.", model);
+	    } else {
+	        // Obtener un ejemplar de la lista
+	        Ejemplar ejemplarParaReservar = ejemplares.get(0);
+
+	        // Si hay ejemplares disponibles, realizar la reserva
+	        Reserva reserva = new Reserva();
+	        reserva.setTitulo(t);
+	        reserva.setUsuario(u);
+	        Date fechaInicio = new Date();
+	        java.sql.Date sqlDate = new java.sql.Date(fechaInicio.getTime());
+	        reserva.setFecha(sqlDate); // Fecha actual
+	        reservaDAO.save(reserva);
+
+	        // Eliminar el ejemplar reservado de la base de datos
+	        ejemplarDAO.delete(ejemplarParaReservar);
+
+	        mensaje("Reserva realizada con éxito.", model);
+	    }
+
+	    return "reservar-ejemplar";
+
+	}
+
+	
+	@GetMapping("/reservarEjemplar")
+	public String reservaEjemplar(Model model) {
+		List<Titulo> titulos = tituloDAO.findAll();
+		List<Usuario> usuarios = usuarioDAO.findAll();
+		
+		model.addAttribute("titulos", titulos);
+		model.addAttribute("usuarios", usuarios);
+		return "reservar-ejemplar";
+	}
+
+	public <T> List<T> optionalToList(Optional<T> optional) {
+		List<T> list = new ArrayList<>();
+		optional.ifPresent(list::add);
+		return list;
+	}
+	
+	public void mensaje(String mensaje, Model model) {
+		model.addAttribute("mensaje", mensaje);
+		reservaEjemplar(model);
 	}
 
 	public Prestamo realizarPrestamo(Usuario usuario, Titulo titulo, Ejemplar ejemplar) {

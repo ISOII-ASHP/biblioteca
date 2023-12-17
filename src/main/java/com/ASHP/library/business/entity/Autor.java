@@ -67,9 +67,4 @@ public class Autor {
 		this.titulos = titulos;
 	}
 
-	@Override
-	public String toString() {
-		return "Autor [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", titulos=" + titulos + "]";
-	}
-
 }

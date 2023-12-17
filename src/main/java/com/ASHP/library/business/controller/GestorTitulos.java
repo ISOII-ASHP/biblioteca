@@ -2,6 +2,7 @@ package com.ASHP.library.business.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -93,7 +94,7 @@ public class GestorTitulos {
 		tituloPorNombre.setEjemplares(ejemplares);
 		ejemplarDAO.save(e);
 
-		return "vista-titulo";
+		return "redirect:/vista-titulo";
 	}
 
 	private Titulo getTituloByName(String nombreTitulo) {
@@ -118,30 +119,118 @@ public class GestorTitulos {
 
 		return "titulo";
 	}
-
-	@PostMapping("/actualizarTitulo")
-	public String actualizarTitulo(Titulo titulo, Model model) {
-		tituloDAO.findById(titulo.getId());
-		tituloDAO.save(titulo);
+	
+	@GetMapping("/vista-titulo")
+	public String verListaLibros(Model model) {
+		List<Titulo> titulos = tituloDAO.findAll();
+		model.addAttribute("listaLibros", titulos);
 		return "vista-titulo";
+	}
+
+	@GetMapping("/iractualizarTitulo")
+	public String llevaraactualizarTitulo(@RequestParam("tituloId") Long tituloId, Model model) {
+	    Titulo titulo = tituloDAO.findById(tituloId).orElseThrow(() -> new IllegalArgumentException("Invalid titulo Id:" + tituloId));
+	    model.addAttribute("titulo", titulo);
+	    return "modificar-titulo";
+	}
+	
+	@PostMapping("/actualizarTitulo")
+	public String actualizarTitulo(@ModelAttribute("form") Titulo tituloActualizado) {
+	    // Obtener el título existente de la base de datos
+	    Titulo tituloExistente = tituloDAO.findById(tituloActualizado.getId())
+	            .orElseThrow(() -> new IllegalArgumentException("Invalid titulo Id:" + tituloActualizado.getId()));
+
+	    // Actualizar los campos del título existente con los valores del título actualizado
+	    tituloExistente.setTitulo(tituloActualizado.getTitulo());
+	    tituloExistente.setIsbn(tituloActualizado.getIsbn());
+	    tituloExistente.setNumReserva(tituloActualizado.getNumReserva());
+	    // Actualizar otros campos según sea necesario
+
+	    // Guardar los cambios en la base de datos
+	    tituloDAO.save(tituloExistente);
+
+	    return "redirect:/vista-titulo";
 	}
 
 	@PostMapping("/borrarTitulo")
-	public String borrarTitulo(@ModelAttribute Titulo titulo, Model model) {
-		tituloDAO.delete(titulo);
+	public String borrarTitulo(@RequestParam("tituloId") Long tituloId, Model model) {
+		Titulo titulo = tituloDAO.findById(tituloId).orElseThrow(() -> new IllegalArgumentException("Invalid titulo Id:" + tituloId));
+	    model.addAttribute("titulo", titulo);
+	    tituloDAO.delete(titulo);
+	    return "redirect:/vista-titulo";
+	}
+	
+	/** Dar de alta ejemplar
+	 * 
+	 * @param ejemplar
+	 * @param tituloId
+	 * @return
+	 */
+	@PostMapping("/altaEjemplar")
+	public String altaEjemplar(@ModelAttribute Ejemplar ejemplar, @RequestParam("titulo") Long tituloId,
+			@RequestParam("numEjemplares") int numEjemplares) {
+		Titulo titulo = tituloDAO.findById(tituloId)
+				.orElseThrow(() -> new IllegalArgumentException("Invalid titulo Id:" + tituloId));
+
+
+		Optional<Ejemplar> optionalEjemplar = ejemplarDAO.findById(tituloId);
+		List<Ejemplar> ejemplares = optionalToList(optionalEjemplar);
+		
+		for (int i = 1; i < numEjemplares; i++) {
+			Ejemplar e = new Ejemplar(titulo);
+			ejemplares.add(e);
+			titulo.addEjemplar(e);
+			ejemplarDAO.save(e);
+	    }
+
 		return "vista-titulo";
 	}
-
-	@PostMapping("/altaEjemplar")
-	public String altaEjemplar(@ModelAttribute("ejemplar") Ejemplar ejemplar, @RequestParam("tituloId") Long tituloId) {
-	    Titulo titulo = tituloDAO.findById(tituloId).orElseThrow(() -> new IllegalArgumentException("Invalid titulo Id:" + tituloId));
-	    titulo.getEjemplares().add(ejemplar);
-	    tituloDAO.save(titulo);
-	    return "redirect:/vistaFormTituloAutor";
-	}
-
 	
-	public void bajaEjemplar(Titulo aT) {
-		throw new UnsupportedOperationException();
+	@GetMapping("/altaEjemplar")
+	public String altaEjemplar(Model model) {
+		List<Titulo> titulos = tituloDAO.findAll();
+		model.addAttribute("titulos", titulos);
+		return "alta-ejemplar";
 	}
+	
+	/**
+	 * Convertir Optional a List
+	 * 
+	 * @param <T>
+	 * @param optional
+	 * @return
+	 */
+	public <T> List<T> optionalToList(Optional<T> optional) {
+		List<T> list = new ArrayList<>();
+		optional.ifPresent(list::add);
+		return list;
+	}
+
+	@PostMapping("/bajaEjemplar")
+	public String bajaEjemplar(@RequestParam("titulo") Long tituloId,
+	        @RequestParam("numEjemplares") int numEjemplares) {
+	    Titulo titulo = tituloDAO.findById(tituloId)
+	            .orElseThrow(() -> new IllegalArgumentException("Invalid titulo Id:" + tituloId));
+
+	    Optional<Ejemplar> optionalEjemplar = ejemplarDAO.findById(tituloId);
+	    List<Ejemplar> ejemplares = optionalToList(optionalEjemplar);
+
+	    int ejemplaresToRemove = Math.min(numEjemplares, ejemplares.size());
+
+	    for (int i = 0; i < ejemplaresToRemove; i++) {
+	        Ejemplar ejemplarToRemove = ejemplares.remove(ejemplares.size() - 1);
+	        titulo.removeEjemplar(ejemplarToRemove);
+	        ejemplarDAO.delete(ejemplarToRemove);
+	    }
+
+	    return "vista-titulo";
+	}
+	
+	@GetMapping("/bajaEjemplar")
+	public String bajaEjemplar(Model model) {
+		List<Titulo> titulos = tituloDAO.findAll();
+		model.addAttribute("titulos", titulos);
+		return "baja-ejemplar";
+	}
+
 }
