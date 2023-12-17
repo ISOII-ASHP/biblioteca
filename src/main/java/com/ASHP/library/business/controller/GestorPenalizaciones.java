@@ -25,17 +25,17 @@ public class GestorPenalizaciones {
 		calendar.setTime(fechaActual);
 		calendar.add(Calendar.DAY_OF_YEAR, 30); // 30 días desde hoy
 		Date fechaPenalizacion = calendar.getTime();
-		
+
 		usuario.setFechaFinPenalizacion(fechaPenalizacion);
 		_usuarioDAO.save(usuario);
 	}
-	
+
 	/**
 	 * @param usuario usuario a comprobar
 	 * @return true si está penalizado, false si no.
 	 */
 	public boolean comprobarPenalizacion(Usuario usuario) {
-		return usuario.getFechaFinPenalizacion() != null 
-				&& usuario.getFechaFinPenalizacion().compareTo(new Date()) > 0;
+		return usuario.getFechaFinPenalizacion() != null
+			&& usuario.getFechaFinPenalizacion().compareTo(new Date()) > 0;
 	}
 }

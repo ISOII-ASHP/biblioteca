@@ -18,4 +18,9 @@ public interface EjemplarDAO extends JpaRepository<Ejemplar, Long> {
            "WHERE e.titulo = :titulo " +
            "AND NOT EXISTS (SELECT p FROM Prestamo p WHERE p.ejemplar = e AND p.activo = true)")
 	List<Ejemplar> findEjemplaresDisponibles(@Param("titulo") Titulo titulo);
+
+	@Query("SELECT count(e) > 0 FROM Ejemplar e " +
+           "WHERE e = :ejemplar " +
+		   "and NOT EXISTS (SELECT p FROM Prestamo p WHERE p.ejemplar = e AND p.activo = true)")
+	boolean isEjemplarDisponible(@Param("ejemplar") Ejemplar ejemplar);
 }

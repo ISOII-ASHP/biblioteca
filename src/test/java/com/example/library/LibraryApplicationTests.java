@@ -13,9 +13,9 @@ import com.ASHP.library.LibraryApplication;
 @AutoConfigureMockMvc*/
 class LibraryApplicationTests {
 
-	@Test
-	void contextLoads() {
+	//@Test
+	//void contextLoads() {
 		
-	}
+	//}
 
 }

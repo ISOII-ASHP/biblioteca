@@ -7,18 +7,27 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Revista extends Titulo {
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
 	public Revista() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public String toString() {
-		return "Revista [autores=" + autores + ", ejemplares=" + ejemplares + ", prestamos=" + prestamos + ", reservas="
-				+ reservas + "]";
+	public Long getId() {
+		return id;
 	}
 
-	
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return "Revista [id=" + id + ", autores=" + autores + ", ejemplares=" + ejemplares + ", prestamos=" + prestamos
+				+ ", reservas=" + reservas + "]";
+	}
 
 }

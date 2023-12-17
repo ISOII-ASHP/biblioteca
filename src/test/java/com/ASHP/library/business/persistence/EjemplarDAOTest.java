@@ -1,9 +1,10 @@
 package com.ASHP.library.business.persistence;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.List;
 
-import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,9 +31,15 @@ public class EjemplarDAOTest {
     @Autowired
     AutorDAO autorDAO;
 
+
+    @Autowired                  // Ambos para inicializar préstamos
+    UsuarioDAO usuarioDAO;
+    @Autowired
+    PrestamoDAO prestamosDAO;
+
     @BeforeEach
     public void before(){
-        TestRepoInitializer.initRepos(ejemplarDAO, tituloDAO, autorDAO);
+        TestRepoInitializer.initTitulos(ejemplarDAO, tituloDAO, autorDAO);
     }
 
     @Test
@@ -45,12 +52,18 @@ public class EjemplarDAOTest {
         List<Ejemplar> ejemplaresT2 = ejemplarDAO.findByTitulo(titulos.get(1));
 
         // Then:
-        Assert.assertEquals(3, ejemplaresT1.size());
-        Assert.assertEquals(2, ejemplaresT2.size());
+        Assertions.assertEquals(3, ejemplaresT1.size());
+        Assertions.assertEquals(2, ejemplaresT2.size());
     }   
 
     @Test
-    void testFindEjemplaresDisponibles() {
-        // 
+    void testFindEjemplaresDisponibles_devuelve_ejemplares_de_un_titulo_no_prestados() {
+        TestRepoInitializer.initUsuarios(usuarioDAO); 
+        TestRepoInitializer.initPrestamos(prestamosDAO);
+        
+        List<Ejemplar> disponibles = 
+            ejemplarDAO.findEjemplaresDisponibles(TestRepoInitializer.titulos[0]);
+
+        assertEquals(2, disponibles.size());
     }
 }
