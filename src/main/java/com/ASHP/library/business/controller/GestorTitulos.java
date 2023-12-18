@@ -183,7 +183,7 @@ public class GestorTitulos {
 			ejemplarDAO.save(e);
 	    }
 
-		return "vista-titulo";
+		return "redirect:/vista-titulo";
 	}
 	
 	@GetMapping("/altaEjemplar")
@@ -223,7 +223,7 @@ public class GestorTitulos {
 	        ejemplarDAO.delete(ejemplarToRemove);
 	    }
 
-	    return "vista-titulo";
+	    return "redirect:/vista-titulo";
 	}
 	
 	@GetMapping("/bajaEjemplar")

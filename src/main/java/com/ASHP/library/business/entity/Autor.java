@@ -67,4 +67,11 @@ public class Autor {
 		this.titulos = titulos;
 	}
 
+	@Override
+	public String toString() {
+		return nombre + " " + apellido;
+	}
+	
+	
+
 }
