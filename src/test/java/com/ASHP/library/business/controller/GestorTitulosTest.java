@@ -1,5 +1,7 @@
 package com.ASHP.library.business.controller;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.After;
@@ -15,6 +17,7 @@ import org.springframework.ui.Model;
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.assertEquals;
 
+import com.ASHP.library.business.entity.Autor;
 import com.ASHP.library.business.entity.Ejemplar;
 import com.ASHP.library.business.entity.Titulo;
 import com.ASHP.library.business.persistence.AutorDAO;
@@ -52,6 +55,25 @@ public class GestorTitulosTest {
 
 	@After
 	public void tearDown() throws Exception {
+	}
+
+
+	@Test
+	public void testAltaTitulo() {
+	    List<String> tituloInfo = Arrays.asList("Nombre del Título", "ISBN123", "NR123");
+	    List<String> autorInfo = Arrays.asList("Nombre del Autor", "Apellido del Autor");
+	    Model mockModel = mock(Model.class);
+
+	    when(tituloDAO.save(any(Titulo.class))).thenReturn(new Titulo());
+	    when(autorDAO.save(any(Autor.class))).thenReturn(new Autor());
+	    when(ejemplarDAO.save(any(Ejemplar.class))).thenReturn(new Ejemplar());
+
+	    String viewName = gestorTitulos.altaTitulo(tituloInfo, autorInfo, mockModel);
+
+	    verify(tituloDAO).save(any(Titulo.class));
+	    verify(autorDAO).save(any(Autor.class));
+	    verify(ejemplarDAO).save(any(Ejemplar.class));
+	    assertEquals("redirect:/vista-titulo", viewName);
 	}
 
 	@Test
