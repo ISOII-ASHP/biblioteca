@@ -62,7 +62,6 @@ public class Prestamo {
 		return new Prestamo(fechaInicio, fechaFin, true, usuario, titulo, ejemplar);
 	}
 
-
 	public Long getId() {
 		return id;
 	}

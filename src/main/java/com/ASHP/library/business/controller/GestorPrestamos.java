@@ -37,14 +37,14 @@ public class GestorPrestamos {
 	@Autowired
 	public PrestamoDAO prestamoDAO;
 	@Autowired
-	public ReservaDAO reservaDAO;
+	public ReservaDAO _reservaDAO;
 	@Autowired
-	public TituloDAO tituloDAO;
+	public TituloDAO _tituloDAO;
 	@Autowired
-	public EjemplarDAO ejemplarDAO;
+	public EjemplarDAO _ejemplarDAO;
 
 	@Autowired
-	public UsuarioDAO usuarioDAO;
+	public UsuarioDAO _usuarioDAO;
 
 	@GetMapping("/prestamo")
 	public String menuPrestamos() {
@@ -53,8 +53,8 @@ public class GestorPrestamos {
 
 	@GetMapping("/nuevo-prestamo")
 	public String menuNuevoPrestamo(Model model) {
-		List<Titulo> todosLosTitulos = tituloDAO.findAll();
-		List<Usuario> todosLosUsuarios = usuarioDAO.findAll();
+		List<Titulo> todosLosTitulos = _tituloDAO.findAll();
+		List<Usuario> todosLosUsuarios = _usuarioDAO.findAll();
 		model.addAttribute("titulos", todosLosTitulos);
 		model.addAttribute("usuarios", todosLosUsuarios);
 
@@ -64,11 +64,11 @@ public class GestorPrestamos {
 	@PostMapping("/nuevo-prestamo")
 	public String postNuevoPrestamo(@RequestParam Long usuario, @RequestParam Long titulo, Model model) {
 		// Obtener el título por su ID
-		Optional<Titulo> tOptional = tituloDAO.findById(titulo);
+		Optional<Titulo> tOptional = _tituloDAO.findById(titulo);
 		Titulo t = tOptional.get();
 
 		// Obtener el usuario por su ID
-		Optional<Usuario> uOptional = usuarioDAO.findById(usuario);
+		Optional<Usuario> uOptional = _usuarioDAO.findById(usuario);
 		Usuario u = uOptional.get();
 
 		ArrayList<String> errores = new ArrayList();
@@ -82,15 +82,15 @@ public class GestorPrestamos {
 			errores.add("Usuario penalizado. No se le puede prestar más hasta: " + u.getFechaFinPenalizacion());
 		}
 
-		List<Ejemplar> ejemplares = ejemplarDAO.findEjemplaresDisponibles(t);
+		List<Ejemplar> ejemplares = _ejemplarDAO.findEjemplaresDisponibles(t);
 		System.out.println(ejemplares);
 		if (ejemplares.size() == 0) {
 			errores.add("No hay ejemplares disponibles");
 		}
 
 		if (errores.size() > 0) {
-			List<Titulo> todosLosTitulos = tituloDAO.findAll();
-			List<Usuario> todosLosUsuarios = usuarioDAO.findAll();
+			List<Titulo> todosLosTitulos = _tituloDAO.findAll();
+			List<Usuario> todosLosUsuarios = _usuarioDAO.findAll();
 			model.addAttribute("titulos", todosLosTitulos);
 			model.addAttribute("usuarios", todosLosUsuarios);
 
@@ -111,15 +111,15 @@ public class GestorPrestamos {
 	@PostMapping("/crear-prestamo")
 	public String realizarPrestamo(@RequestParam Long usuario, @RequestParam Long titulo, @RequestParam Long ejemplar) {
 		// Obtener el título por su ID
-		Optional<Titulo> tOptional = tituloDAO.findById(titulo);
+		Optional<Titulo> tOptional = _tituloDAO.findById(titulo);
 		Titulo t = tOptional.get();
 
 		// Obtener el usuario por su ID
-		Optional<Usuario> uOptional = usuarioDAO.findById(usuario);
+		Optional<Usuario> uOptional = _usuarioDAO.findById(usuario);
 		Usuario u = uOptional.get();
 
 		// Obtener el ejemplar por su ID
-		Optional<Ejemplar> eOptional = ejemplarDAO.findById(ejemplar);
+		Optional<Ejemplar> eOptional = _ejemplarDAO.findById(ejemplar);
 		Ejemplar e = eOptional.get();
 
 		// Obtener fechas de inicio y de fin
@@ -144,11 +144,11 @@ public class GestorPrestamos {
 	@PostMapping("/reservarEjemplar")
 	public String reservarTitulo(Model model, @RequestParam("titulo") Long tituloId, @RequestParam("usuario") Long usuarioId) {
 		// Obtener el título por su ID
-	    Optional<Titulo> tOptional = tituloDAO.findById(tituloId);
+	    Optional<Titulo> tOptional = _tituloDAO.findById(tituloId);
 	    Titulo t = tOptional.get();
 
 	    // Obtener el usuario por su ID
-	    Optional<Usuario> uOptional = usuarioDAO.findById(usuarioId);
+	    Optional<Usuario> uOptional = _usuarioDAO.findById(usuarioId);
 
 	    Usuario u = uOptional.get();
 
@@ -168,10 +168,10 @@ public class GestorPrestamos {
 	        Date fechaInicio = new Date();
 	        java.sql.Date sqlDate = new java.sql.Date(fechaInicio.getTime());
 	        reserva.setFecha(sqlDate); // Fecha actual
-	        reservaDAO.save(reserva);
+	        _reservaDAO.save(reserva);
 
 	        // Eliminar el ejemplar reservado de la base de datos
-	        ejemplarDAO.delete(ejemplarParaReservar);
+	        _ejemplarDAO.delete(ejemplarParaReservar);
 
 	        mensaje("Reserva realizada con éxito.", model);
 	    }
@@ -183,8 +183,8 @@ public class GestorPrestamos {
 	
 	@GetMapping("/reservarEjemplar")
 	public String reservaEjemplar(Model model) {
-		List<Titulo> titulos = tituloDAO.findAll();
-		List<Usuario> usuarios = usuarioDAO.findAll();
+		List<Titulo> titulos = _tituloDAO.findAll();
+		List<Usuario> usuarios = _usuarioDAO.findAll();
 		
 		model.addAttribute("titulos", titulos);
 		model.addAttribute("usuarios", usuarios);
