@@ -31,7 +31,7 @@ public class GestorPenalizacionesTest {
     void before() {
         TestRepoInitializer.initUsuarios(usuarioDAO);
     }
-
+//
     @Test
     void aplicaPenalizacion_establece_una_fecha_de_penalizacion_mayor_a_hoy() {
         Usuario testUser = TestRepoInitializer.usuarios[0];
