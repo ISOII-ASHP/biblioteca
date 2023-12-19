@@ -71,14 +71,6 @@ public class GestorTitulosTest {
 	    assertEquals("redirect:/vista-titulo", viewName);
 	}
 
-	@Test
-	public void testVerFormulario() {
-		throw new RuntimeException("not yet implemented");
-	}
-
-	@Test
-	public void testOptionalToList() {
-		throw new RuntimeException("not yet implemented");
-	}
+	
 
 }
