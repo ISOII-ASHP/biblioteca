@@ -24,15 +24,9 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
 
-    # Compilar el proyecto con Maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
-    # Paso para ejecutar pruebas y generar informes de cobertura con JaCoCo
-    - name: Run tests and generate JaCoCo coverage report
-      run: mvn test verify
-
-    # Paso para el análisis de SonarCloud
     - name: Analyze with SonarCloud
       uses: SonarSource/sonarcloud-github-action@master
       env:
