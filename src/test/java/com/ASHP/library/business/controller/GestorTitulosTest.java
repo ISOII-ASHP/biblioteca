@@ -16,6 +16,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.ui.Model;
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import com.ASHP.library.business.entity.Autor;
 import com.ASHP.library.business.entity.Ejemplar;
@@ -100,6 +101,75 @@ public class GestorTitulosTest {
 	    verify(ejemplarDAO, times(numEjemplares - 1)).save(any(Ejemplar.class));
 
 	    assertEquals("vista-titulo", viewName);
+	}
+	
+	@Test
+    public void testVerListaLibros() {
+        Titulo titulo1 = new Titulo();
+        Titulo titulo2 = new Titulo();
+        when(tituloDAO.findAll()).thenReturn(Arrays.asList(titulo1, titulo2));
+
+        String view = gestorTitulos.verListaLibros(model);
+
+        verify(model, times(1)).addAttribute("listaLibros", Arrays.asList(titulo1, titulo2));
+        assertEquals("vista-titulo", view);
+    }
+	
+	@Test
+	public void testLlevaraactualizarTitulo() {
+	    Long tituloId = 1L;
+	    Titulo titulo = new Titulo();
+	    when(tituloDAO.findById(tituloId)).thenReturn(Optional.of(titulo));
+
+	    String view = gestorTitulos.llevaraactualizarTitulo(tituloId, model);
+
+	    verify(model, times(1)).addAttribute("titulo", titulo);
+	    assertEquals("modificar-titulo", view);
+	}
+
+	@Test
+	public void testActualizarTitulo() {
+	    Long tituloId = 1L;
+	    Titulo tituloActualizado = new Titulo();
+	    tituloActualizado.setId(tituloId);
+	    Titulo tituloExistente = new Titulo();
+	    when(tituloDAO.findById(tituloId)).thenReturn(Optional.of(tituloExistente));
+
+	    String view = gestorTitulos.actualizarTitulo(tituloActualizado);
+
+	    assertEquals(tituloActualizado.getTitulo(), tituloExistente.getTitulo());
+	    assertEquals(tituloActualizado.getIsbn(), tituloExistente.getIsbn());
+	    assertEquals(tituloActualizado.getNumReserva(), tituloExistente.getNumReserva());
+	    verify(tituloDAO, times(1)).save(tituloExistente);
+	    assertEquals("redirect:/vista-titulo", view);
+	}
+
+	@Test
+	public void testBorrarTitulo() {
+	    Long tituloId = 1L;
+	    Titulo titulo = new Titulo();
+	    when(tituloDAO.findById(tituloId)).thenReturn(Optional.of(titulo));
+
+	    String view = gestorTitulos.borrarTitulo(tituloId, model);
+
+	    verify(tituloDAO, times(1)).delete(titulo);
+	    assertEquals("redirect:/vista-titulo", view);
+	}
+
+	@Test
+	public void testBajaEjemplar() {
+	    Long tituloId = 1L;
+	    int numEjemplares = 1;
+	    Titulo titulo = new Titulo();
+	    when(tituloDAO.findById(tituloId)).thenReturn(Optional.of(titulo));
+	    Ejemplar ejemplar = new Ejemplar();
+	    when(ejemplarDAO.findById(tituloId)).thenReturn(Optional.of(ejemplar));
+
+	    String view = gestorTitulos.bajaEjemplar(tituloId, numEjemplares);
+
+	    assertTrue(titulo.getEjemplares().isEmpty());
+	    verify(ejemplarDAO, times(1)).delete(ejemplar);
+	    assertEquals("redirect:/vista-titulo", view);
 	}
 
 }
