@@ -265,10 +265,16 @@ Cuando el filtro coincide con un elemento nuevo o actualizado, en este caso los 
 </p>
 
 
-
-
 ## Pom
-![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/47db923d-0964-45d7-b9f5-cac88308440a)
+<img width="662" alt="image" src="https://github.com/ISOII-ASHP/biblioteca/assets/91836109/08165d8a-f144-4d4f-9123-12b9b5ed1dc1">
+
+<img width="590" alt="image" src="https://github.com/ISOII-ASHP/biblioteca/assets/91836109/785c0a8d-8ead-490b-a3c8-c116c57ae37a">
+
+<img width="487" alt="image" src="https://github.com/ISOII-ASHP/biblioteca/assets/91836109/30863fa1-3eae-4baf-bd1d-8e6f114f067b">
+
+<img width="338" alt="image" src="https://github.com/ISOII-ASHP/biblioteca/assets/91836109/d9a52e10-6f22-4728-8987-dbd5b9cdfa2a">
+
+
 
 <p align="justify">
   El archivo pom.xml, indica las siguientes dependencias gestionadas:
@@ -289,7 +295,7 @@ Cuando el filtro coincide con un elemento nuevo o actualizado, en este caso los 
 
 `JUnit Platform launcer:` Proporciona capacidades para lanzar el marco de pruebas de JUnit.
 
-`JUnit JUnit:` La biblioteca de JUnit para pruebas unitarias, marcada también para uso exclusivo en pruebas (<scope>test</scope>).
+`JUnit:` La biblioteca de JUnit para pruebas unitarias, marcada también para uso exclusivo en pruebas (<scope>test</scope>).
 
 <p align="justify">
 
@@ -309,6 +315,7 @@ El proyecto está configurado para el desarrollo de una aplicación web con Spri
 
 `Surefire:` Configurado a través del plugin maven-surefire-report-plugin. Este plugin se usa para ejecutar pruebas unitarias y generar informes de estas pruebas. La configuración especifica que no se debe omitir el informe si no hay pruebas (<skipEmptyReport>false</skipEmptyReport>), asegurando así que se generen informes incluso cuando no hay pruebas o estas no se ejecutan.
 
+
 <p align="justify">
 
 Estos componentes son esenciales en proyectos de software modernos, ya que JaCoCo proporciona información vital sobre la cobertura de pruebas, SonarCloud ayuda a mantener la calidad del código y Surefire asegura que las pruebas unitarias se ejecuten correctamente y se generen informes de las mismas.
@@ -316,8 +323,6 @@ Estos componentes son esenciales en proyectos de software modernos, ya que JaCoC
 Estas herramientas juntas ofrecen un entorno robusto para el desarrollo, prueba, y mantenimiento de aplicaciones web de alta calidad y con buenas prácticas de ingeniería de software.
 
 </p>
-
-
 
 
 ## Ramas y merges
@@ -332,6 +337,8 @@ Estas herramientas juntas ofrecen un entorno robusto para el desarrollo, prueba,
 `Rama Master:` Sirve como la rama principal donde el código refleja el estado de producción. Las actualizaciones a master se hacen a través de merges cuidadosamente revisados desde develop o ramas de hotfix, en caso de error.
 
 `Rama Develop:` Actúa como una rama de integración para las características que se están desarrollando. Esta es la rama donde todas las características (feature branches) se unen (merge) antes de ser llevadas a master.
+
+`Rama Mantenimiento:` La rama es una rama dedicada a la mejora continua y corrección de errores en el código existente. El propósito de esta rama es permitir un enfoque organizado para abordar los problemas identificados por herramientas de análisis de código como SonarCloud, así como para realizar refactorizaciones y optimizaciones.
 
 `Feature Branches:` Por cada nueva característica o mejora significativa, se crea una nueva rama desde develop. Esto permite trabajar en la característica de manera aislada. Una vez que la característica está completa y ha pasado todas las pruebas, se hace merge de vuelta a develop.
 
@@ -384,7 +391,7 @@ Actualmente, tenemos 54 commits.
 <img width="442" alt="image" src="https://github.com/ISOII-ASHP/biblioteca/assets/91836109/53e1f1c9-0363-4797-9d87-895f2c80da3c">
 
 <p align="justify">
- Deployment.yml automatizará el proceso de despliegue cuando ocurran eventos específicos en la rama main. Aquí está lo que hace cada sección:
+ El flujo de trabajo "Deployment" se activa con cambios en la rama main o mediante activación manual. Posee permisos para escribir en el repositorio. Se ejecuta en Windows y consta de varios pasos: clona el repositorio, configura JDK 11 con Temurin, compila el proyecto con Maven y realiza un análisis de código con SonarCloud, usando tokens de autenticación. Aquí está lo que hace cada sección:
 </p>
 
 `name:` El nombre del flujo de trabajo es "Deployment".
