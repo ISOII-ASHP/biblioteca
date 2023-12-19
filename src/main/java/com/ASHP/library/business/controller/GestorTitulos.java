@@ -179,15 +179,11 @@ public class GestorTitulos {
 		for (int i = 1; i < numEjemplares; i++) {
 			Ejemplar e = new Ejemplar(titulo);
 			ejemplares.add(e);
-			//titulo.setEjemplares(ejemplares);
 			titulo.addEjemplar(e);
 			ejemplarDAO.save(e);
 	    }
-		
 
-		//titulo.getEjemplares().add(ejemplar);
-		//tituloDAO.save(titulo);
-		return "vista-titulo";
+		return "redirect:/vista-titulo";
 	}
 	
 	@GetMapping("/altaEjemplar")
@@ -210,7 +206,31 @@ public class GestorTitulos {
 		return list;
 	}
 
-	public void bajaEjemplar(Titulo aT) {
-		throw new UnsupportedOperationException();
+	@PostMapping("/bajaEjemplar")
+	public String bajaEjemplar(@RequestParam("titulo") Long tituloId,
+	        @RequestParam("numEjemplares") int numEjemplares) {
+	    Titulo titulo = tituloDAO.findById(tituloId)
+	            .orElseThrow(() -> new IllegalArgumentException("Invalid titulo Id:" + tituloId));
+
+	    Optional<Ejemplar> optionalEjemplar = ejemplarDAO.findById(tituloId);
+	    List<Ejemplar> ejemplares = optionalToList(optionalEjemplar);
+
+	    int ejemplaresToRemove = Math.min(numEjemplares, ejemplares.size());
+
+	    for (int i = 0; i < ejemplaresToRemove; i++) {
+	        Ejemplar ejemplarToRemove = ejemplares.remove(ejemplares.size() - 1);
+	        titulo.removeEjemplar(ejemplarToRemove);
+	        ejemplarDAO.delete(ejemplarToRemove);
+	    }
+
+	    return "redirect:/vista-titulo";
 	}
+	
+	@GetMapping("/bajaEjemplar")
+	public String bajaEjemplar(Model model) {
+		List<Titulo> titulos = tituloDAO.findAll();
+		model.addAttribute("titulos", titulos);
+		return "baja-ejemplar";
+	}
+
 }

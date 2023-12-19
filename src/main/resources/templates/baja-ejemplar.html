@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="es" xmlns:th="https://www.thymeleaf.org">
 <div th:insert="~{cabecera}"></div>
-<title>Alta ejemplar</title>
+<title>Baja ejemplar</title>
 <style>
 	.btn-left {
 		margin-top: 30px;
@@ -15,11 +15,11 @@
 		<div class="row justify-content-center mt-3">
 			<div class="row justify-content-center mt-1 text-center">
 				<p class=" alert alert-primary" role="alert">
-				<h1>Añadir nuevos ejemplares</h1>
+				<h1>Eliminar ejemplares</h1>
 				</p>
 			</div>
 			<div class="row justify-content-center">
-				<form action="#" th:action="@{/altaEjemplar}" th:object="${ejemplar}" method="POST">
+				<form action="#" th:action="@{/bajaEjemplar}" th:object="${ejemplar}" method="POST">
 					<div class="row">
 						<div class="col">
 							<label>Titulo</label>
