@@ -36,6 +36,13 @@ public class Usuario {
 
 	public Usuario() {
 	}
+	
+	public Usuario( String nombre, String apellidos) {
+		super();
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+	}
+
 
 	public Usuario(String nombre, String apellidos, Date fechaFinPenalizacion, Object attribute,
 			List<Prestamo> prestamos, List<Reserva> reservas) {
