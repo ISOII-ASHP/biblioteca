@@ -28,6 +28,8 @@
 
 - [Plan de Prueba](#plan-de-prueba)
 
+- [Nuestros Casos de Prueba](#nuestros-casos-de-prueba)
+
 ## Sprints
   <p align="justify">
    Antes de definir el antes y después de cada sprint, vamos a indicar que nuestros sprints son de cada 2 semanas.
@@ -527,5 +529,16 @@ Este es nuestro plan de prueba:
 `5. Corrección de problemas:` Si una prueba falla, se corrige el código para que pase la prueba. En este proceso también utilizamos SonarCloud para ver los resultados y ver los correspondientes fallos. Luego, volvemos a ejecutar las pruebas parar asegurarnos de que todas pasan correctamente.
 
 `6. Cobertura de código:` Utilizamos JaCoCo para segurarnos de que las pruebas cubren adecuadamente el código. Esto lo hemos podido realizar gracias a SonarCloud diseñando una puerta de calidad personalizada, introduciendo esta característica y otras más. (Esto se describe mejor en la sección de Quality Gate).
+
+## Nuestros Casos de Prueba
+
+<img width="1075" alt="image" src="https://github.com/ISOII-ASHP/biblioteca/assets/91836109/cd64ef90-c9e4-4899-a1e6-5593b79d425b">
+
+<img width="1087" alt="image" src="https://github.com/ISOII-ASHP/biblioteca/assets/91836109/d7e88daf-138c-4500-971c-b57f583e33a4">
+
+<img width="1093" alt="image" src="https://github.com/ISOII-ASHP/biblioteca/assets/91836109/58091251-31eb-4224-9dec-c46f15c41936">
+
+<img width="1097" alt="image" src="https://github.com/ISOII-ASHP/biblioteca/assets/91836109/aa388036-7e6c-4667-83f0-0c29c0aaa6a7">
+
 
 
