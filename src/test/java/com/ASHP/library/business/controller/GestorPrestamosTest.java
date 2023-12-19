@@ -1,18 +1,40 @@
 package com.ASHP.library.business.controller;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
 import com.ASHP.library.business.TestRepoInitializer;
+import com.ASHP.library.business.entity.Ejemplar;
+import com.ASHP.library.business.entity.Reserva;
+import com.ASHP.library.business.entity.Titulo;
+import com.ASHP.library.business.entity.Usuario;
 import com.ASHP.library.business.persistence.AutorDAO;
 import com.ASHP.library.business.persistence.EjemplarDAO;
 import com.ASHP.library.business.persistence.PrestamoDAO;
+import com.ASHP.library.business.persistence.ReservaDAO;
 import com.ASHP.library.business.persistence.TituloDAO;
 import com.ASHP.library.business.persistence.UsuarioDAO;
+
+import jakarta.transaction.Transactional;
+
+import org.springframework.http.MediaType;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -23,36 +45,84 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.Calendar;
 import java.util.Date;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.CoreMatchers.not;
+
 
 @AutoConfigureMockMvc
 @SpringBootTest
 @Transactional
+@RunWith(MockitoJUnitRunner.class)
 public class GestorPrestamosTest {
-    @Autowired
+	@Autowired
 	private MockMvc mockMvc;
+    @Mock
+    private TituloDAO tituloDAO;
+    @Mock
+    private UsuarioDAO usuarioDAO;
+    @Mock
+    private EjemplarDAO ejemplarDAO;
+    @Mock
+    private ReservaDAO reservaDAO;
+    @Mock
+    private AutorDAO autorDAO;
+    @Mock
+    private PrestamoDAO prestamoDAO;
+    @Mock
+    private Model model;
 
-    @Autowired
-    EjemplarDAO ejemplarDAO;
-    @Autowired
-    TituloDAO tituloDAO;
-    @Autowired
-    AutorDAO autorDAO;
-    @Autowired
-    UsuarioDAO usuarioDAO;
-    @Autowired
-    PrestamoDAO prestamoDAO;
+    @InjectMocks
+    private GestorPrestamos gestorPrestamos;
 
+    private Titulo mockTitulo;
+    private Usuario mockUsuario;
+    private List<Ejemplar> mockEjemplares;
+
+    @Before
+    public void setup() {
+        mockTitulo = new Titulo();
+        mockUsuario = new Usuario();
+        mockEjemplares = new ArrayList<>();
+    }
+    
     @BeforeEach
     void before() {
         TestRepoInitializer.initTitulos(ejemplarDAO, tituloDAO, autorDAO);
         TestRepoInitializer.initUsuarios(usuarioDAO);
     }
 
+
+    @Test
+    public void reservarTitulo_NoEjemplaresDisponibles() {
+        when(tituloDAO.findById(anyLong())).thenReturn(Optional.of(mockTitulo));
+        when(usuarioDAO.findById(anyLong())).thenReturn(Optional.of(mockUsuario));
+        when(mockTitulo.getEjemplares()).thenReturn(new ArrayList<>());
+
+        String result = gestorPrestamos.reservarEjemplar(model, 1L, 1L);
+
+        verify(model).addAttribute(eq("mensaje"), eq("No hay ejemplares disponibles de este título."));
+        assertEquals("reservar-ejemplar", result);
+    }
+
+    @Test
+    public void reservarTitulo_ConEjemplaresDisponibles() {
+        Ejemplar mockEjemplar = new Ejemplar();
+        mockEjemplares.add(mockEjemplar);
+
+        when(tituloDAO.findById(anyLong())).thenReturn(Optional.of(mockTitulo));
+        when(usuarioDAO.findById(anyLong())).thenReturn(Optional.of(mockUsuario));
+        when(mockTitulo.getEjemplares()).thenReturn(mockEjemplares);
+        when(mockEjemplares.get(0)).thenReturn(mockEjemplar);
+
+        String result = gestorPrestamos.reservarEjemplar(model, 1L, 1L);
+
+        verify(reservaDAO).save(any(Reserva.class));
+        verify(ejemplarDAO).delete(any(Ejemplar.class));
+        verify(model).addAttribute(eq("mensaje"), eq("Reserva realizada con éxito."));
+        assertEquals("reservar-ejemplar", result);
+    }
+
+    
     @Test
 	void GET_nuevoPrestamo_debe_mostrar_controles_para_elegir_titulo_y_usuario() throws Exception {
 		this.mockMvc.perform(get("/nuevo-prestamo"))
