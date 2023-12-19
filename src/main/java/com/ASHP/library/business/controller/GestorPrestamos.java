@@ -35,10 +35,7 @@ public class GestorPrestamos {
 	private static final Logger log = LoggerFactory.getLogger(GestorPrestamos.class);
 
 	@Autowired
-	public GestorPenalizaciones gestorPenalizaciones;
-
-	@Autowired
-	public PrestamoDAO _prestamoDAO;
+	public PrestamoDAO prestamoDAO;
 	@Autowired
 	public ReservaDAO reservaDAO;
 	@Autowired
@@ -64,60 +61,30 @@ public class GestorPrestamos {
 		return "nuevo-prestamo";
 	}
 
-	public void validarUsuario(Usuario u, ArrayList<String> errores) {
-		// FIXME: establecer ese 4 de alguna propiedad MAX_PRESTAMOS
-		// de alguna constante, algún fichero de config, vars. de entorno...
-		if ( u.getPrestamos().size() >= 4 ) {
-			errores.add("Usuario supera el límite de préstamos (4)");
-		// TODO: comparar esta fecha con el día de hoy.
-		} else if ( gestorPenalizaciones.comprobarPenalizacion(u) ) {
-			errores.add("Usuario penalizado. No se le puede prestar más hasta: " + 
-							u.getFechaFinPenalizacion());
-		}
-	}
-
-	public void validarEjemplar(Ejemplar u, ArrayList<String> errores) {
-		if (!_ejemplarDAO.isEjemplarDisponible(u)) {
-			errores.add(
-				"El ejemplar " + u.getId() + " no se encuentra disponible"
-			);
-		}
-	}
-
 	@PostMapping("/nuevo-prestamo")
-	public String postNuevoPrestamo(
-		@RequestParam Long usuario, 
-		@RequestParam Long titulo, 
-		@RequestParam Optional<Long> ejemplar, 
-		Model model) {
-
-		ArrayList<String> errores = new ArrayList<>();
-		model.addAttribute("errores", errores);
-			
-		Optional<Titulo> tOptional = _tituloDAO.findById(titulo);
+	public String postNuevoPrestamo(@RequestParam Long usuario, @RequestParam Long titulo, Model model) {
+		// Obtener el título por su ID
+		Optional<Titulo> tOptional = tituloDAO.findById(titulo);
 		Titulo t = tOptional.get();
-		Optional<Usuario> uOptional = _usuarioDAO.findById(usuario);
+
+		// Obtener el usuario por su ID
+		Optional<Usuario> uOptional = usuarioDAO.findById(usuario);
 		Usuario u = uOptional.get();
 
-		validarUsuario(u, errores);
+		ArrayList<String> errores = new ArrayList();
 
-		/**
-		 * Si solo se recibe Usuario y Titulo, se muestra el selector con
-		 * los ejemplares disponibles. Pero si se recibe también ejemplar,
-		 * se intenta crear el préstamo.
-		 */
-		if (ejemplar.isPresent()) {
-			Optional<Ejemplar> eOptional = _ejemplarDAO.findById(ejemplar.get());
-			Ejemplar e = eOptional.get();
-			validarEjemplar(e, errores);
-			if (errores.size() == 0) {
-				realizarPrestamo(u, t, e);
-				return "confirmacion-prestamo.html";
-			}
+		// FIXME: establecer ese 4 de alguna propiedad MAX_PRESTAMOS
+		// de alguna constante, algún fichero de config, vars. de entorno...
+		if (u.getPrestamos().size() >= 4) {
+			errores.add("Usuario supera el límite de préstamos (4)");
+			// TODO: comparar esta fecha con el día de hoy.
+		} else if (u.getFechaFinPenalizacion() != null) {
+			errores.add("Usuario penalizado. No se le puede prestar más hasta: " + u.getFechaFinPenalizacion());
 		}
 
-		List<Ejemplar> ejemplares = _ejemplarDAO.findEjemplaresDisponibles(t);
-		if ( ejemplares.size() == 0 ) {
+		List<Ejemplar> ejemplares = ejemplarDAO.findEjemplaresDisponibles(t);
+		System.out.println(ejemplares);
+		if (ejemplares.size() == 0) {
 			errores.add("No hay ejemplares disponibles");
 		}
 
@@ -126,10 +93,14 @@ public class GestorPrestamos {
 			List<Usuario> todosLosUsuarios = usuarioDAO.findAll();
 			model.addAttribute("titulos", todosLosTitulos);
 			model.addAttribute("usuarios", todosLosUsuarios);
-			model.addAttribute("tituloYUsuarioSeleccionado", false);
+
+			model.addAttribute("errores", errores);
+			model.addAttribute("seleccionado", false);
 		} else {
-			model.addAttribute("tituloYUsuarioSeleccionado", true);
+			model.addAttribute("seleccionado", true);
 		}
+
+		model.addAttribute("errores", errores);
 		model.addAttribute("ejemplares", ejemplares);
 		model.addAttribute("titulo", t);
 		model.addAttribute("usuario", u);
@@ -137,39 +108,35 @@ public class GestorPrestamos {
 		return "nuevo-prestamo";
 	}
 
-	@GetMapping("/devolucion")
-	public String vistaDevolucion() {
-		
-		return "devolucion";
+	@PostMapping("/crear-prestamo")
+	public String realizarPrestamo(@RequestParam Long usuario, @RequestParam Long titulo, @RequestParam Long ejemplar) {
+		// Obtener el título por su ID
+		Optional<Titulo> tOptional = tituloDAO.findById(titulo);
+		Titulo t = tOptional.get();
+
+		// Obtener el usuario por su ID
+		Optional<Usuario> uOptional = usuarioDAO.findById(usuario);
+		Usuario u = uOptional.get();
+
+		// Obtener el ejemplar por su ID
+		Optional<Ejemplar> eOptional = ejemplarDAO.findById(ejemplar);
+		Ejemplar e = eOptional.get();
+
+		// Obtener fechas de inicio y de fin
+		Date fechaInicio = new Date();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(fechaInicio);
+		calendar.add(Calendar.DAY_OF_YEAR, 7);
+		Date fechaFin = calendar.getTime();
+
+		Prestamo p = new Prestamo(fechaInicio, fechaFin, true, u, t, e);
+		prestamoDAO.save(p);
+
+		return "confirmacion-prestamo";
 	}
 
-	@PostMapping("/devolucion")
-	public String postDevolucion(@RequestParam Long id, Model model) {
-		Optional<Ejemplar> ejemplarOpt = _ejemplarDAO.findById(id);
-
-		ArrayList<String> errores = new ArrayList<>();
-
-		if (ejemplarOpt.isPresent()) {
-			realizarDevolucion(ejemplarOpt.get());
-		} else {
-			errores.add("No se encontró ejemplar con ID " + id);
-		}
-
-		model.addAttribute("errores", errores);
-		return "devolucion";
-	}
-
-	public void realizarDevolucion(Ejemplar ejemplar) {
-		Prestamo prestamoActivo = 
-				_prestamoDAO.findPrestamoActivoPorEjemplar(ejemplar);
-
-		prestamoActivo.setActivo(false);
-		Date fechaActual = new Date();
-		Date fechaFin = prestamoActivo.getFechaFin();
-		if (fechaActual.compareTo(fechaFin) > 0) {
-		}
-
-		_prestamoDAO.save(prestamoActivo);
+	public void realizarDevolucion(String aIsbn, String aIdEjemplar, String aIdUsuario) {
+		throw new UnsupportedOperationException();
 	}
 	
 	
@@ -233,11 +200,5 @@ public class GestorPrestamos {
 	public void mensaje(String mensaje, Model model) {
 		model.addAttribute("mensaje", mensaje);
 		reservaEjemplar(model);
-	}
-
-	public Prestamo realizarPrestamo(Usuario usuario, Titulo titulo, Ejemplar ejemplar) {
-		Prestamo p = Prestamo.prestamoDeDiasDesdeHoy(7, usuario, titulo, ejemplar);
-		_prestamoDAO.save(p);
-		return p;
 	}
 }

@@ -8,33 +8,32 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "prestamo")
 public class Prestamo {
-	public static Prestamo prestamoDeDiasDesdeHoy(
-		int dias, Usuario usuario, Titulo titulo, Ejemplar ejemplar) {
-		Date fechaInicio = new Date();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(fechaInicio);
-        calendar.add(Calendar.DAY_OF_YEAR, 7);
-        Date fechaFin = calendar.getTime();
-
-		return new Prestamo(fechaInicio, fechaFin, true, usuario, titulo, ejemplar);
-	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@Column
 	private Date fechaInicio;
+	
 	@Column
 	private Date fechaFin;
+	
 	@Column
 	private Boolean activo;
+	
 	@ManyToOne
+	@JoinColumn(name = "usuario_id")
 	public Usuario usuario;
+	
 	@ManyToOne
+	@JoinColumn(name = "titulo_id")
 	public Titulo titulo;
 
 	@ManyToOne
@@ -51,6 +50,18 @@ public class Prestamo {
 		this.titulo = titulo;
 		this.ejemplar = ejemplar;
 	}
+
+	public static Prestamo prestamoDeDiasDesdeHoy(
+		int dias, Usuario usuario, Titulo titulo, Ejemplar ejemplar) {
+		Date fechaInicio = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fechaInicio);
+        calendar.add(Calendar.DAY_OF_YEAR, 7);
+        Date fechaFin = calendar.getTime();
+
+		return new Prestamo(fechaInicio, fechaFin, true, usuario, titulo, ejemplar);
+	}
+
 
 	public Long getId() {
 		return id;
