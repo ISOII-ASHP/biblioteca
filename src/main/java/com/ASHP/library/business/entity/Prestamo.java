@@ -1,6 +1,5 @@
 package com.ASHP.library.business.entity;
 
-import java.util.Calendar;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -49,17 +48,6 @@ public class Prestamo {
 		this.usuario = usuario;
 		this.titulo = titulo;
 		this.ejemplar = ejemplar;
-	}
-
-	public static Prestamo prestamoDeDiasDesdeHoy(
-		int dias, Usuario usuario, Titulo titulo, Ejemplar ejemplar) {
-		Date fechaInicio = new Date();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(fechaInicio);
-        calendar.add(Calendar.DAY_OF_YEAR, 7);
-        Date fechaFin = calendar.getTime();
-
-		return new Prestamo(fechaInicio, fechaFin, true, usuario, titulo, ejemplar);
 	}
 
 	public Long getId() {

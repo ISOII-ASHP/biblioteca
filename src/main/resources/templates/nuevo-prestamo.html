@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <div th:insert="~{cabecera}"></div>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,20 +13,21 @@
     <main>
         <h1>Nuevo prestamo</h1>
         <ul class="errores" style="color: red;">
-            <li th:each="e : ${errores}"
-                th:text="${e}"></li>
-        </ul>
-
-        <div th:if="${tituloYUsuarioSeleccionado == null || !tituloYUsuarioSeleccionado}">
+        	<li th:each="e : ${errores}"
+        		th:text="${e}"></li>
+       	</ul>
+        <div th:if="${seleccionado == null || !seleccionado}">
             <form action="" method="POST">
                 <label for="titulo">Titulo</label>
                 <select name="titulo" id="titulo">
+                    <option value="">--- Selecciona título ---</option>
                     <option th:value="${t.id}" th:each="t : ${titulos}"
                                     th:text="${t.titulo + ' ' + t.isbn}"></option>
                 </select>
 
                 <label for="usuario">Usuario</label>
                 <select name="usuario" id="usuario">
+                    <option value="">--- Selecciona usuario ---</option>
                     <option th:each="u : ${usuarios}"
                                 th:value="${u.id}" 
                                 th:text="${u.nombre + ' ' + u.apellidos}"></option>
@@ -37,8 +37,8 @@
             </form>
         </div>
 
-        <div th:if="${tituloYUsuarioSeleccionado}">
-            <form action="" method="POST">
+        <div th:if="${seleccionado}">
+            <form action="/crear-prestamo" method="POST">
                 
                 <input type="text" name="titulo" th:value="${titulo.id}" readonly hidden>
                 <input type="text" name="usuario" th:value="${usuario.id}" readonly hidden>
@@ -52,6 +52,7 @@
 
                 <label for="ejemplar">Ejemplar</label>
                 <select name="ejemplar" id="ejemplar">
+                    <option value="">--- Selecciona ejemplar ---</option>
                     <option th:each="e : ${ejemplares}"
                                 th:value="${e.id}" 
                                 th:text="${e.id}"></option>
