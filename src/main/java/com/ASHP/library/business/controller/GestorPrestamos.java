@@ -142,7 +142,7 @@ public class GestorPrestamos {
 	
 	// Método para reservar un título
 	@PostMapping("/reservarEjemplar")
-	public String reservarEjemplar(Model model, @RequestParam("titulo") Long tituloId, @RequestParam("usuario") Long usuarioId) {
+	public String reservaEjemplar(Model model, @RequestParam("titulo") Long tituloId, @RequestParam("usuario") Long usuarioId) {
 		// Obtener el título por su ID
 	    Optional<Titulo> tOptional = tituloDAO.findById(tituloId);
 	    Titulo t = tOptional.get();
@@ -182,7 +182,7 @@ public class GestorPrestamos {
 
 	
 	@GetMapping("/reservarEjemplar")
-	public String reservaEjemplar(Model model) {
+	public String reservarEjemplar(Model model) {
 		List<Titulo> titulos = tituloDAO.findAll();
 		List<Usuario> usuarios = usuarioDAO.findAll();
 		
@@ -199,6 +199,6 @@ public class GestorPrestamos {
 	
 	public void mensaje(String mensaje, Model model) {
 		model.addAttribute("mensaje", mensaje);
-		reservaEjemplar(model);
+		reservarEjemplar(model);
 	}
 }

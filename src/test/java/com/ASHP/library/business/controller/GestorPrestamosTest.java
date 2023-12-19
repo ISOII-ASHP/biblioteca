@@ -58,7 +58,7 @@ public class GestorPrestamosTest {
         when(usuarioDAO.findById(anyLong())).thenReturn(Optional.of(mockUsuario));
         when(mockTitulo.getEjemplares()).thenReturn(new ArrayList<>());
 
-        String result = gestorPrestamos.reservarEjemplar(model, 1L, 1L);
+        String result = gestorPrestamos.reservaEjemplar(model, 1L, 1L);
 
         verify(model).addAttribute(eq("mensaje"), eq("No hay ejemplares disponibles de este título."));
         assertEquals("reservar-ejemplar", result);
@@ -74,7 +74,7 @@ public class GestorPrestamosTest {
         when(mockTitulo.getEjemplares()).thenReturn(mockEjemplares);
         when(mockEjemplares.get(0)).thenReturn(mockEjemplar);
 
-        String result = gestorPrestamos.reservarEjemplar(model, 1L, 1L);
+        String result = gestorPrestamos.reservaEjemplar(model, 1L, 1L);
 
         verify(reservaDAO).save(any(Reserva.class));
         verify(ejemplarDAO).delete(any(Ejemplar.class));
