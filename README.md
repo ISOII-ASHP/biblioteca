@@ -451,6 +451,9 @@ Hemos expandido los perfiles de calidad de SonarCloud. Hemos personalizado y agr
 
 ## Quality Gate
 
+<img width="454" alt="image" src="https://github.com/ISOII-ASHP/biblioteca/assets/91836109/2a4ca409-e37a-4ecf-a0cb-dba825c01af9">
+
+
 <p align="justify">
 Hemos diseñado un Quality Gate en SonarCloud enfocado en la calidad del código y la cobertura. Hemos considerado los siguientes criterios y valores:
 </p>
