@@ -18,6 +18,8 @@
 
 - [Deployment.yml](#deployment)
 
+- [.gitignore](#gitignore)
+
 ## Sprints
   <p align="justify">
    Antes de definir el antes y después de cada sprint, vamos a indicar que nuestros sprints son de cada 2 semanas.
@@ -154,6 +156,65 @@ Retrospectiva:
 •	Revisar y ajustar las prácticas de desarrollo si es necesario para mejorar la productividad.
 
 •	Recoger retroalimentación para ajustar y mejorar los siguientes sprints.
+
+Antes y después de cada Sprint:
+
+•	Seguimos implementando funcionalidades del proyecto. Ahora que tenemos incorporado SonarCloud, nos ayudará a mantener estándares de calidad en el código y a prevenir erroes a medida que avanza el proyecto.
+</p>
+
+#### Sprint 5
+
+<img width="239" alt="image" src="https://github.com/ISOII-ASHP/biblioteca/assets/91836109/960a49ea-d4d6-4009-a9c0-d3af01567755">
+
+<p align="justify">
+Tareas:
+  
+•	Configurar el plugin Maven Surefire para la ejecución de pruebas unitarias.
+
+•	Escribir pruebas unitarias con JUnit para las funcionalidades desarrolladas.
+
+•	Integrar JaCoCo para analizar y reportar la cobertura de código.
+
+•	Establecer umbrales de cobertura de código y trabajar para cumplirlos o superarlos.
+
+•	Continuar con el desarrollo de las funcionales que faltan.
+
+•	Configurar un workflow para que en cada commit del main, se realice un análisis de código con SonarCloud.
+
+Retrospectiva:
+
+•	Evaluar la efectividad del marco de pruebas implementado.
+
+•	Discutir los desafíos y las mejoras en la calidad y cobertura de código.
+
+Antes y después de cada Sprint:
+
+•	Seguimos implementando funcionalidades del proyecto. Vamos introduciendo pruebas unitarias y análisis de cobertura que nos ayudará a detectar problemas temprano, evitar regresiones y mantener un estándar de calidad a medida que el proyecto crece. El equipo continúa con el desarrollo de pruebas unitarias utilizando JUnit y el plugin Maven Surefire para asegurarse de que las funcionalidades y correcciones son estables y no introducen regresiones. 
+</p>
+
+#### Sprint 6
+<p align="justify">
+Tareas:
+  
+•	Crear una rama mantenimiento dedicada a las tareas de limpieza del código.
+
+•	Revisar los informes de SonarCloud para identificar y priorizar errores.
+
+•	Corregir los errores y llevar a cabo refactorizaciones necesarias para mejorar la calidad del código.
+
+•	Realizar pruebas para asegurar que las correcciones no introduzcan nuevos errores.
+
+•	Fusionar la rama mantenimiento de vuelta a master después de que las correcciones hayan sido verificadas.
+
+Retrospectiva:
+
+•	Analizar el proceso de mantenimiento y las correcciones realizadas.
+
+•	 Planificar actividades de mantenimiento continuo basadas en la retroalimentación de SonarCloud.
+
+Antes y después de cada Sprint:
+
+•	Este enfoque de mantenimiento asegura un código más limpio y robusto, lo que puede reducir los costos a largo plazo y mejorar la mantenibilidad del software. El equipo trabaja diligentemente para cerrar el ciclo de desarrollo con un producto bien probado y con una interfaz de alta calidad.
 </p>
 
 ## Workflows
@@ -320,7 +381,7 @@ Actualmente, tenemos 54 commits.
 
 ## Deployment
 
-![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/69b55c87-68b0-40a0-8c86-3ec3f39bf4b8)
+<img width="442" alt="image" src="https://github.com/ISOII-ASHP/biblioteca/assets/91836109/53e1f1c9-0363-4797-9d87-895f2c80da3c">
 
 <p align="justify">
  Deployment.yml automatizará el proceso de despliegue cuando ocurran eventos específicos en la rama main. Aquí está lo que hace cada sección:
@@ -340,15 +401,32 @@ Actualmente, tenemos 54 commits.
 
   •	`Checkout Repo:` Utiliza la acción actions/checkout@v3 para clonar el repositorio y poder trabajar con él.
   •	`Set up JDK 11:` Utiliza la acción actions/setup-java@v2 para configurar el entorno Java Development Kit (JDK) versión 11, usando la distribución 'temurin'.
-        
-
+  •	`Build with Maven:` Compila el proyecto utilizando Maven.
+  •	`Analyze with SonarCloud:` Realiza un análisis de código con SonarCloud, utilizando tokens de GitHub y SonarCloud para autenticación.
         
         
 <p align="justify">
 Este es un flujo de trabajo de despliegue y se ocupará de preparar el entorno necesario para compilar.
 </p>
 
+## Gitignore
 
+<img width="221" alt="image" src="https://github.com/ISOII-ASHP/biblioteca/assets/91836109/5e71cd03-7dec-49b5-986a-0c7c824de835">
 
+<p align="justify">
+El archivo .gitignore es utilizado en repositorios de Git para excluir archivos y directorios del control de versiones. Las entradas especificadas en este archivo no serán rastreadas por Git, lo que significa que no aparecerán en commits ni serán subidos al repositorio remoto. Este archivo está configurado para ignorar:
+</p>
+
+•	Directorios comunes de compilación como target/.
+
+•	Archivos relacionados con herramientas y entornos de desarrollo como IntelliJ IDEA (.idea, *.iws, *.iml, *.ipr), Eclipse (.classpath, .project, .settings, springBeans, .sts4-cache), NetBeans (nbproject/private/, nbbuild/, dist/, nbdist/, .nb-gradle), y Visual Studio Code (.vscode/).
+
+•	Archivos relacionados con la base de datos y logs como database/, derby.log, y archivos .dat.
+
+•	Otros archivos de configuración de herramientas como .dbeaver.
+
+<p align="justify">
+El propósito de estas exclusiones es mantener el repositorio limpio y evitar subir archivos que son específicos de la configuración de cada desarrollador o que son generados durante la compilación y ejecución del código.
+</p>
 
 
