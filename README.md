@@ -20,6 +20,10 @@
 
 - [.gitignore](#gitignore)
 
+- [Perfiles de calidad](#perfiles-de-calidad)
+
+- [Quality Gate](#quality-gate)
+
 ## Sprints
   <p align="justify">
    Antes de definir el antes y después de cada sprint, vamos a indicar que nuestros sprints son de cada 2 semanas.
@@ -437,4 +441,29 @@ El archivo .gitignore es utilizado en repositorios de Git para excluir archivos 
 El propósito de estas exclusiones es mantener el repositorio limpio y evitar subir archivos que son específicos de la configuración de cada desarrollador o que son generados durante la compilación y ejecución del código.
 </p>
 
+## Perfiles de calidad
+
+<img width="777" alt="image" src="https://github.com/ISOII-ASHP/biblioteca/assets/91836109/bba20b1a-6507-41ea-af0b-dfd03cba5cc0">
+
+<p align="justify">
+Hemos expandido los perfiles de calidad de SonarCloud. Hemos personalizado y agregado nuevos criterios y reglas para evaluar la calidad del código del proyecto. 
+</p>
+
+## Quality Gate
+
+<p align="justify">
+Hemos diseñado un Quality Gate en SonarCloud enfocado en la calidad del código y la cobertura. Hemos considerado los siguientes criterios y valores:
+</p>
+
+`Cobertura de código:` Un 80% de cobertura de código para asegurar que la mayoría del código está probado.
+
+`Errores:` Cero errores de código.
+
+`Vulnerabilidades:` Cero vulnerabilidades de seguridad.
+
+`Duplicación de Código:` Menos del 3% de duplicaciones en el código.
+
+`Calificaciones de Mantenibilidad, Fiabilidad y Seguridad:` Ninguna clase con una calificación peor que A.
+
+`Éxito de las pruebas unitarias:` Un 100% de éxito en las pruebas unitarias.
 
