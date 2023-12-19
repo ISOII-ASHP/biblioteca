@@ -8,32 +8,34 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Transient;
 
 @Entity
-@Table(name = "AUTOR")
+@Table(name = "autor")
 public class Autor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@Column
 	private String nombre;
+	
 	@Column
 	private String apellido;
 	
-    @ManyToMany
-    @JoinTable(
-            name = "AUTOR_TITULO",
-            joinColumns = {@JoinColumn(name = "autor_id")},
-            inverseJoinColumns = {@JoinColumn(name = "titulo_id")}
-    )
+    @ManyToMany(mappedBy = "autores")
 	public List<Titulo> titulos = new ArrayList<Titulo>();
 
 	public Autor() {
 		super();
+	}
+
+	public Autor( String nombre, String apellido) {
+		super();
+		this.nombre = nombre;
+		this.apellido = apellido;
 	}
 
 	public Autor(String nombre, String apellido, List<Titulo> titulos) {
@@ -77,7 +79,9 @@ public class Autor {
 
 	@Override
 	public String toString() {
-		return "Autor [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", titulos=" + titulos + "]";
+		return nombre + " " + apellido;
 	}
+	
+	
 
 }

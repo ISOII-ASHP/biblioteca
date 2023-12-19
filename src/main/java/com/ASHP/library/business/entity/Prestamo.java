@@ -12,35 +12,42 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "PRESTAMO")
+@Table(name = "prestamo")
 public class Prestamo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@Column
 	private Date fechaInicio;
+	
 	@Column
 	private Date fechaFin;
+	
 	@Column
 	private Boolean activo;
+	
 	@ManyToOne
-	@JoinColumn(name = "USUARIO_id")
+	@JoinColumn(name = "usuario_id")
 	public Usuario usuario;
+	
 	@ManyToOne
-	@JoinColumn(name = "TITULO_id")
+	@JoinColumn(name = "titulo_id")
 	public Titulo titulo;
 
-	public Prestamo() {
+	@ManyToOne
+	public Ejemplar ejemplar;
 
-	}
+	public Prestamo() {}
 
-	public Prestamo(Date fechaInicio, Date fechaFin, Boolean activo, Usuario usuario, Titulo titulo) {
+	public Prestamo(Date fechaInicio, Date fechaFin, Boolean activo, Usuario usuario, Titulo titulo, Ejemplar ejemplar) {
 		super();
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 		this.activo = activo;
 		this.usuario = usuario;
 		this.titulo = titulo;
+		this.ejemplar = ejemplar;
 	}
 
 	public Long getId() {
@@ -90,11 +97,4 @@ public class Prestamo {
 	public void setTitulo(Titulo titulo) {
 		this.titulo = titulo;
 	}
-
-	@Override
-	public String toString() {
-		return "Prestamo [id=" + id + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", activo=" + activo
-				+ ", usuario=" + usuario + ", titulo=" + titulo + "]";
-	}
-
 }

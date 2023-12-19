@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<div th:insert="~{cabecera}"></div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <div>Nombre de usuario</div>
+    </header>
+    <main>
+        <h1>Nuevo prestamo</h1>
+        <ul class="errores" style="color: red;">
+        	<li th:each="e : ${errores}"
+        		th:text="${e}"></li>
+       	</ul>
+        <div th:if="${seleccionado == null || !seleccionado}">
+            <form action="" method="POST">
+                <label for="titulo">Titulo</label>
+                <select name="titulo" id="titulo">
+                    <option value="">--- Selecciona título ---</option>
+                    <option th:value="${t.id}" th:each="t : ${titulos}"
+                                    th:text="${t.titulo + ' ' + t.isbn}"></option>
+                </select>
+
+                <label for="usuario">Usuario</label>
+                <select name="usuario" id="usuario">
+                    <option value="">--- Selecciona usuario ---</option>
+                    <option th:each="u : ${usuarios}"
+                                th:value="${u.id}" 
+                                th:text="${u.nombre + ' ' + u.apellidos}"></option>
+                </select>
+
+                <input type="submit" value="Continuar">
+            </form>
+        </div>
+
+        <div th:if="${seleccionado}">
+            <form action="/crear-prestamo" method="POST">
+                
+                <input type="text" name="titulo" th:value="${titulo.id}" readonly hidden>
+                <input type="text" name="usuario" th:value="${usuario.id}" readonly hidden>
+
+                <div>
+                    <strong>Usuario</strong>: <span th:text="${usuario.nombre + ' ' + usuario.apellidos}"></span>
+                </div>
+                <div>
+                    <strong>Título</strong>: <span th:text="${titulo.titulo}"></span>
+                </div>
+
+                <label for="ejemplar">Ejemplar</label>
+                <select name="ejemplar" id="ejemplar">
+                    <option value="">--- Selecciona ejemplar ---</option>
+                    <option th:each="e : ${ejemplares}"
+                                th:value="${e.id}" 
+                                th:text="${e.id}"></option>
+                </select>
+
+                <input type="submit" value="Continuar">
+            </form>
+        </div>
+    </main>
+</body>
+</html>
