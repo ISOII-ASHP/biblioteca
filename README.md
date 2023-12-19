@@ -1,7 +1,7 @@
 ### Documentación ISOII ASHP
 
 ## Índice
-ss
+
 - [Sprints](#sprints)
 
 - [Workflows](#workflows)
