@@ -24,6 +24,10 @@
 
 - [Quality Gate](#quality-gate)
 
+- [Plan de Mantenimiento](#plan-de-mantenimiento)
+
+- [Plan de Prueba](#plan-de-prueba)
+
 ## Sprints
   <p align="justify">
    Antes de definir el antes y después de cada sprint, vamos a indicar que nuestros sprints son de cada 2 semanas.
@@ -469,4 +473,59 @@ Hemos diseñado un Quality Gate en SonarCloud enfocado en la calidad del código
 `Calificaciones de Mantenibilidad, Fiabilidad y Seguridad:` Ninguna clase con una calificación peor que A.
 
 `Éxito de las pruebas unitarias:` Un 100% de éxito en las pruebas unitarias.
+
+## Plan de Mantenimiento
+
+<p align="justify">
+Un plan de mantenimiento es un conjunto de actividades programadas y estrategias diseñadas para asegurar que el software continúe funcionando correctamente y eficientemente después de su despliegue inicial. Este plan incluye los siguientes elementos:
+</p>
+
+`1. Crear una rama de mantenimiento:` Crear una nueva rama en la cual se va a realizar cambios para llegar al objetivo de un código de calidad.
+
+`2. Revisión y Actualización Regular del Código:` Revisar periódicamente el código fuente para identificar y corregir errores, mejorar la eficiencia, y actualizar partes del código que puedan haber quedado obsoletas. Para ello, hemos diseñado el workflow deplyment para que cada vez que se haga un commit, se haga un análisis automáticamente.
+
+`3. Gestión de Dependencias:` Actualizar regularmente las bibliotecas utilizados para asegurar que el software se mantenga actualizado con las últimas versiones, mejorando la seguridad y el rendimiento.
+
+`4. Monitorización del Sistema:` Implementación de herramientas de monitorización para rastrear el rendimiento del sistema, identificar problemas potenciales, y realizar ajustes proactivos. También, realizamos frecuentemente informes y análisis en SonarCloud para conocer mejor nuestras debilidades.
+
+`5. Respuesta a Errores y Bugs:` Identificación rápida y la respuesta a errores y bugs.
+
+`6. Seguridad:` Realizar revisiones de seguridad periódicas y actualizar el software para proteger contra vulnerabilidades y amenazas emergentes.
+
+`7. Pruebas Regulares:` Realizar pruebas continuas para asegurar que los cambios no introduzcan nuevos errores en el sistema.
+
+`8. Cobertura de código:` Para segurarnos de que las pruebas cubren adecuadamente el código.
+
+`9. Manteniabilidad:` Nos centramos en la manteniabilidad para tener mejor capacidad de realizar cambios y mejorar el sistema de manera eficiente.
+
+`10. Confiabilidad:` Nuestro código debe ser confiable para que funcione de manera consistente y predecible. 
+
+`11. Líneas duplicadas:` Esta característica nos permite que nuestro código no sea complejo y no tenga riesgo de errores y a su vez, disminuir el rendimiento por el almacenamiento.
+
+`12. Resolución de problemas:` Realizamos análisis en SonarCloud para corregir muchas de estas características y llegar a tener un código de calidad y mantenible lo mejor posible. Hemos expandido los perfiles de calidad para que SonarCloud detecte más reglas y mejorar nuestro código. Resolvemos los problemas una vez identificados en nuestra rama de mantenimiento.
+
+`13. Merge con la rama master:` Una vez teniendo un código de calidad, que ha pasado los análisis y pruebas con éxito, podemos mergearlo con la rama master ya que hemos completado su funcionalidad.
+
+<p align="justify">
+Destacar que varios de estos puntos 
+</p>
+
+## Plan de Prueba
+
+<p align="justify">
+Este es nuestro plan de prueba:
+</p>
+
+`1. Identificación de pruebas:` Las pruebas que vamos a realizar son unitarias que las vamos a separar por cada funcionalidad que realizamos, en diferentes métodos indiciduales.
+
+`2. Identificación de unidades a probar:` Hemos utilizado unidades que consideramos apropiadas para generar nuestras pruebas unitarias.
+
+`3. Ejecución de las pruebas:` Para realizar las pruebas utilizamos aserciones de JUnit para verificar que los resultados esperados coincidan con los reales.
+
+`4. Generación de informes:` Surefire generará informes de ejecución de pruebas. Examinamos los informes para identificar pruebas que hallan fallado y las razones de los fallos.
+
+`5. Corrección de problemas:` Si una prueba falla, se corrige el código para que pase la prueba. En este proceso también utilizamos SonarCloud para ver los resultados y ver los correspondientes fallos. Luego, volvemos a ejecutar las pruebas parar asegurarnos de que todas pasan correctamente.
+
+`6. Cobertura de código:` Utilizamos JaCoCo para segurarnos de que las pruebas cubren adecuadamente el código. Esto lo hemos podido realizar gracias a SonarCloud diseñando una puerta de calidad personalizada, introduciendo esta característica y otras más. (Esto se describe mejor en la sección de Quality Gate).
+
 
