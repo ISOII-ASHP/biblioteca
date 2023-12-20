@@ -204,6 +204,10 @@ Antes y después de cada Sprint:
 </p>
 
 #### Sprint 6
+
+<img width="233" alt="image" src="https://github.com/ISOII-ASHP/biblioteca/assets/91836109/dda5557e-779e-4ca2-a496-5413afd15dc7">
+
+
 <p align="justify">
 Tareas:
   
@@ -338,7 +342,8 @@ Estas herramientas juntas ofrecen un entorno robusto para el desarrollo, prueba,
 
 ## Ramas y merges
 
-![image](https://github.com/ISOII-ASHP/biblioteca/assets/91836109/73a3a5f8-a3d5-4afb-9efd-9c192d99924d)
+<img width="995" alt="image" src="https://github.com/ISOII-ASHP/biblioteca/assets/91836109/8ac7e387-6c57-4a9b-93bc-f2e9c778d4fd">
+
 
 <p align="justify">
  La gestión de configuración de ramas en un proyecto que utiliza Git y sigue el modelo de branching por características junto con las ramas master y develop se organiza generalmente de la siguiente manera:
@@ -361,10 +366,11 @@ Estas herramientas juntas ofrecen un entorno robusto para el desarrollo, prueba,
 
 ## Commits
 
-<img width="958" alt="image" src="https://github.com/ISOII-ASHP/biblioteca/assets/91836109/dd349d55-ca08-4c6a-904f-553ae3c1317a">
+<img width="965" alt="image" src="https://github.com/ISOII-ASHP/biblioteca/assets/91836109/6a629655-d299-472e-8f73-d00f33f6719f">
+
 
 <p align="justify">
-Actualmente, tenemos 54 commits.
+Actualmente, tenemos 221 commits.
 </p>
 
 ## Proyecto weight
