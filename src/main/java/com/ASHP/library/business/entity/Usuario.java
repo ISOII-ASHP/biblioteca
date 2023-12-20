@@ -36,8 +36,12 @@ public class Usuario {
 
 	public Usuario() {
 	}
+	
+	public Usuario(String nombre, String apellidos) {
+		this(nombre, apellidos, null, List.of(), List.of());
+	}
 
-	public Usuario(String nombre, String apellidos, Date fechaFinPenalizacion, Object attribute,
+	public Usuario(String nombre, String apellidos, Date fechaFinPenalizacion,
 			List<Prestamo> prestamos, List<Reserva> reservas) {
 		super();
 		this.nombre = nombre;
@@ -93,5 +97,11 @@ public class Usuario {
 
 	public void setReservas(List<Reserva> reservas) {
 		this.reservas = reservas;
+	}
+	
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", fechaFinPenalizacion="
+				+ fechaFinPenalizacion + ", prestamos=" + prestamos + ", reservas=" + reservas + "]";
 	}
 }
