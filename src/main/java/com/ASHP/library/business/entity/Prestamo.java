@@ -1,5 +1,6 @@
 package com.ASHP.library.business.entity;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -14,6 +15,17 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "prestamo")
 public class Prestamo {
+	public static Prestamo prestamoDeDiasDesdeHoy(
+			int dias, Usuario usuario, Titulo titulo, Ejemplar ejemplar) {
+			Date fechaInicio = new Date();
+	        Calendar calendar = Calendar.getInstance();
+	        calendar.setTime(fechaInicio);
+	        calendar.add(Calendar.DAY_OF_YEAR, dias);
+	        Date fechaFin = calendar.getTime();
+
+			return new Prestamo(fechaInicio, fechaFin, true, usuario, titulo, ejemplar);
+		}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -96,5 +108,11 @@ public class Prestamo {
 
 	public void setTitulo(Titulo titulo) {
 		this.titulo = titulo;
+	}
+	
+	@Override
+	public String toString() {
+		return "Prestamo [id=" + id + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", activo=" + activo
+				+ ", usuario=" + usuario + ", titulo=" + titulo + "]";
 	}
 }

@@ -42,13 +42,13 @@ public class Titulo {
 	protected List<Autor> autores;
 	
 	@OneToMany(mappedBy = "titulo")
-	protected List<Ejemplar> ejemplares = new ArrayList<Ejemplar>();
+	protected List<Ejemplar> ejemplares = new ArrayList<>();
 
 	@OneToMany(mappedBy = "titulo")
-	protected List<Prestamo> prestamos = new ArrayList<Prestamo>();
+	protected List<Prestamo> prestamos = new ArrayList<>();
 
 	@OneToMany(mappedBy = "titulo")
-	protected List<Reserva> reservas = new ArrayList<Reserva>();
+	protected List<Reserva> reservas = new ArrayList<>();
 
     public Titulo() {
 	}

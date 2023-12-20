@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,8 +31,7 @@ public class GestorTitulos {
 	@Autowired
 	public AutorDAO autorDAO;
 
-	// @Autowired
-	// private TituloServices tituloService;
+	
 
 	public GestorTitulos(TituloDAO tituloDAO, AutorDAO autorDAO, EjemplarDAO ejemplarDAO) {
 
@@ -88,7 +85,7 @@ public class GestorTitulos {
 		Titulo tituloPorNombre = getTituloByName(nombreTitulo);
 		
 		Ejemplar e = new Ejemplar(tituloPorNombre);
-		List<Ejemplar> ejemplares = new ArrayList<Ejemplar>();
+		List<Ejemplar> ejemplares = new ArrayList<>();
 		ejemplares.add(e);
 		
 		tituloPorNombre.setEjemplares(ejemplares);

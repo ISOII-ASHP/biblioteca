@@ -10,7 +10,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "autor")
@@ -26,7 +25,7 @@ public class Autor {
 	private String apellido;
 	
     @ManyToMany(mappedBy = "autores")
-	public List<Titulo> titulos = new ArrayList<Titulo>();
+	public List<Titulo> titulos = new ArrayList<>();
 
 	public Autor() {
 		super();

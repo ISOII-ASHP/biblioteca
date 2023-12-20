@@ -11,7 +11,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "usuario")
@@ -29,15 +28,19 @@ public class Usuario {
 	private Date fechaFinPenalizacion;
 		
     @OneToMany(mappedBy = "usuario")
-	public List<Prestamo> prestamos = new ArrayList<Prestamo>();
+	public List<Prestamo> prestamos = new ArrayList<>();
     
     @OneToMany(mappedBy = "usuario")
-	public List<Reserva> reservas = new ArrayList<Reserva>();
+	public List<Reserva> reservas = new ArrayList<>();
 
 	public Usuario() {
 	}
+	
+	public Usuario(String nombre, String apellidos) {
+		this(nombre, apellidos, null, List.of(), List.of());
+	}
 
-	public Usuario(String nombre, String apellidos, Date fechaFinPenalizacion, Object attribute,
+	public Usuario(String nombre, String apellidos, Date fechaFinPenalizacion,
 			List<Prestamo> prestamos, List<Reserva> reservas) {
 		super();
 		this.nombre = nombre;
@@ -93,5 +96,11 @@ public class Usuario {
 
 	public void setReservas(List<Reserva> reservas) {
 		this.reservas = reservas;
+	}
+	
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", fechaFinPenalizacion="
+				+ fechaFinPenalizacion + ", prestamos=" + prestamos + ", reservas=" + reservas + "]";
 	}
 }
