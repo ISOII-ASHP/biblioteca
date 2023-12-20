@@ -3,21 +3,17 @@ package com.ASHP.library.business.controller;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import com.ASHP.library.business.entity.Prestamo;
 import com.ASHP.library.business.entity.Usuario;
 import com.ASHP.library.business.persistence.UsuarioDAO;
 
 @Controller
 public class GestorPenalizaciones {
-	private static final Logger log = LoggerFactory.getLogger(GestorPenalizaciones.class);
 
 	@Autowired
-	public UsuarioDAO _usuarioDAO;
+	public UsuarioDAO usuarioDAO;
 
 	public void aplicarPenalizacion(Usuario usuario) {
 		Date fechaActual = new Date();
@@ -27,7 +23,7 @@ public class GestorPenalizaciones {
 		Date fechaPenalizacion = calendar.getTime();
 
 		usuario.setFechaFinPenalizacion(fechaPenalizacion);
-		_usuarioDAO.save(usuario);
+		usuarioDAO.save(usuario);
 	}
 
 	/**

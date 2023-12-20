@@ -1,24 +1,17 @@
 package com.ASHP.library.business.controller;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.ASHP.library.business.entity.Autor;
 import com.ASHP.library.business.entity.Ejemplar;
 import com.ASHP.library.business.entity.Prestamo;
 import com.ASHP.library.business.entity.Reserva;
@@ -32,7 +25,6 @@ import com.ASHP.library.business.persistence.UsuarioDAO;
 
 @Controller
 public class GestorPrestamos {
-	private static final Logger log = LoggerFactory.getLogger(GestorPrestamos.class);
 
 	@Autowired
 	public GestorPenalizaciones gestorPenalizaciones;
@@ -64,19 +56,18 @@ public class GestorPrestamos {
 		return "nuevo-prestamo";
 	}
 	
-	public void validarUsuario(Usuario u, ArrayList<String> errores) {
-		// FIXME: establecer ese 4 de alguna propiedad MAX_PRESTAMOS
-		// de alguna constante, algún fichero de config, vars. de entorno...
+	public void validarUsuario(Usuario u, List<String> errores) {
+		
 		if ( u.getPrestamos().size() >= 4 ) {
 			errores.add("Usuario supera el límite de préstamos (4)");
-		// TODO: comparar esta fecha con el día de hoy.
+		
 		} else if ( gestorPenalizaciones.comprobarPenalizacion(u) ) {
 			errores.add("Usuario penalizado. No se le puede prestar más hasta: " + 
 							u.getFechaFinPenalizacion());
 		}
 	}
 
-	public void validarEjemplar(Ejemplar u, ArrayList<String> errores) {
+	public void validarEjemplar(Ejemplar u, List<String> errores) {
 		if (!ejemplarDAO.isEjemplarDisponible(u)) {
 			errores.add(
 				"El ejemplar " + u.getId() + " no se encuentra disponible"
@@ -110,18 +101,18 @@ public class GestorPrestamos {
 			Optional<Ejemplar> eOptional = ejemplarDAO.findById(ejemplar.get());
 			Ejemplar e = eOptional.get();
 			validarEjemplar(e, errores);
-			if (errores.size() == 0) {
+			if (errores.isEmpty()) {
 				realizarPrestamo(u, t, e);
 				return "confirmacion-prestamo.html";
 			}
 		}
 
 		List<Ejemplar> ejemplares = ejemplarDAO.findEjemplaresDisponibles(t);
-		if ( ejemplares.size() == 0 ) {
+		if ( ejemplares.isEmpty() ) {
 			errores.add("No hay ejemplares disponibles");
 		}
 
-		if (errores.size() > 0) {
+		if (!errores.isEmpty()) {
 			List<Titulo> todosLosTitulos = tituloDAO.findAll();
 			List<Usuario> todosLosUsuarios = usuarioDAO.findAll();
 			model.addAttribute("titulos", todosLosTitulos);
@@ -174,6 +165,7 @@ public class GestorPrestamos {
 		Date fechaActual = new Date();
 		Date fechaFin = prestamoActivo.getFechaFin();
 		if (fechaActual.compareTo(fechaFin) > 0) {
+			gestorPenalizaciones.aplicarPenalizacion(prestamoActivo.getUsuario());
 		}
 
 		prestamoDAO.save(prestamoActivo);

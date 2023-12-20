@@ -20,7 +20,7 @@ public class Prestamo {
 			Date fechaInicio = new Date();
 	        Calendar calendar = Calendar.getInstance();
 	        calendar.setTime(fechaInicio);
-	        calendar.add(Calendar.DAY_OF_YEAR, 7);
+	        calendar.add(Calendar.DAY_OF_YEAR, dias);
 	        Date fechaFin = calendar.getTime();
 
 			return new Prestamo(fechaInicio, fechaFin, true, usuario, titulo, ejemplar);

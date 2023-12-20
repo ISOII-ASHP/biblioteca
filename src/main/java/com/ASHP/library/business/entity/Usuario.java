@@ -11,7 +11,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "usuario")
@@ -29,10 +28,10 @@ public class Usuario {
 	private Date fechaFinPenalizacion;
 		
     @OneToMany(mappedBy = "usuario")
-	public List<Prestamo> prestamos = new ArrayList<Prestamo>();
+	public List<Prestamo> prestamos = new ArrayList<>();
     
     @OneToMany(mappedBy = "usuario")
-	public List<Reserva> reservas = new ArrayList<Reserva>();
+	public List<Reserva> reservas = new ArrayList<>();
 
 	public Usuario() {
 	}
